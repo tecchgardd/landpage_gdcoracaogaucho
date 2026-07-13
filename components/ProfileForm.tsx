@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { meService, type Profile } from '@/services/meService';
+import { findAddressByCep } from '@/services/cepService';
 import { useAuth } from './providers/AuthProvider';
 
 const STATES = [
@@ -14,6 +15,7 @@ const STATES = [
 ] as const;
 
 const formatCpf = (value: string) => value.replace(/\D/g, '').slice(0, 11).replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+const formatCep = (value: string) => value.replace(/\D/g, '').slice(0, 8).replace(/(\d{5})(\d)/, '$1-$2');
 
 const emptyProfile = (user: { id: string; name?: string; email?: string }): Profile => ({
   userId: user.id, name: user.name ?? '', email: user.email ?? '', cpf: '', phone: '', birthDate: '', gender: '', cep: '',
@@ -30,12 +32,45 @@ export function ProfileForm() {
   const [error, setError] = useState('');
   const [saving, setSaving] = useState(false);
   const [cpfLocked, setCpfLocked] = useState(false);
+  const [cepStatus, setCepStatus] = useState<{ loading: boolean; message: string; error: boolean }>({ loading: false, message: '', error: false });
 
   useEffect(() => {
     if (!user) return;
     setProfile(emptyProfile(user));
     meService.profile().then((data) => { setProfile(data); setCpfLocked(data.cpf.replace(/\D/g, '').length === 11); setError(''); }).catch((caught) => setError(caught instanceof Error ? caught.message : 'Não foi possível carregar seus dados salvos.'));
   }, [user]);
+
+  useEffect(() => {
+    const cep = profile?.cep.replace(/\D/g, '') ?? '';
+    if (cep.length !== 8) {
+      setCepStatus({ loading: false, message: '', error: false });
+      return;
+    }
+
+    const controller = new AbortController();
+    const timer = setTimeout(() => {
+      setCepStatus({ loading: true, message: 'Buscando endereço…', error: false });
+      findAddressByCep(cep, controller.signal)
+        .then((result) => {
+          setProfile((current) => current && current.cep.replace(/\D/g, '') === cep ? {
+            ...current,
+            cep: result.cep,
+            address: result.address || current.address,
+            neighborhood: result.neighborhood || current.neighborhood,
+            city: result.city || current.city,
+            state: result.state || current.state,
+            complete: current.complete
+          } : current);
+          setCepStatus({ loading: false, message: 'Endereço preenchido automaticamente.', error: false });
+        })
+        .catch((caught) => {
+          if (caught instanceof DOMException && caught.name === 'AbortError') return;
+          setCepStatus({ loading: false, message: caught instanceof Error ? caught.message : 'Não foi possível consultar o CEP.', error: true });
+        });
+    }, 350);
+
+    return () => { clearTimeout(timer); controller.abort(); };
+  }, [profile?.cep]);
 
   if (!profile) return <div className="h-96 animate-pulse rounded-xl bg-black/10" />;
 
@@ -75,7 +110,7 @@ export function ProfileForm() {
 
         <Step number="2" title="Endereço">
           <div className="grid gap-5 sm:grid-cols-2">
-            <ProfileField label="CEP" value={profile.cep} onChange={(value) => update('cep', value)} autoComplete="postal-code" required />
+            <ProfileField label="CEP" value={formatCep(profile.cep)} onChange={(value) => update('cep', formatCep(value))} autoComplete="postal-code" inputMode="numeric" placeholder="00000-000" hint={cepStatus.message ? <span className={cepStatus.error ? 'text-red-600' : 'text-gaucho-green'}>{cepStatus.loading ? '⌛ ' : cepStatus.error ? '⚠ ' : '✓ '}{cepStatus.message}</span> : undefined} required />
             <ProfileField label="Endereço" value={profile.address} onChange={(value) => update('address', value)} autoComplete="address-line1" className="sm:col-span-2" required />
             <ProfileField label="Número" value={profile.number} onChange={(value) => update('number', value)} autoComplete="address-line2" required />
             <ProfileField label="Complemento" value={profile.complement} onChange={(value) => update('complement', value)} autoComplete="address-line2" placeholder="Opcional" />
@@ -101,6 +136,6 @@ function Step({ number, title, children }: { number: string; title: string; chil
 
 function Required() { return <span className="text-gaucho-red">*</span>; }
 
-function ProfileField({ label, value, onChange, disabled = false, autoComplete, type = 'text', inputMode, placeholder, className = '', required = false }: { label: string; value: string; onChange?: (value: string) => void; disabled?: boolean; autoComplete: string; type?: string; inputMode?: React.HTMLAttributes<HTMLInputElement>['inputMode']; placeholder?: string; className?: string; required?: boolean }) {
-  return <label className={`grid gap-1.5 text-sm font-bold text-black/75 ${className}`}><span>{label} {required && <Required />}</span><input required={required} type={type} inputMode={inputMode} value={value} onChange={(event) => onChange?.(event.target.value)} disabled={disabled} autoComplete={autoComplete} placeholder={placeholder} className={inputClass} /></label>;
+function ProfileField({ label, value, onChange, disabled = false, autoComplete, type = 'text', inputMode, placeholder, hint, className = '', required = false }: { label: string; value: string; onChange?: (value: string) => void; disabled?: boolean; autoComplete: string; type?: string; inputMode?: React.HTMLAttributes<HTMLInputElement>['inputMode']; placeholder?: string; hint?: React.ReactNode; className?: string; required?: boolean }) {
+  return <label className={`grid gap-1.5 text-sm font-bold text-black/75 ${className}`}><span>{label} {required && <Required />}</span><input required={required} type={type} inputMode={inputMode} value={value} onChange={(event) => onChange?.(event.target.value)} disabled={disabled} autoComplete={autoComplete} placeholder={placeholder} className={inputClass} />{hint && <span className="text-xs font-bold">{hint}</span>}</label>;
 }
