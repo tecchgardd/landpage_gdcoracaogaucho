@@ -9,6 +9,19 @@ import { useCart } from '@/components/providers/CartProvider';
 import { meService, type CartValidation, type CheckoutResult, type Profile } from '@/services/meService';
 
 const money = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
+const emptyProfile = (user: { id: string; name?: string; email?: string }): Profile => ({
+  userId: user.id, name: user.name ?? '', email: user.email ?? '', cpf: '', phone: '', birthDate: '', gender: '', cep: '', address: '',
+  number: '', complement: '', neighborhood: '', state: '', city: '', complete: false
+});
+
+function hasCompleteProfile(profile: Profile | null) {
+  return Boolean(profile?.name && profile.cpf && profile.phone && profile.birthDate && profile.gender && profile.cep && profile.address && profile.number && profile.neighborhood && profile.state && profile.city);
+}
+
+function formatPhone(value: string) {
+  const digits = value.replace(/\D/g, '');
+  return digits.length > 10 ? digits.replace(/^(\d{2})(\d{5})(\d{4}).*/, '($1) $2-$3') : digits.replace(/^(\d{2})(\d{4})(\d{4}).*/, '($1) $2-$3');
+}
 
 export default function CheckoutPage() {
   const { user, loading: authLoading } = useAuth();
@@ -28,133 +41,76 @@ export default function CheckoutPage() {
 
   useEffect(() => {
     if (!user) return;
-
-    // Render the form immediately from the authenticated account. API profile
-    // data replaces it when available, but one failed request never hides it.
-    setProfile((current) => current ?? {
-      userId: user.id,
-      name: user.name ?? '',
-      email: user.email ?? '',
-      cpf: '',
-      phone: '',
-      birthDate: '',
-      gender: '',
-      cep: '',
-      address: '',
-      number: '',
-      complement: '',
-      neighborhood: '',
-      state: '',
-      city: '',
-      complete: false
-    });
-
-    if (!cart.items.length) {
-      setLoading(false);
-      return;
-    }
+    setProfile((current) => current ?? emptyProfile(user));
+    if (!cart.items.length) { setLoading(false); return; }
 
     let active = true;
-    setLoading(true);
-    setProfileError('');
-    setValidationError('');
-
+    setLoading(true); setProfileError(''); setValidationError(''); setValidation(null);
     Promise.allSettled([meService.profile(), meService.validateCart(cart.items)])
       .then(([profileResult, validationResult]) => {
         if (!active) return;
         if (profileResult.status === 'fulfilled') setProfile(profileResult.value);
         else setProfileError(profileResult.reason instanceof Error ? profileResult.reason.message : 'Não foi possível carregar seus dados salvos.');
-
         if (validationResult.status === 'fulfilled') setValidation(validationResult.value);
         else setValidationError(validationResult.reason instanceof Error ? validationResult.reason.message : 'Não foi possível validar os itens do carrinho.');
       })
       .finally(() => { if (active) setLoading(false); });
-
     return () => { active = false; };
   }, [user, cart.items]);
 
+  const profileComplete = hasCompleteProfile(profile);
+  const hasInvalidItems = Boolean(validation?.invalidItems.length);
+  const canFinish = profileComplete && Boolean(validation?.validItems.length) && !hasInvalidItems && !loading;
+
   const finish = async () => {
-    setActionError('');
-    setLoading(true);
+    setActionError(''); setLoading(true);
     try {
       const checkout = await meService.checkout(cart.items);
-      setResult(checkout);
-      cart.clear();
+      setResult(checkout); cart.clear();
     } catch (caught) {
       setActionError(caught instanceof Error ? caught.message : 'Não foi possível concluir o pedido.');
-    } finally {
-      setLoading(false);
-    }
+    } finally { setLoading(false); }
   };
 
-  if (authLoading || (!profile && loading)) {
-    return <main className="min-h-screen bg-gaucho-cream"><Header /><div className="mx-auto max-w-4xl px-6 pt-40"><div className="h-64 animate-pulse rounded-2xl bg-black/10" /></div></main>;
-  }
-
-  if (!cart.items.length && !result) {
-    return <main className="min-h-screen bg-gaucho-cream"><Header /><section className="mx-auto max-w-3xl px-6 pt-40 text-center"><h1 className="text-3xl font-black">Seu carrinho está vazio</h1><Link href="/bilheteria" className="mt-5 inline-block text-gaucho-red">Voltar à bilheteria</Link></section></main>;
-  }
+  if (authLoading || (!profile && loading)) return <main className="min-h-screen bg-gaucho-cream"><Header /><div className="mx-auto max-w-5xl px-5 pt-36"><div className="h-72 animate-pulse rounded-3xl bg-black/10" /></div></main>;
+  if (!cart.items.length && !result) return <main className="min-h-screen bg-gaucho-cream"><Header /><section className="mx-auto max-w-3xl px-5 pb-20 pt-36 text-center"><span className="text-5xl">🛒</span><h1 className="mt-5 font-display text-4xl font-black">Seu carrinho está vazio</h1><p className="mt-2 text-black/55">Escolha um evento para iniciar seu pedido.</p><Link href="/bilheteria" className="mt-6 inline-block rounded-xl bg-gaucho-red px-6 py-3 font-black text-white">Explorar bilheteria</Link></section></main>;
 
   return (
     <main className="min-h-screen bg-gaucho-cream text-black">
       <Header />
-      <section className="mx-auto max-w-5xl px-6 pb-24 pt-36">
-        <h1 className="font-display text-5xl font-black">Checkout seguro</h1>
-        {result ? (
-          <div className="mt-8 rounded-2xl bg-white p-8 shadow-xl">
-            <h2 className="text-2xl font-black">{result.free ? 'Pedido confirmado!' : 'Pedido criado'}</h2>
-            <p className="mt-2">Código: <b>{result.orderCode}</b></p>
-            {result.checkoutUrl && <a href={result.checkoutUrl} className="mt-5 inline-block rounded-lg bg-gaucho-red px-7 py-4 font-black text-white">Continuar para pagamento</a>}
-            <Link href={`/minha-conta/pedidos/${result.orderId}`} className="mt-5 block font-bold text-gaucho-green">Acompanhar pedido</Link>
-          </div>
-        ) : (
-          <div className="mt-8 grid gap-6 lg:grid-cols-[1fr_340px]">
-            <div className="space-y-6">
-              {profile && (
-                <section className="rounded-2xl bg-white p-6 shadow-lg">
-                  <h2 className="text-xl font-black">Dados do comprador</h2>
-                  {profileError ? (
-                    <p className="mt-4 rounded-lg bg-red-50 p-3 text-sm text-red-700">Não foi possível verificar seus dados: {profileError}</p>
-                  ) : profile.complete ? (
-                    <div className="mt-3">
-                      <p className="font-bold">{profile.name}</p>
-                      <p className="text-sm text-black/55">{profile.email} • {profile.phone}</p>
-                      <p className="mt-2 text-sm text-black/55">{profile.address}, {profile.number} — {profile.neighborhood}, {profile.city}/{profile.state}</p>
-                      <Link href="/minha-conta/perfil?returnTo=/checkout" className="mt-4 inline-block text-sm font-bold text-gaucho-green">Editar meus dados</Link>
-                    </div>
-                  ) : (
-                    <div className="mt-4 rounded-xl border border-amber-200 bg-amber-50 p-5">
-                      <h3 className="font-black text-amber-950">Complete seus dados antes de finalizar</h3>
-                      <p className="mt-1 text-sm text-amber-900/80">Dados pessoais e endereço completos são obrigatórios para confirmar o pedido.</p>
-                      <Link href="/minha-conta/perfil?returnTo=/checkout" className="mt-4 inline-block rounded-lg bg-gaucho-green px-5 py-3 font-black text-white">Completar meus dados</Link>
-                    </div>
-                  )}
-                </section>
-              )}
+      <section className="mx-auto max-w-6xl px-5 pb-24 pt-32 sm:px-6 sm:pt-36">
+        <Link href="/carrinho" className="inline-flex items-center gap-2 text-sm font-bold text-black/55 transition hover:text-gaucho-green">← Voltar ao carrinho</Link>
+        <div className="mt-3 flex flex-wrap items-end justify-between gap-4">
+          <div><p className="text-xs font-black uppercase tracking-[0.22em] text-gaucho-red">Finalização da compra</p><h1 className="mt-1 font-display text-4xl font-black sm:text-5xl">Checkout seguro</h1></div>
+          {!result && <div className="hidden items-center gap-2 text-xs font-bold text-black/40 sm:flex"><StepDot active done={profileComplete}>1</StepDot><span>Dados</span><i className="h-px w-6 bg-black/15" /><StepDot active={Boolean(validation)}>2</StepDot><span>Itens</span><i className="h-px w-6 bg-black/15" /><StepDot>3</StepDot><span>Confirmar</span></div>}
+        </div>
 
-              <section className="rounded-2xl bg-white p-6 shadow-lg">
-                <h2 className="text-xl font-black">Itens do pedido</h2>
-                {validationError && <p className="mt-4 rounded-lg bg-red-50 p-3 text-sm text-red-700">Não foi possível validar preços e disponibilidade: {validationError}</p>}
-                {validation ? (
-                  <>
-                    {validation.validItems.map((item) => <div key={item.eventId} className="mt-4 flex justify-between gap-4 border-t pt-4"><div><b>{item.name}</b><p className="text-sm text-black/55">{item.quantity} × {money.format(item.unitPrice)}</p>{item.quantityAdjusted && <p className="text-sm text-gaucho-red">Quantidade ajustada à disponibilidade atual.</p>}</div><b>{money.format(item.total)}</b></div>)}
-                    {validation.invalidItems.map((item) => <p key={item.eventId} className="mt-3 rounded bg-red-50 p-3 text-red-700">{item.name ?? 'Item'}: {item.reason}</p>)}
-                  </>
-                ) : (
-                  cart.items.map((item) => <div key={item.eventId} className="mt-4 flex justify-between gap-4 border-t pt-4"><div><b>{item.snapshot.title}</b><p className="text-sm text-black/55">Quantidade: {item.quantity}</p></div><span className="text-sm font-bold text-black/50">Aguardando validação</span></div>)
-                )}
-              </section>
+        {result ? (
+          <div className="mt-8 rounded-3xl border border-green-200 bg-white p-8 text-center shadow-xl sm:p-12"><span className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-green-100 text-2xl text-gaucho-green">✓</span><h2 className="mt-5 text-3xl font-black">{result.free ? 'Pedido confirmado!' : 'Pedido criado'}</h2><p className="mt-2 text-black/55">Código do pedido: <b className="text-black">{result.orderCode}</b></p>{result.checkoutUrl && <a href={result.checkoutUrl} className="mt-6 inline-block rounded-xl bg-gaucho-red px-7 py-4 font-black text-white">Continuar para pagamento</a>}<Link href={`/minha-conta/pedidos/${result.orderId}`} className="mt-5 block font-bold text-gaucho-green">Acompanhar pedido →</Link></div>
+        ) : (
+          <div className="mt-8 grid items-start gap-6 lg:grid-cols-[minmax(0,1fr)_360px]">
+            <div className="space-y-5">
+              <Card number="1" title="Dados do comprador" action={profileComplete ? <Link href="/minha-conta/perfil?returnTo=/checkout" className="text-sm font-bold text-gaucho-green">Editar dados</Link> : undefined}>
+                {profileError ? <Alert tone="error">Não foi possível verificar seus dados: {profileError}</Alert> : profileComplete && profile ? <BuyerSummary profile={profile} /> : <div className="rounded-2xl border border-amber-200 bg-amber-50 p-5 sm:flex sm:items-center sm:justify-between sm:gap-5"><div><h3 className="font-black text-amber-950">Seu cadastro ainda está incompleto</h3><p className="mt-1 text-sm leading-6 text-amber-900/75">Preencha os dados pessoais e o endereço para liberar a confirmação.</p></div><Link href="/minha-conta/perfil?returnTo=/checkout" className="mt-4 inline-block shrink-0 rounded-xl bg-gaucho-green px-5 py-3 text-sm font-black text-white sm:mt-0">Completar dados</Link></div>}
+              </Card>
+
+              <Card number="2" title="Itens do pedido" subtitle={`${cart.count} ${cart.count === 1 ? 'item' : 'itens'} no carrinho`}>
+                {validationError && <Alert tone="error">Não foi possível validar preços e disponibilidade: {validationError}</Alert>}
+                {loading && !validation ? <div className="space-y-3"><div className="h-20 animate-pulse rounded-2xl bg-black/5" /><p className="text-center text-xs font-bold text-black/40">Validando disponibilidade e valores…</p></div> : validation ? <div className="space-y-3">
+                  {validation.validItems.map((item) => <article key={item.eventId} className="flex flex-col gap-4 rounded-2xl border border-black/10 p-4 sm:flex-row sm:items-center sm:justify-between"><div><span className="rounded-full bg-gaucho-green/10 px-2.5 py-1 text-[10px] font-black text-gaucho-green">{item.type}</span><h3 className="mt-2 font-black">{item.name}</h3><p className="mt-1 text-sm text-black/50">{item.quantity} × {money.format(item.unitPrice)}</p>{item.quantityAdjusted && <p className="mt-1 text-xs font-bold text-amber-700">Quantidade ajustada à disponibilidade.</p>}</div><b className="text-lg">{money.format(item.total)}</b></article>)}
+                  {validation.invalidItems.map((item) => <article key={item.eventId} className="rounded-2xl border border-red-200 bg-red-50 p-4 sm:flex sm:items-center sm:justify-between sm:gap-4"><div><span className="text-[10px] font-black uppercase tracking-wider text-red-600">Indisponível</span><h3 className="mt-1 font-black text-red-900">{item.name ?? 'Item do carrinho'}</h3><p className="mt-1 text-sm text-red-700">{item.reason}</p></div><button onClick={() => cart.remove(item.eventId)} className="mt-3 text-sm font-black text-red-700 underline underline-offset-4 sm:mt-0">Remover item</button></article>)}
+                </div> : null}
+              </Card>
             </div>
 
-            <aside className="h-fit rounded-2xl bg-white p-6 shadow-xl">
+            <aside className="rounded-3xl border border-black/5 bg-white p-6 shadow-[0_18px_50px_rgba(40,30,15,0.12)] lg:sticky lg:top-6">
               <h2 className="text-xl font-black">Resumo do pedido</h2>
-              <p className="mt-5 flex justify-between"><span>Subtotal</span><b>{money.format(validation?.subtotal ?? 0)}</b></p>
-              <p className="mt-2 flex justify-between"><span>Taxa</span><b>{money.format(validation?.fee ?? 0)}</b></p>
-              <p className="mt-4 flex justify-between border-t pt-4 text-xl"><span>Total</span><b>{money.format(validation?.total ?? 0)}</b></p>
-              {actionError && <p className="mt-4 rounded bg-red-50 p-3 text-sm text-red-700">{actionError}</p>}
-              <button disabled={loading || !profile?.complete || !validation || Boolean(validation.invalidItems.length) || validation.validItems.length === 0} onClick={finish} className="mt-6 w-full rounded-lg bg-gaucho-red py-4 font-black uppercase text-white disabled:cursor-not-allowed disabled:opacity-40">{loading ? 'Validando…' : 'Confirmar pedido'}</button>
-              {!validation && <p className="mt-3 text-center text-xs text-black/50">O pedido será liberado assim que preços e disponibilidade forem validados.</p>}
-              {profile && !profile.complete && <p className="mt-3 text-center text-xs font-bold text-gaucho-red">Complete seus dados para liberar a confirmação.</p>}
+              <div className="mt-6 space-y-3 text-sm"><p className="flex justify-between gap-4"><span className="text-black/55">Subtotal</span><b>{money.format(validation?.subtotal ?? 0)}</b></p><p className="flex justify-between gap-4"><span className="text-black/55">Taxa</span><b>{money.format(validation?.fee ?? 0)}</b></p></div>
+              <p className="mt-5 flex items-end justify-between gap-4 border-t pt-5"><span className="font-bold">Total</span><b className="text-2xl">{money.format(validation?.total ?? 0)}</b></p>
+              {actionError && <div className="mt-4"><Alert tone="error">{actionError}</Alert></div>}
+              <button disabled={!canFinish} onClick={finish} className="mt-6 w-full rounded-xl bg-gaucho-red py-4 font-black uppercase tracking-wide text-white shadow-lg shadow-red-950/15 transition hover:bg-red-700 disabled:cursor-not-allowed disabled:shadow-none disabled:grayscale disabled:opacity-40">{loading ? 'Validando…' : 'Confirmar pedido'}</button>
+              <CheckoutHint loading={loading} validation={validation} profileComplete={profileComplete} />
+              <p className="mt-5 flex items-center justify-center gap-2 border-t pt-4 text-xs text-black/40"><span>🔒</span> Ambiente seguro para sua compra</p>
             </aside>
           </div>
         )}
@@ -162,3 +118,10 @@ export default function CheckoutPage() {
     </main>
   );
 }
+
+function StepDot({ children, active = false, done = false }: { children: React.ReactNode; active?: boolean; done?: boolean }) { return <span className={`flex h-6 w-6 items-center justify-center rounded-full text-[10px] ${done ? 'bg-gaucho-green text-white' : active ? 'bg-gaucho-gold text-black' : 'bg-black/10'}`}>{done ? '✓' : children}</span>; }
+function Card({ number, title, subtitle, action, children }: { number: string; title: string; subtitle?: string; action?: React.ReactNode; children: React.ReactNode }) { return <section className="rounded-3xl border border-black/5 bg-white p-5 shadow-[0_12px_35px_rgba(40,30,15,0.08)] sm:p-7"><header className="mb-5 flex items-start justify-between gap-4"><div className="flex items-center gap-3"><span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gaucho-gold/20 text-xs font-black text-gaucho-green">{number}</span><div><h2 className="text-xl font-black">{title}</h2>{subtitle && <p className="mt-0.5 text-xs text-black/45">{subtitle}</p>}</div></div>{action}</header>{children}</section>; }
+function Alert({ children, tone }: { children: React.ReactNode; tone: 'error' }) { return <p className={tone === 'error' ? 'rounded-xl border border-red-200 bg-red-50 p-4 text-sm font-bold text-red-700' : ''}>{children}</p>; }
+function BuyerSummary({ profile }: { profile: Profile }) { const firstLine = [profile.address, profile.number].filter(Boolean).join(', '); const city = [profile.city, profile.state].filter(Boolean).join('/'); const secondLine = [profile.neighborhood, city].filter(Boolean).join(' • '); return <div className="grid gap-4 sm:grid-cols-2"><Info label="Contato" value={profile.name} detail={`${profile.email} • ${formatPhone(profile.phone)}`} /><Info label="Entrega / cadastro" value={firstLine} detail={secondLine} /></div>; }
+function Info({ label, value, detail }: { label: string; value: string; detail: string }) { return <div className="rounded-2xl bg-black/[0.035] p-4"><span className="text-[10px] font-black uppercase tracking-wider text-black/40">{label}</span><p className="mt-1 font-black">{value}</p><p className="mt-1 break-words text-sm text-black/50">{detail}</p></div>; }
+function CheckoutHint({ loading, validation, profileComplete }: { loading: boolean; validation: CartValidation | null; profileComplete: boolean }) { let text = ''; if (loading) text = 'Aguarde a validação dos itens.'; else if (!profileComplete) text = 'Complete seus dados para continuar.'; else if (!validation) text = 'Não foi possível validar o carrinho.'; else if (validation.invalidItems.length) text = 'Remova os itens indisponíveis para continuar.'; else if (!validation.validItems.length) text = 'Seu carrinho não possui itens válidos.'; return text ? <p className="mt-3 text-center text-xs font-bold leading-5 text-black/45">{text}</p> : null; }
