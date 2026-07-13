@@ -14,8 +14,8 @@ const STATES = [
   ['RS', 'Rio Grande do Sul'], ['RO', 'Rondônia'], ['RR', 'Roraima'], ['SC', 'Santa Catarina'], ['SP', 'São Paulo'], ['SE', 'Sergipe'], ['TO', 'Tocantins']
 ] as const;
 
-const formatCpf = (value: string) => value.replace(/\D/g, '').slice(0, 11).replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d{1,2})$/, '$1-$2');
-const formatCep = (value: string) => value.replace(/\D/g, '').slice(0, 8).replace(/(\d{5})(\d)/, '$1-$2');
+const formatCpf = (value?: string) => (value ?? '').replace(/\D/g, '').slice(0, 11).replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+const formatCep = (value?: string) => (value ?? '').replace(/\D/g, '').slice(0, 8).replace(/(\d{5})(\d)/, '$1-$2');
 
 const emptyProfile = (user: { id: string; name?: string; email?: string }): Profile => ({
   userId: user.id, name: user.name ?? '', email: user.email ?? '', cpf: '', phone: '', birthDate: '', gender: '', cep: '',
@@ -37,11 +37,11 @@ export function ProfileForm() {
   useEffect(() => {
     if (!user) return;
     setProfile(emptyProfile(user));
-    meService.profile().then((data) => { setProfile(data); setCpfLocked(data.cpf.replace(/\D/g, '').length === 11); setError(''); }).catch((caught) => setError(caught instanceof Error ? caught.message : 'Não foi possível carregar seus dados salvos.'));
+    meService.profile().then((data) => { setProfile(data); setCpfLocked((data.cpf ?? '').replace(/\D/g, '').length === 11); setError(''); }).catch((caught) => setError(caught instanceof Error ? caught.message : 'Não foi possível carregar seus dados salvos.'));
   }, [user]);
 
   useEffect(() => {
-    const cep = profile?.cep.replace(/\D/g, '') ?? '';
+    const cep = profile?.cep?.replace(/\D/g, '') ?? '';
     if (cep.length !== 8) {
       setCepStatus({ loading: false, message: '', error: false });
       return;
@@ -52,7 +52,7 @@ export function ProfileForm() {
       setCepStatus({ loading: true, message: 'Buscando endereço…', error: false });
       findAddressByCep(cep, controller.signal)
         .then((result) => {
-          setProfile((current) => current && current.cep.replace(/\D/g, '') === cep ? {
+          setProfile((current) => current && (current.cep ?? '').replace(/\D/g, '') === cep ? {
             ...current,
             cep: result.cep,
             address: result.address || current.address,

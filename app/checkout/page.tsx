@@ -18,8 +18,8 @@ function hasCompleteProfile(profile: Profile | null) {
   return Boolean(profile?.name && profile.cpf && profile.phone && profile.birthDate && profile.gender && profile.cep && profile.address && profile.number && profile.neighborhood && profile.state && profile.city);
 }
 
-function formatPhone(value: string) {
-  const digits = value.replace(/\D/g, '');
+function formatPhone(value?: string) {
+  const digits = (value ?? '').replace(/\D/g, '');
   return digits.length > 10 ? digits.replace(/^(\d{2})(\d{5})(\d{4}).*/, '($1) $2-$3') : digits.replace(/^(\d{2})(\d{4})(\d{4}).*/, '($1) $2-$3');
 }
 

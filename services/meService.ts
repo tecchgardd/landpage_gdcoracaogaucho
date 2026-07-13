@@ -11,10 +11,27 @@ export type CheckoutResult = { orderId: number; orderCode: string; status: strin
 export type CustomerOrder = Record<string, unknown> & { id: number; code: string; status: string; paymentStatus?: string; paymentMethod?: string; total: number; createdAt: string; statusLabel: string; items: Array<Record<string, unknown>> };
 
 const cartBody = (items: Array<{ eventId: number; quantity: number }>) => ({ items: items.map(({ eventId, quantity }) => ({ eventId, quantity })) });
+const normalizeProfile = (data: Partial<Profile>): Profile => ({
+  userId: String(data.userId ?? ''),
+  name: String(data.name ?? ''),
+  email: String(data.email ?? ''),
+  phone: String(data.phone ?? ''),
+  cpf: String(data.cpf ?? ''),
+  birthDate: String(data.birthDate ?? ''),
+  gender: String(data.gender ?? ''),
+  cep: String(data.cep ?? ''),
+  address: String(data.address ?? ''),
+  number: String(data.number ?? ''),
+  complement: String(data.complement ?? ''),
+  neighborhood: String(data.neighborhood ?? ''),
+  state: String(data.state ?? ''),
+  city: String(data.city ?? ''),
+  complete: Boolean(data.complete)
+});
 
 export const meService = {
-  profile: () => publicApiGet<Profile>('/api/me/profile'),
-  updateProfile: (profile: Pick<Profile, 'name' | 'cpf' | 'phone' | 'birthDate' | 'gender' | 'cep' | 'address' | 'number' | 'complement' | 'neighborhood' | 'state' | 'city'>) => publicApiPatch<Profile>('/api/me/profile', profile),
+  profile: () => publicApiGet<Partial<Profile>>('/api/me/profile').then(normalizeProfile),
+  updateProfile: (profile: Pick<Profile, 'name' | 'cpf' | 'phone' | 'birthDate' | 'gender' | 'cep' | 'address' | 'number' | 'complement' | 'neighborhood' | 'state' | 'city'>) => publicApiPatch<Partial<Profile>>('/api/me/profile', profile).then(normalizeProfile),
   validateCart: (items: Array<{ eventId: number; quantity: number }>) => publicApiPost<CartValidation>('/api/me/checkout/validate', cartBody(items)),
   checkout: (items: Array<{ eventId: number; quantity: number }>) => publicApiPost<CheckoutResult>('/api/me/checkout', cartBody(items)),
   orders: () => publicApiGet<{ data: CustomerOrder[] }>('/api/me/orders'),
