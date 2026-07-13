@@ -13,6 +13,8 @@ const STATES = [
   ['RS', 'Rio Grande do Sul'], ['RO', 'Rondônia'], ['RR', 'Roraima'], ['SC', 'Santa Catarina'], ['SP', 'São Paulo'], ['SE', 'Sergipe'], ['TO', 'Tocantins']
 ] as const;
 
+const formatCpf = (value: string) => value.replace(/\D/g, '').slice(0, 11).replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+
 const emptyProfile = (user: { id: string; name?: string; email?: string }): Profile => ({
   userId: user.id, name: user.name ?? '', email: user.email ?? '', cpf: '', phone: '', birthDate: '', gender: '', cep: '',
   address: '', number: '', complement: '', neighborhood: '', state: '', city: '', complete: false
@@ -27,11 +29,12 @@ export function ProfileForm() {
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
   const [saving, setSaving] = useState(false);
+  const [cpfLocked, setCpfLocked] = useState(false);
 
   useEffect(() => {
     if (!user) return;
     setProfile(emptyProfile(user));
-    meService.profile().then((data) => { setProfile(data); setError(''); }).catch((caught) => setError(caught instanceof Error ? caught.message : 'Não foi possível carregar seus dados salvos.'));
+    meService.profile().then((data) => { setProfile(data); setCpfLocked(data.cpf.replace(/\D/g, '').length === 11); setError(''); }).catch((caught) => setError(caught instanceof Error ? caught.message : 'Não foi possível carregar seus dados salvos.'));
   }, [user]);
 
   if (!profile) return <div className="h-96 animate-pulse rounded-xl bg-black/10" />;
@@ -43,6 +46,7 @@ export function ProfileForm() {
     try {
       const saved = await meService.updateProfile(profile);
       setProfile(saved);
+      setCpfLocked(true);
       setMessage('Dados completos e salvos com sucesso. Você já pode finalizar suas compras.');
     } catch (caught) {
       setError(caught instanceof Error ? caught.message : 'Falha ao salvar os dados.');
@@ -57,7 +61,7 @@ export function ProfileForm() {
           <div className="grid gap-5 sm:grid-cols-2">
             <ProfileField label="Nome completo" value={profile.name} disabled={Boolean(profile.name)} onChange={(value) => update('name', value)} autoComplete="name" className="sm:col-span-2" required />
             <ProfileField label="E-mail" value={profile.email} disabled autoComplete="email" className="sm:col-span-2" required />
-            <ProfileField label="CPF" value={profile.cpf} disabled={Boolean(profile.cpf)} onChange={(value) => update('cpf', value)} autoComplete="off" required />
+            <ProfileField label="CPF" value={formatCpf(profile.cpf)} disabled={cpfLocked} onChange={(value) => update('cpf', formatCpf(value))} autoComplete="off" inputMode="numeric" placeholder="000.000.000-00" required />
             <ProfileField label="Data de nascimento" type="date" value={profile.birthDate} onChange={(value) => update('birthDate', value)} autoComplete="bday" required />
             <fieldset className="sm:col-span-2">
               <legend className="mb-3 text-sm font-bold text-black/75">Sexo <Required /></legend>
@@ -97,6 +101,6 @@ function Step({ number, title, children }: { number: string; title: string; chil
 
 function Required() { return <span className="text-gaucho-red">*</span>; }
 
-function ProfileField({ label, value, onChange, disabled = false, autoComplete, type = 'text', placeholder, className = '', required = false }: { label: string; value: string; onChange?: (value: string) => void; disabled?: boolean; autoComplete: string; type?: string; placeholder?: string; className?: string; required?: boolean }) {
-  return <label className={`grid gap-1.5 text-sm font-bold text-black/75 ${className}`}><span>{label} {required && <Required />}</span><input required={required} type={type} value={value} onChange={(event) => onChange?.(event.target.value)} disabled={disabled} autoComplete={autoComplete} placeholder={placeholder} className={inputClass} /></label>;
+function ProfileField({ label, value, onChange, disabled = false, autoComplete, type = 'text', inputMode, placeholder, className = '', required = false }: { label: string; value: string; onChange?: (value: string) => void; disabled?: boolean; autoComplete: string; type?: string; inputMode?: React.HTMLAttributes<HTMLInputElement>['inputMode']; placeholder?: string; className?: string; required?: boolean }) {
+  return <label className={`grid gap-1.5 text-sm font-bold text-black/75 ${className}`}><span>{label} {required && <Required />}</span><input required={required} type={type} inputMode={inputMode} value={value} onChange={(event) => onChange?.(event.target.value)} disabled={disabled} autoComplete={autoComplete} placeholder={placeholder} className={inputClass} /></label>;
 }
