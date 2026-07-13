@@ -20,7 +20,6 @@ export default function CheckoutPage() {
   const [validationError, setValidationError] = useState('');
   const [actionError, setActionError] = useState('');
   const [loading, setLoading] = useState(true);
-  const [saving, setSaving] = useState(false);
   const [result, setResult] = useState<CheckoutResult | null>(null);
 
   useEffect(() => {
@@ -38,7 +37,14 @@ export default function CheckoutPage() {
       email: user.email ?? '',
       cpf: '',
       phone: '',
+      birthDate: '',
+      gender: '',
+      cep: '',
       address: '',
+      number: '',
+      complement: '',
+      neighborhood: '',
+      state: '',
       city: '',
       complete: false
     });
@@ -66,21 +72,6 @@ export default function CheckoutPage() {
 
     return () => { active = false; };
   }, [user, cart.items]);
-
-  const saveProfile = async () => {
-    if (!profile) return;
-    setSaving(true);
-    setActionError('');
-    try {
-      const saved = await meService.updateProfile(profile);
-      setProfile({ ...profile, ...saved, complete: true });
-      setProfileError('');
-    } catch (caught) {
-      setActionError(caught instanceof Error ? caught.message : 'Não foi possível salvar seus dados.');
-    } finally {
-      setSaving(false);
-    }
-  };
 
   const finish = async () => {
     setActionError('');
@@ -122,18 +113,22 @@ export default function CheckoutPage() {
               {profile && (
                 <section className="rounded-2xl bg-white p-6 shadow-lg">
                   <h2 className="text-xl font-black">Dados do comprador</h2>
-                  <p className="mt-1 text-sm text-black/55">Confira os dados que serão usados no pedido. O e-mail da conta não pode ser alterado aqui.</p>
-                  {profileError && <p className="mt-4 rounded-lg bg-amber-50 p-3 text-sm text-amber-800">Seus dados salvos não puderam ser carregados ({profileError}). Preencha os campos abaixo e salve para continuar.</p>}
-                  <div className="mt-4 grid gap-4 sm:grid-cols-2">
-                    <Field label="Nome completo" value={profile.name} onChange={(value) => setProfile({ ...profile, name: value, complete: false })} autoComplete="name" />
-                    <Field label="E-mail" value={profile.email} disabled autoComplete="email" />
-                    <Field label="CPF" value={profile.cpf} onChange={(value) => setProfile({ ...profile, cpf: value, complete: false })} autoComplete="off" />
-                    <Field label="Telefone" value={profile.phone} onChange={(value) => setProfile({ ...profile, phone: value, complete: false })} autoComplete="tel" />
-                    <Field label="Endereço" value={profile.address} onChange={(value) => setProfile({ ...profile, address: value, complete: false })} autoComplete="street-address" />
-                    <Field label="Cidade" value={profile.city} onChange={(value) => setProfile({ ...profile, city: value, complete: false })} autoComplete="address-level2" />
-                  </div>
-                  <button onClick={saveProfile} disabled={saving} className="mt-5 rounded-lg border border-gaucho-green px-5 py-3 font-bold text-gaucho-green disabled:opacity-50">{saving ? 'Salvando…' : 'Salvar dados'}</button>
-                  {!profile.complete && <p className="mt-3 text-sm font-bold text-gaucho-red">Salve seus dados antes de confirmar o pedido.</p>}
+                  {profileError ? (
+                    <p className="mt-4 rounded-lg bg-red-50 p-3 text-sm text-red-700">Não foi possível verificar seus dados: {profileError}</p>
+                  ) : profile.complete ? (
+                    <div className="mt-3">
+                      <p className="font-bold">{profile.name}</p>
+                      <p className="text-sm text-black/55">{profile.email} • {profile.phone}</p>
+                      <p className="mt-2 text-sm text-black/55">{profile.address}, {profile.number} — {profile.neighborhood}, {profile.city}/{profile.state}</p>
+                      <Link href="/minha-conta/perfil?returnTo=/checkout" className="mt-4 inline-block text-sm font-bold text-gaucho-green">Editar meus dados</Link>
+                    </div>
+                  ) : (
+                    <div className="mt-4 rounded-xl border border-amber-200 bg-amber-50 p-5">
+                      <h3 className="font-black text-amber-950">Complete seus dados antes de finalizar</h3>
+                      <p className="mt-1 text-sm text-amber-900/80">Dados pessoais e endereço completos são obrigatórios para confirmar o pedido.</p>
+                      <Link href="/minha-conta/perfil?returnTo=/checkout" className="mt-4 inline-block rounded-lg bg-gaucho-green px-5 py-3 font-black text-white">Completar meus dados</Link>
+                    </div>
+                  )}
                 </section>
               )}
 
@@ -159,19 +154,11 @@ export default function CheckoutPage() {
               {actionError && <p className="mt-4 rounded bg-red-50 p-3 text-sm text-red-700">{actionError}</p>}
               <button disabled={loading || !profile?.complete || !validation || Boolean(validation.invalidItems.length) || validation.validItems.length === 0} onClick={finish} className="mt-6 w-full rounded-lg bg-gaucho-red py-4 font-black uppercase text-white disabled:cursor-not-allowed disabled:opacity-40">{loading ? 'Validando…' : 'Confirmar pedido'}</button>
               {!validation && <p className="mt-3 text-center text-xs text-black/50">O pedido será liberado assim que preços e disponibilidade forem validados.</p>}
+              {profile && !profile.complete && <p className="mt-3 text-center text-xs font-bold text-gaucho-red">Complete seus dados para liberar a confirmação.</p>}
             </aside>
           </div>
         )}
       </section>
     </main>
-  );
-}
-
-function Field({ label, value, onChange, disabled = false, autoComplete }: { label: string; value: string; onChange?: (value: string) => void; disabled?: boolean; autoComplete: string }) {
-  return (
-    <label className="grid gap-1.5 text-sm font-bold text-black/70">
-      {label}
-      <input value={value} onChange={(event) => onChange?.(event.target.value)} disabled={disabled} autoComplete={autoComplete} className="rounded-lg border border-black/20 bg-white p-3 font-normal text-black outline-none transition focus:border-gaucho-green focus:ring-2 focus:ring-gaucho-green/15 disabled:bg-black/5 disabled:text-black/50" />
-    </label>
   );
 }

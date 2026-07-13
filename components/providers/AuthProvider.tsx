@@ -1,13 +1,13 @@
 'use client';
 
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
-import { authService, type SessionUser } from '@/services/authService';
+import { authService, type CustomerSignUpInput, type SessionUser } from '@/services/authService';
 
 type AuthContextValue = {
   user: SessionUser | null;
   loading: boolean;
   signIn: (email: string, password: string) => Promise<void>;
-  signUp: (name: string, email: string, password: string, phone: string) => Promise<void>;
+  signUp: (data: CustomerSignUpInput) => Promise<void>;
   signOut: () => Promise<void>;
   refresh: () => Promise<void>;
 };
@@ -26,7 +26,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const value = useMemo<AuthContextValue>(() => ({
     user, loading, refresh,
     signIn: async (email, password) => { const result = await authService.signIn(email, password); setUser(result?.user ?? null); },
-    signUp: async (name, email, password, phone) => { const result = await authService.signUp(name, email, password, phone); setUser(result?.user ?? null); },
+    signUp: async (data) => { const result = await authService.signUp(data); setUser(result?.user ?? null); },
     signOut: async () => { await authService.signOut(); setUser(null); }
   }), [user, loading, refresh]);
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
