@@ -1,0 +1,1 @@
+import { AccountShell } from '@/components/AccountShell'; import { ProfileForm } from '@/components/ProfileForm'; export default function Page() { return <AccountShell title="Meus dados"><ProfileForm /></AccountShell>; }

@@ -1,0 +1,7 @@
+const DATE_LOCALE = 'pt-BR';
+const dateParts = (value?: string | Date) => { if (!value) return null; const date = value instanceof Date ? value : new Date(value); return Number.isNaN(date.getTime()) ? null : date; };
+export function formatEventDate(value?: string | Date) { const date = dateParts(value); return date ? new Intl.DateTimeFormat(DATE_LOCALE, { day: '2-digit', month: 'long', year: 'numeric', timeZone: 'UTC' }).format(date) : 'Data a confirmar'; }
+export function formatEventTime(value?: string | Date) { const date = dateParts(value); return date ? new Intl.DateTimeFormat(DATE_LOCALE, { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'UTC' }).format(date) : 'Horário a confirmar'; }
+export function formatShortDate(value?: string | Date) { const date = dateParts(value); return date ? { day: new Intl.DateTimeFormat(DATE_LOCALE, { day: '2-digit', timeZone: 'UTC' }).format(date), month: new Intl.DateTimeFormat(DATE_LOCALE, { month: 'short', timeZone: 'UTC' }).format(date).replace('.', '').toUpperCase(), weekday: new Intl.DateTimeFormat(DATE_LOCALE, { weekday: 'short', timeZone: 'UTC' }).format(date).replace('.', '').toUpperCase() } : { day: '--', month: '', weekday: '' }; }
+export function formatCurrency(value?: number | null) { return new Intl.NumberFormat(DATE_LOCALE, { style: 'currency', currency: 'BRL' }).format(value ?? 0); }
+export function formatPrice(value?: number | null, context: 'Taxa' | 'Entrada' = 'Entrada') { return !value || value <= 0 ? `${context}: Gratuita` : `${context}: ${formatCurrency(value)}`; }
