@@ -1,4 +1,6 @@
-const API_BASE_URL = (process.env.NEXT_PUBLIC_API_URL ?? (process.env.NODE_ENV === 'development' ? 'http://localhost:3333' : '')).replace(/\/$/, '');
+// API calls deliberately stay on the page origin. next.config proxies them to the
+// backend so authentication cookies are first-party in production as well.
+const API_BASE_URL = '';
 
 export async function publicApiGet<T>(path: string): Promise<T> {
   const normalizedPath = path.startsWith('/') ? path : `/${path}`;
