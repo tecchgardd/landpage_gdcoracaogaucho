@@ -7,6 +7,8 @@ import { Header } from '@/components/Header';
 import { useAuth } from '@/components/providers/AuthProvider';
 import { useCart } from '@/components/providers/CartProvider';
 import { meService, type CartValidation, type CheckoutResult, type Profile } from '@/services/meService';
+import { ApiError } from '@/services/public/apiClient';
+import { rememberCheckoutOrder } from '@/services/checkoutRecovery';
 
 const money = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
 const emptyProfile = (user: { id: string; name?: string; email?: string }): Profile => ({
@@ -34,6 +36,7 @@ export default function CheckoutPage() {
   const [actionError, setActionError] = useState('');
   const [loading, setLoading] = useState(true);
   const [result, setResult] = useState<CheckoutResult | null>(null);
+  const [confirmedChanges, setConfirmedChanges] = useState(false);
 
   useEffect(() => {
     if (!authLoading && !user) router.replace('/login?returnTo=/checkout');
@@ -60,14 +63,18 @@ export default function CheckoutPage() {
 
   const profileComplete = hasCompleteProfile(profile);
   const hasInvalidItems = Boolean(validation?.invalidItems.length);
-  const canFinish = profileComplete && Boolean(validation?.validItems.length) && !hasInvalidItems && !loading;
+  const canFinish = profileComplete && Boolean(validation?.validItems.length) && !hasInvalidItems && !loading && (!validation?.changed || confirmedChanges);
 
   const finish = async () => {
     setActionError(''); setLoading(true);
     try {
       const checkout = await meService.checkout(cart.items);
-      setResult(checkout); cart.clear();
+      rememberCheckoutOrder(checkout.orderId);
+      setResult(checkout);
+      if (checkout.checkoutUrl) window.location.assign(checkout.checkoutUrl);
+      else if (checkout.status === 'PAGO') { cart.clear(); router.push('/checkout/sucesso'); }
     } catch (caught) {
+      if (caught instanceof ApiError && caught.status === 422) { router.push('/minha-conta/perfil?returnTo=/checkout&incompleto=1'); return; }
       setActionError(caught instanceof Error ? caught.message : 'Não foi possível concluir o pedido.');
     } finally { setLoading(false); }
   };
@@ -86,7 +93,7 @@ export default function CheckoutPage() {
         </div>
 
         {result ? (
-          <div className="mt-8 rounded-3xl border border-green-200 bg-white p-8 text-center shadow-xl sm:p-12"><span className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-green-100 text-2xl text-gaucho-green">✓</span><h2 className="mt-5 text-3xl font-black">{result.free ? 'Pedido confirmado!' : 'Pedido criado'}</h2><p className="mt-2 text-black/55">Código do pedido: <b className="text-black">{result.orderCode}</b></p>{result.checkoutUrl && <a href={result.checkoutUrl} className="mt-6 inline-block rounded-xl bg-gaucho-red px-7 py-4 font-black text-white">Continuar para pagamento</a>}<Link href={`/minha-conta/pedidos/${result.orderId}`} className="mt-5 block font-bold text-gaucho-green">Acompanhar pedido →</Link></div>
+          <div className="mt-8 rounded-3xl border border-green-200 bg-white p-8 text-center shadow-xl sm:p-12"><span className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-green-100 text-2xl text-gaucho-green">✓</span><h2 className="mt-5 text-3xl font-black">Pedido confirmado!</h2><p className="mt-2 text-black/55">Seu evento é gratuito e a inscrição foi concluída.</p><Link href="/minha-conta/ingressos" className="mt-6 inline-block rounded-xl bg-gaucho-green px-7 py-4 font-black text-white">Ver meus ingressos</Link></div>
         ) : (
           <div className="mt-8 grid items-start gap-6 lg:grid-cols-[minmax(0,1fr)_360px]">
             <div className="space-y-5">
@@ -107,6 +114,7 @@ export default function CheckoutPage() {
               <h2 className="text-xl font-black">Resumo do pedido</h2>
               <div className="mt-6 space-y-3 text-sm"><p className="flex justify-between gap-4"><span className="text-black/55">Subtotal</span><b>{money.format(validation?.subtotal ?? 0)}</b></p><p className="flex justify-between gap-4"><span className="text-black/55">Taxa</span><b>{money.format(validation?.fee ?? 0)}</b></p></div>
               <p className="mt-5 flex items-end justify-between gap-4 border-t pt-5"><span className="font-bold">Total</span><b className="text-2xl">{money.format(validation?.total ?? 0)}</b></p>
+              {validation?.changed && !confirmedChanges && <div className="mt-4 rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-900"><b>O carrinho foi atualizado.</b><p className="mt-1">Revise os valores e quantidades oficiais antes de continuar.</p><button onClick={() => setConfirmedChanges(true)} className="mt-3 font-black underline underline-offset-4">Revisei e confirmo as alterações</button></div>}
               {actionError && <div className="mt-4"><Alert tone="error">{actionError}</Alert></div>}
               <button disabled={!canFinish} onClick={finish} className="mt-6 w-full rounded-xl bg-gaucho-red py-4 font-black uppercase tracking-wide text-white shadow-lg shadow-red-950/15 transition hover:bg-red-700 disabled:cursor-not-allowed disabled:shadow-none disabled:grayscale disabled:opacity-40">{loading ? 'Validando…' : 'Confirmar pedido'}</button>
               <CheckoutHint loading={loading} validation={validation} profileComplete={profileComplete} />
