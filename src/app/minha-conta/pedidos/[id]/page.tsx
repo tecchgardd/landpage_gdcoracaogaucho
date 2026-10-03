@@ -1,0 +1,1 @@
+import { AccountShell } from '@/components/account/AccountShell'; import { OrderDetails } from '@/components/account/OrderDetails'; export default function Page({ params }: { params: { id: string } }) { return <AccountShell title="Detalhes do pedido"><OrderDetails id={Number(params.id)} /></AccountShell>; }

@@ -2,10 +2,10 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 
-const service = readFileSync(new URL('../services/meService.ts', import.meta.url), 'utf8');
-const checkout = readFileSync(new URL('../app/checkout/page.tsx', import.meta.url), 'utf8');
-const status = readFileSync(new URL('../components/CheckoutStatusPage.tsx', import.meta.url), 'utf8');
-const canceled = readFileSync(new URL('../app/checkout/cancelado/page.tsx', import.meta.url), 'utf8');
+const service = readFileSync(new URL('../src/services/account/meService.ts', import.meta.url), 'utf8');
+const checkout = readFileSync(new URL('../src/app/checkout/page.tsx', import.meta.url), 'utf8');
+const status = readFileSync(new URL('../src/components/checkout/CheckoutStatusPage.tsx', import.meta.url), 'utf8');
+const canceled = readFileSync(new URL('../src/app/checkout/cancelado/page.tsx', import.meta.url), 'utf8');
 
 test('checkout usa a rota Stripe canônica e envia somente itens e origem', () => {
   assert.match(service, /'\/api\/payments\/checkout'/);

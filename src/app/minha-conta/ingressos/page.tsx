@@ -1,0 +1,1 @@
+import { AccountShell } from '@/components/account/AccountShell'; import { TicketsList } from '@/components/account/AccountLists'; export default function Page() { return <AccountShell title="Meus ingressos"><TicketsList /></AccountShell>; }

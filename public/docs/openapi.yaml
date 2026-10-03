@@ -1,0 +1,706 @@
+openapi: 3.0.3
+info:
+  title: Coração Gaúcho — Backend API (contrato consumido pelo frontend)
+  version: "1.0.0"
+  description: >
+    Esta especificação documenta o contrato de API **consumido** por este projeto
+    (coracao-gaucho-next). O backend real vive em um repositório separado
+    (NEXT_PUBLIC_API_URL, hoje `https://backend-coracaogaucho.vercel.app`) e não
+    faz parte deste código-fonte — por isso esta spec foi reconstruída a partir
+    das chamadas feitas em `services/public/*` e `services/account/*`, e não
+    gerada a partir do código do backend. Trate-a como documentação de
+    integração: se o backend mudar um contrato, esta spec deve ser atualizada
+    manualmente.
+
+    Em produção, todas as chamadas do frontend são feitas para o path relativo
+    (`/api/...`) na própria origem do site, e o `next.config.mjs` faz o rewrite
+    de `/api/:path*` para `NEXT_PUBLIC_API_URL`, preservando cookies de sessão
+    first-party (ver `services/public/apiClient.ts`).
+  contact:
+    name: GD Coração Gaúcho
+servers:
+  - url: /
+    description: Origem do site (Next.js faz o proxy para o backend via rewrites)
+
+tags:
+  - name: Público — Catálogo
+    description: Endpoints sem autenticação consumidos pelas páginas públicas (home, bilheteria, blog, curso).
+  - name: Autenticação
+    description: Sessão e cadastro de clientes (better-auth style, cookies first-party).
+  - name: Conta do cliente
+    description: Perfil, pedidos, ingressos e inscrições do usuário autenticado.
+  - name: Pagamentos
+    description: Checkout, status e retentativa de pagamento (Stripe por trás do backend).
+
+paths:
+  /api/public/events:
+    get:
+      tags: [Público — Catálogo]
+      summary: Lista eventos, bailes e cursos públicos
+      description: >
+        Usado por `ticketService.listAvailableEvents`, `publicEventService.list`
+        (filtra `type !== 'CURSO'` no cliente) e `publicClassService.listAvailable`
+        (usa `type=CURSO`).
+      parameters:
+        - name: upcoming
+          in: query
+          schema: { type: boolean }
+          example: false
+        - name: limit
+          in: query
+          schema: { type: integer }
+          example: 100
+        - name: type
+          in: query
+          description: Filtra por tipo no backend (ex. CURSO). Quando omitido, o frontend filtra localmente.
+          schema: { type: string, enum: [BAILE, EVENTO, CURSO, APRESENTAÇÃO] }
+      responses:
+        "200":
+          description: Lista de eventos (array puro ou envelope com data/items/results)
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - type: array
+                    items: { $ref: "#/components/schemas/PublicEventApi" }
+                  - type: object
+                    properties:
+                      data: { type: array, items: { $ref: "#/components/schemas/PublicEventApi" } }
+                      items: { type: array, items: { $ref: "#/components/schemas/PublicEventApi" } }
+                      results: { type: array, items: { $ref: "#/components/schemas/PublicEventApi" } }
+
+  /api/public/events/{idOrSlug}:
+    get:
+      tags: [Público — Catálogo]
+      summary: Detalhe de um evento, baile ou curso por id ou slug
+      description: Usado por `ticketService.getEvent`, `publicEventService.getBySlug` e `publicClassService.getBySlug`.
+      parameters:
+        - name: idOrSlug
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        "200":
+          description: Evento encontrado
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/PublicEventApi" }
+        "404":
+          $ref: "#/components/responses/NotFound"
+
+  /api/public/albums:
+    get:
+      tags: [Público — Catálogo]
+      summary: Lista álbuns de formatura/eventos
+      responses:
+        "200":
+          description: Lista de álbuns
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - type: array
+                    items: { $ref: "#/components/schemas/PublicAlbumApi" }
+                  - type: object
+                    properties:
+                      data: { type: array, items: { $ref: "#/components/schemas/PublicAlbumApi" } }
+
+  /api/public/albums/{slug}:
+    get:
+      tags: [Público — Catálogo]
+      summary: Detalhe de um álbum (com fotos embutidas, quando disponíveis)
+      parameters:
+        - name: slug
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        "200":
+          description: Álbum encontrado
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/PublicAlbumApi" }
+
+  /api/public/albums/{slug}/photos:
+    get:
+      tags: [Público — Catálogo]
+      summary: Fotos paginadas de um álbum (cursor-based)
+      parameters:
+        - name: slug
+          in: path
+          required: true
+          schema: { type: string }
+        - name: limit
+          in: query
+          schema: { type: integer, default: 40 }
+        - name: cursor
+          in: query
+          schema: { type: string }
+      responses:
+        "200":
+          description: Página de fotos
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data: { type: array, items: { $ref: "#/components/schemas/PublicAlbumImage" } }
+                  nextCursor: { type: string, nullable: true }
+                  total: { type: integer }
+
+  /api/public/empresas:
+    get:
+      tags: [Público — Catálogo]
+      summary: Lista de empresas apoiadoras exibidas na home
+      responses:
+        "200":
+          description: Lista de empresas
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data: { type: array, items: { $ref: "#/components/schemas/PublicEmpresa" } }
+
+  /api/auth/get-session:
+    get:
+      tags: [Autenticação]
+      summary: Retorna a sessão atual (cookie first-party)
+      responses:
+        "200":
+          description: Sessão atual, ou null se deslogado
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/SessionResponse" }
+
+  /api/auth/sign-in/email:
+    post:
+      tags: [Autenticação]
+      summary: Login com e-mail e senha
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email, password]
+              properties:
+                email: { type: string, format: email }
+                password: { type: string, format: password }
+      responses:
+        "200":
+          description: Sessão criada
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/SessionResponse" }
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+
+  /api/customer-auth/sign-up:
+    post:
+      tags: [Autenticação]
+      summary: Cadastro de novo cliente
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name, email, cpf, cep, address, password]
+              properties:
+                name: { type: string }
+                email: { type: string, format: email }
+                cpf: { type: string, description: "Somente dígitos (11 caracteres)" }
+                cep: { type: string, description: "Somente dígitos (8 caracteres)" }
+                address: { type: string }
+                password: { type: string, format: password, minLength: 8 }
+      responses:
+        "200":
+          description: Conta criada e sessão iniciada
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/SessionResponse" }
+
+  /api/auth/sign-out:
+    post:
+      tags: [Autenticação]
+      summary: Encerra a sessão atual
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema: { type: object }
+      responses:
+        "200":
+          description: Logout efetuado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success: { type: boolean }
+
+  /api/auth/sign-in/social:
+    post:
+      tags: [Autenticação]
+      summary: Inicia login social (Google)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [provider, callbackURL]
+              properties:
+                provider: { type: string, example: google }
+                callbackURL: { type: string, format: uri }
+      responses:
+        "200":
+          description: URL de redirecionamento para o provedor OAuth
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  url: { type: string, format: uri }
+                  redirect: { type: boolean }
+
+  /api/me/profile:
+    get:
+      tags: [Conta do cliente]
+      summary: Dados de perfil do cliente autenticado
+      security: [{ cookieAuth: [] }]
+      responses:
+        "200":
+          description: Perfil (pode estar parcialmente preenchido)
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Profile" }
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+    patch:
+      tags: [Conta do cliente]
+      summary: Atualiza dados pessoais e endereço do cliente
+      security: [{ cookieAuth: [] }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name: { type: string }
+                cpf: { type: string }
+                phone: { type: string }
+                birthDate: { type: string, format: date }
+                gender: { type: string, enum: [MASCULINO, FEMININO, OUTRO, NAO_INFORMADO] }
+                cep: { type: string }
+                address: { type: string }
+                number: { type: string }
+                complement: { type: string }
+                neighborhood: { type: string }
+                state: { type: string }
+                city: { type: string }
+      responses:
+        "200":
+          description: Perfil atualizado
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Profile" }
+        "422":
+          description: Dados obrigatórios ausentes ou inválidos
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiErrorBody" }
+
+  /api/me/checkout/validate:
+    post:
+      tags: [Pagamentos]
+      summary: Revalida itens do carrinho (preço, disponibilidade, quantidade) antes de pagar
+      security: [{ cookieAuth: [] }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/CartItemsBody" }
+      responses:
+        "200":
+          description: Resultado da validação, com itens válidos/inválidos e totais oficiais
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/CartValidation" }
+
+  /api/payments/checkout:
+    post:
+      tags: [Pagamentos]
+      summary: Cria o pedido e inicia o checkout (Stripe) ou confirma direto se gratuito
+      description: >
+        Rota canônica de checkout. O frontend envia apenas `items` e `origin`;
+        preço e disponibilidade são sempre recalculados no backend (ver teste
+        `tests/payment-contract.test.mjs`).
+      security: [{ cookieAuth: [] }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/CartItemsBody"
+                - type: object
+                  properties:
+                    origin: { type: string, enum: [SITE] }
+      responses:
+        "200":
+          description: Pedido criado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success: { type: boolean, enum: [true] }
+                  data: { $ref: "#/components/schemas/CheckoutResult" }
+        "409":
+          description: Pedido já pago ou com tentativa ativa
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiErrorBody" }
+        "422":
+          description: Perfil do cliente incompleto — frontend redireciona para /minha-conta/perfil
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiErrorBody" }
+
+  /api/payments/{orderId}/status:
+    get:
+      tags: [Pagamentos]
+      summary: Consulta o status de pagamento de um pedido (usado em polling)
+      security: [{ cookieAuth: [] }]
+      parameters:
+        - name: orderId
+          in: path
+          required: true
+          schema: { type: integer }
+      responses:
+        "200":
+          description: Status atual
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success: { type: boolean, enum: [true] }
+                  data: { $ref: "#/components/schemas/PaymentStatus" }
+        "404":
+          $ref: "#/components/responses/NotFound"
+
+  /api/payments/{orderId}/retry:
+    post:
+      tags: [Pagamentos]
+      summary: Abre uma nova sessão de pagamento para um pedido pendente/falho
+      security: [{ cookieAuth: [] }]
+      parameters:
+        - name: orderId
+          in: path
+          required: true
+          schema: { type: integer }
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema: { type: object }
+      responses:
+        "200":
+          description: Nova sessão de checkout
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success: { type: boolean, enum: [true] }
+                  data: { $ref: "#/components/schemas/CheckoutResult" }
+
+  /api/me/orders:
+    get:
+      tags: [Conta do cliente]
+      summary: Lista os pedidos do cliente autenticado
+      security: [{ cookieAuth: [] }]
+      responses:
+        "200":
+          description: Lista de pedidos
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data: { type: array, items: { $ref: "#/components/schemas/CustomerOrder" } }
+
+  /api/me/orders/{id}:
+    get:
+      tags: [Conta do cliente]
+      summary: Detalhe de um pedido (deve pertencer ao cliente autenticado)
+      security: [{ cookieAuth: [] }]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: integer }
+      responses:
+        "200":
+          description: Pedido encontrado
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/CustomerOrder" }
+        "404":
+          description: Pedido não encontrado ou não pertence a esta conta
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiErrorBody" }
+
+  /api/me/tickets:
+    get:
+      tags: [Conta do cliente]
+      summary: Ingressos pagos do cliente (com QR code)
+      security: [{ cookieAuth: [] }]
+      responses:
+        "200":
+          description: Lista de ingressos
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items: { type: object, additionalProperties: true }
+
+  /api/me/enrollments:
+    get:
+      tags: [Conta do cliente]
+      summary: Inscrições do cliente em cursos/turmas
+      security: [{ cookieAuth: [] }]
+      responses:
+        "200":
+          description: Lista de inscrições
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items: { type: object, additionalProperties: true }
+
+components:
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: better-auth.session_token
+      description: >
+        Sessão first-party via cookie, propagada porque o frontend chama o
+        path relativo `/api/...` na mesma origem (proxiado pelo next.config.mjs).
+
+  responses:
+    Unauthorized:
+      description: Sessão expirada ou ausente
+      content:
+        application/json:
+          schema: { $ref: "#/components/schemas/ApiErrorBody" }
+    NotFound:
+      description: Recurso não encontrado
+      content:
+        application/json:
+          schema: { $ref: "#/components/schemas/ApiErrorBody" }
+
+  schemas:
+    ApiErrorBody:
+      type: object
+      description: >
+        Formato de erro tratado por `services/public/apiClient.ts`. Para os
+        status 401/404/409/422/429/503 o frontend substitui a mensagem por um
+        texto amigável fixo, independentemente do que o backend retornar.
+      properties:
+        message: { type: string }
+        error: { type: string }
+        details: {}
+
+    PublicEventApi:
+      type: object
+      description: Payload bruto do backend — todos os campos são opcionais e passam por `mapEventFromApi` (aceita variantes PT/EN de nome de campo).
+      additionalProperties: true
+      properties:
+        id: { type: string }
+        title: { type: string }
+        slug: { type: string }
+        type: { type: string, enum: [BAILE, EVENTO, CURSO, APRESENTAÇÃO] }
+        description: { type: string }
+        banner: { type: string }
+        date: { type: string, format: date-time }
+        time: { type: string }
+        place: { type: string }
+        city: { type: string }
+        startingPrice: { type: number }
+        status: { type: string, example: ATIVO }
+        available: { type: integer, nullable: true }
+        soldOut: { type: boolean }
+        free: { type: boolean }
+        capacity: { type: integer, nullable: true }
+        salesEndAt: { type: string, format: date-time }
+
+    PublicAlbumApi:
+      type: object
+      additionalProperties: true
+      properties:
+        id: { type: string }
+        title: { type: string }
+        slug: { type: string }
+        description: { type: string }
+        city: { type: string }
+        date: { type: string }
+        coverImage: { type: string }
+        photoCount: { type: integer }
+        status: { type: string }
+        images:
+          type: array
+          items: { $ref: "#/components/schemas/PublicAlbumImage" }
+
+    PublicAlbumImage:
+      type: object
+      properties:
+        id: { type: string }
+        url: { type: string }
+        thumbnailUrl: { type: string }
+        alt: { type: string }
+        width: { type: integer }
+        height: { type: integer }
+
+    PublicEmpresa:
+      type: object
+      required: [id, nome, imagemUrl]
+      properties:
+        id: { type: string }
+        nome: { type: string }
+        imagemUrl: { type: string }
+
+    SessionUser:
+      type: object
+      properties:
+        id: { type: string }
+        name: { type: string }
+        email: { type: string, format: email }
+        role: { type: string }
+        image: { type: string, nullable: true }
+
+    SessionResponse:
+      type: object
+      nullable: true
+      properties:
+        user: { $ref: "#/components/schemas/SessionUser" }
+        session: {}
+
+    Profile:
+      type: object
+      properties:
+        userId: { type: string }
+        name: { type: string }
+        email: { type: string }
+        phone: { type: string }
+        cpf: { type: string }
+        birthDate: { type: string, format: date }
+        gender: { type: string, enum: [MASCULINO, FEMININO, OUTRO, NAO_INFORMADO] }
+        cep: { type: string }
+        address: { type: string }
+        number: { type: string }
+        complement: { type: string }
+        neighborhood: { type: string }
+        state: { type: string }
+        city: { type: string }
+        complete: { type: boolean, description: "True quando todos os campos obrigatórios estão preenchidos" }
+
+    CartItemsBody:
+      type: object
+      required: [items]
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+            required: [eventId, quantity]
+            properties:
+              eventId: { type: integer }
+              quantity: { type: integer, minimum: 1 }
+
+    ValidatedItem:
+      type: object
+      properties:
+        eventId: { type: integer }
+        itemType: { type: string, enum: [EVENT, DANCE, COURSE] }
+        name: { type: string }
+        type: { type: string }
+        banner: { type: string }
+        startsAt: { type: string, format: date-time }
+        city: { type: string }
+        venue: { type: string }
+        requestedQuantity: { type: integer }
+        quantity: { type: integer }
+        quantityAdjusted: { type: boolean }
+        unitPrice: { type: number }
+        total: { type: number }
+        available: { type: integer, nullable: true }
+        free: { type: boolean }
+
+    CartValidation:
+      type: object
+      properties:
+        validItems:
+          type: array
+          items: { $ref: "#/components/schemas/ValidatedItem" }
+        invalidItems:
+          type: array
+          items:
+            type: object
+            properties:
+              eventId: { type: integer }
+              name: { type: string }
+              reason: { type: string }
+        subtotal: { type: number }
+        fee: { type: number }
+        total: { type: number }
+        changed: { type: boolean, description: "True quando preço/quantidade oficiais diferem do que o carrinho local tinha" }
+
+    CheckoutResult:
+      type: object
+      properties:
+        orderId: { type: integer }
+        paymentId: { type: integer, nullable: true }
+        checkoutSessionId: { type: string, nullable: true }
+        checkoutUrl: { type: string, nullable: true, description: "URL da Stripe Checkout Session; null quando o pedido é gratuito e já foi confirmado" }
+        status: { type: string, example: PAGO }
+
+    PaymentStatus:
+      type: object
+      properties:
+        orderId: { type: integer }
+        orderStatus: { type: string }
+        paymentStatus:
+          type: string
+          enum: [PENDENTE, PROCESSANDO, PAGO, FALHOU, CANCELADO, EXPIRADO, ESTORNADO, PARCIALMENTE_ESTORNADO, CONTESTADO, CONTESTACAO_PERDIDA]
+        checkoutStatus: { type: string, nullable: true }
+        paidAt: { type: string, format: date-time, nullable: true }
+        paymentId: { type: integer, nullable: true }
+
+    CustomerOrder:
+      type: object
+      additionalProperties: true
+      properties:
+        id: { type: integer }
+        code: { type: string }
+        status: { type: string }
+        paymentStatus: { type: string }
+        paymentMethod: { type: string }
+        total: { type: number }
+        createdAt: { type: string, format: date-time }
+        statusLabel: { type: string }
+        items:
+          type: array
+          items: { type: object, additionalProperties: true }
