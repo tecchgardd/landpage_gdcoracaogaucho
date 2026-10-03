@@ -1,0 +1,16 @@
+- main [ref=e2]:
+  - link [ref=e3] [cursor=pointer]:
+    - /url: https://chatgpt.com/
+    - img "ChatGPT" [ref=e4]
+  - generic [ref=e5]:
+    - generic [ref=e6]:
+      - heading "Entre para acessar" [level=1] [ref=e7]
+      - paragraph [ref=e8]: Coração Gaúcho · Tradição em movimento
+    - generic [ref=e9]:
+      - link "Continuar com o ChatGPT" [ref=e10] [cursor=pointer]:
+        - /url: https://coracao-gaucho-nova-pagina.techgard-comercial.chatgpt.site/signin-with-chatgpt?return_to=%2F
+      - generic [ref=e12]:
+        - text: Este site usa o ChatGPT para fazer seu login com segurança. Você pode consultar a
+        - link "Política de Privacidade" [ref=e13] [cursor=pointer]:
+          - /url: https://openai.com/policies/privacy-policy
+        - text: da OpenAI.

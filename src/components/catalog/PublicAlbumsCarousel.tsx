@@ -49,10 +49,10 @@ export function PublicAlbumsCarousel() {
   return (
     <AutoCarousel itemClassName="w-[190px] md:w-[210px]" speed="normal">
       {albums.map((album) => (
-        <article key={album.id} className="group overflow-hidden rounded-lg bg-black text-white shadow-xl shadow-black/20">
+        <article key={album.id} className="group overflow-hidden rounded-lg bg-black text-white shadow-xl shadow-black/20 transition-all duration-500 ease-out hover:-translate-y-1.5 hover:rotate-[-1deg] hover:shadow-2xl">
           <div className="relative h-[118px] bg-gaucho-green/40">
             {album.coverImage ? (
-              <Image src={album.coverImage} alt={album.title} fill className="object-cover opacity-90 transition duration-500 group-hover:scale-105" />
+              <Image src={album.coverImage} alt={album.title} fill className="object-cover opacity-90 transition-transform duration-500 ease-out group-hover:scale-110" />
             ) : null}
             <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
           </div>
@@ -63,7 +63,7 @@ export function PublicAlbumsCarousel() {
               {album.photoCount ?? 0} Fotos
               {album.city ? ` • ${album.city}` : ''}
             </p>
-            <Link href={`/blog/${album.slug}`} className="mt-3 block rounded-full bg-gaucho-green py-2 text-center text-xs font-black uppercase">
+            <Link href={`/blog/${album.slug}`} className="btn-premium mt-3 block rounded-full bg-gaucho-green py-2 text-center text-xs font-black uppercase transition-colors hover:bg-green-700">
               Ver mais
             </Link>
           </div>

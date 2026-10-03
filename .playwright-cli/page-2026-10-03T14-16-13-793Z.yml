@@ -1,0 +1,319 @@
+- generic [active] [ref=e1]:
+  - link "Pular para o conteúdo" [ref=e2] [cursor=pointer]:
+    - /url: "#conteudo"
+  - banner [ref=e3]:
+    - generic [ref=e4]:
+      - link "Fábio Quaraí — início" [ref=e5] [cursor=pointer]:
+        - /url: "#inicio"
+        - generic [ref=e6]: Fábio Quaraí
+      - navigation "Menu principal" [ref=e8]:
+        - link "Início" [ref=e9] [cursor=pointer]:
+          - /url: "#inicio"
+        - link "Música & clipes" [ref=e10] [cursor=pointer]:
+          - /url: "#musicas"
+        - link "O artista" [ref=e11] [cursor=pointer]:
+          - /url: "#sobre"
+        - link "Agenda" [ref=e12] [cursor=pointer]:
+          - /url: "#agenda"
+        - link "Parceiros" [ref=e13] [cursor=pointer]:
+          - /url: "#parceiros"
+      - button "Contrate o show" [ref=e14] [cursor=pointer]
+  - main [ref=e20]:
+    - region [ref=e21]:
+      - generic [ref=e22]:
+        - img "Fábio Quaraí de chapéu, ao pôr do sol no campo" [ref=e23]
+        - iframe [aria-hidden] [ref=e24]
+      - generic [ref=e26]:
+        - generic [ref=e27]:
+          - generic [ref=e28]: RAIZ NO SUL. MÚSICA NA ALMA.
+          - heading "FÁBIO QUARAÍ." [level=1] [ref=e30]: FÁBIOQUARAÍ.
+          - paragraph [ref=e31]: O sentimento de uma canção.A energia de um baita baile.
+          - generic [ref=e32]:
+            - button "Dê o play" [ref=e33] [cursor=pointer]
+            - link "Próximos shows" [ref=e38] [cursor=pointer]:
+              - /url: "#agenda"
+            - link "FILME EM MOVIMENTO" [ref=e42] [cursor=pointer]:
+              - /url: https://www.youtube.com/watch?v=HoJ0QLgbIXE
+          - generic [ref=e47]:
+            - button "ACOMPANHE" [ref=e48] [cursor=pointer]
+            - link "Instagram de Fábio Quaraí" [ref=e52] [cursor=pointer]:
+              - /url: https://www.instagram.com/fabioquarai/
+            - link "YouTube de Fábio Quaraí" [ref=e57] [cursor=pointer]:
+              - /url: https://www.youtube.com/@FabioQuarai
+            - link "Spotify de Fábio Quaraí" [ref=e61] [cursor=pointer]:
+              - /url: https://open.spotify.com/artist/0GoDFs2ReGdY7UmTChu1Fk
+        - generic [ref=e63]:
+          - generic [ref=e64]: FÁBIO QUARAÍ
+          - generic [ref=e65]: Cantor & compositor
+        - generic "Player de músicas de Fábio Quaraí" [ref=e66]:
+          - button "Ouvir prévia de Cabelo Dourado" [ref=e67] [cursor=pointer]
+          - generic [ref=e72]:
+            - generic [ref=e73]:
+              - generic [ref=e79]: SINTA O SOM
+              - generic [ref=e80]: PRÉVIA
+            - heading "Cabelo Dourado" [level=2] [ref=e81]
+            - paragraph [ref=e82]: Fábio Quaraí
+            - generic [ref=e83]:
+              - button "Música anterior" [ref=e84] [cursor=pointer]
+              - button "Reproduzir prévia" [ref=e86] [cursor=pointer]
+              - button "Próxima música" [ref=e90] [cursor=pointer]
+              - generic [ref=e92]:
+                - slider "Posição da prévia" [disabled] [ref=e93] [cursor=pointer]: "0"
+                - generic [ref=e94]: 0:00 / 0:30
+            - button "Ouça nas plataformas" [ref=e98] [cursor=pointer]
+        - link "EXPLORE O UNIVERSO FÁBIO QUARAÍ" [ref=e103] [cursor=pointer]:
+          - /url: "#musicas"
+    - region "Plataformas digitais" [ref=e107]:
+      - generic [ref=e108]:
+        - generic [ref=e109]:
+          - text: SUA TRILHA.
+          - strong [ref=e110]: EM TODO LUGAR.
+        - generic [ref=e111]:
+          - link "Spotify" [ref=e112] [cursor=pointer]:
+            - /url: https://open.spotify.com/artist/0GoDFs2ReGdY7UmTChu1Fk
+          - link "YouTube" [ref=e115] [cursor=pointer]:
+            - /url: https://www.youtube.com/@FabioQuarai
+          - link "Apple Music" [ref=e120] [cursor=pointer]:
+            - /url: https://music.apple.com/br/artist/fabio-quarai/1732527464
+          - link "Deezer" [ref=e125] [cursor=pointer]:
+            - /url: https://www.deezer.com/br/artist/13535401
+          - link "Instagram" [ref=e133] [cursor=pointer]:
+            - /url: https://www.instagram.com/fabioquarai/
+    - region "Músicas, álbuns e clipes" [ref=e139]:
+      - generic [ref=e140]:
+        - generic [ref=e141]:
+          - paragraph [ref=e142]: MÚSICAS & IMAGENS
+          - heading [level=2] [ref=e144]:
+            - text: Som e imagem.
+            - emphasis [ref=e145]: A mesma história.
+        - generic [ref=e146]:
+          - paragraph [ref=e147]: Álbuns, singles e clipes reunidos em uma só experiência.
+          - link "Ver canal oficial" [ref=e148] [cursor=pointer]:
+            - /url: https://www.youtube.com/@FabioQuarai
+      - generic [ref=e152]: LANÇAMENTOS, ÁLBUNS & CLIPES
+      - generic "Clipes e faixas de Fábio Quaraí" [ref=e154]:
+        - generic [ref=e155]:
+          - generic [ref=e156]:
+            - button "Selecionar Como um Gaúcho Ama" [ref=e157] [cursor=pointer]
+            - button "Selecionar Bruta de Verdade" [ref=e158] [cursor=pointer]
+            - button "Selecionar Ela É Xucra" [ref=e159] [cursor=pointer]
+            - button "Selecionar Dia de Mate e Gravação" [ref=e160] [cursor=pointer]
+            - button "Selecionar Ao Vivo em Jaraguá do Sul" [ref=e161] [cursor=pointer]
+          - generic [ref=e162]:
+            - img "Capa do vídeo Cabelo Dourado" [ref=e163]
+            - iframe [aria-hidden] [ref=e164]:
+              - generic "Player de vídeo do YouTube" [ref=f3e3]
+            - generic [ref=e165]: CLIPE RODANDO
+            - link "Assistir Cabelo Dourado no YouTube" [ref=e167] [cursor=pointer]:
+              - /url: https://www.youtube.com/watch?v=zF-CQCwmKbE
+        - generic [ref=e168]:
+          - generic [ref=e169]: 01 / 07
+          - paragraph [ref=e170]: VIDEOCLIPE · 2026
+          - heading "Cabelo Dourado" [level=3] [ref=e171]
+          - paragraph [ref=e172]: Clipe oficial do projeto Dia de Mate e Gravação.
+          - generic [ref=e173]:
+            - button "Ouvir prévia de Cabelo Dourado" [ref=e174] [cursor=pointer]: Ouvir a faixa
+            - link "Ver Cabelo Dourado no YouTube" [ref=e177] [cursor=pointer]:
+              - /url: https://www.youtube.com/watch?v=zF-CQCwmKbE
+              - text: Ver no YouTube
+          - generic [ref=e181]:
+            - button "Clipe anterior" [ref=e182] [cursor=pointer]
+            - button "Pausar troca automática" [ref=e185] [cursor=pointer]
+            - button "Próximo clipe" [ref=e189] [cursor=pointer]
+          - generic "Escolher clipe" [ref=e192]:
+            - button "Selecionar Cabelo Dourado" [ref=e193] [cursor=pointer]
+            - button "Selecionar Como um Gaúcho Ama" [ref=e194] [cursor=pointer]
+            - button "Selecionar Bruta de Verdade" [ref=e195] [cursor=pointer]
+            - button "Selecionar Ela É Xucra" [ref=e196] [cursor=pointer]
+            - button "Selecionar Dia de Mate e Gravação" [ref=e197] [cursor=pointer]
+            - button "Selecionar Ao Vivo em Jaraguá do Sul" [ref=e198] [cursor=pointer]
+            - button "Selecionar Esfrega" [ref=e199] [cursor=pointer]
+          - paragraph [ref=e200]: Cabelo Dourado, item 1 de 7.
+      - paragraph [ref=e201]:
+        - text: Dê o play nas músicas ou abra os clipes para assistir.
+        - link "Ouça a faixa completa no Apple Music" [ref=e203] [cursor=pointer]:
+          - /url: https://music.apple.com/br/album/cabelo-dourado/6766684472?i=6766684625&uo=4
+    - generic [ref=e207]:
+      - generic [ref=e208]:
+        - generic [ref=e209]:
+          - img "Fábio Quaraí cantando e tocando violão" [ref=e210]
+          - generic [ref=e211]: DA FRONTEIRA PARA O SEU CORAÇÃO
+          - generic [ref=e212]: QUARAÍ · RIO GRANDE DO SUL
+        - generic [ref=e216]:
+          - paragraph [ref=e217]: MUITO ALÉM DO PALCO
+          - heading [level=2] [ref=e219]:
+            - text: Uma voz.Muitas histórias.
+            - emphasis [ref=e220]: A mesma raiz.
+          - paragraph [ref=e221]: Natural de Quaraí, na fronteira do Rio Grande do Sul, Fábio Quaraí é cantor e compositor. Sua música carrega o sentimento de quem tem o Sul como origem e a canção como forma de se expressar.
+          - paragraph [ref=e222]: Entre o romantismo e o tranco do baile, cada encontro é um convite para cantar junto. Uma identidade que aparece nas gravações, nas composições e na presença da banda no palco.
+          - generic [ref=e223]:
+            - generic [ref=e228]:
+              - text: CANTOR
+              - strong [ref=e229]: "& compositor"
+            - generic [ref=e237]:
+              - text: ESSÊNCIA
+              - strong [ref=e238]: gaúcha
+          - link "Conheça essa história no YouTube" [ref=e239] [cursor=pointer]:
+            - /url: https://www.youtube.com/@FabioQuarai
+      - generic [ref=e243]:
+        - generic [ref=e244]:
+          - generic [ref=e245]:
+            - paragraph [ref=e246]: A BANDA NA ESTRADA
+            - heading [level=3] [ref=e248]:
+              - text: O show começa
+              - emphasis [ref=e249]: muito antes do palco.
+          - paragraph [ref=e250]: O ônibus também faz parte dessa história. Entre uma cidade e outra, a música segue viagem.
+        - generic [ref=e251]:
+          - generic [ref=e252]: NOSSA HISTÓRIA NA ESTRADA
+          - generic [ref=e255]: Ver o Reel
+          - link "Assistir ao Reel da nova plotagem do ônibus de Fábio Quaraí no Instagram" [ref=e261] [cursor=pointer]:
+            - /url: https://www.instagram.com/reel/DXo7iKAu-DU/
+        - generic [ref=e262]:
+          - generic [ref=e263]: Reel da nova plotagem rodando em silêncio.
+          - link "Assista com som no Instagram" [ref=e264] [cursor=pointer]:
+            - /url: https://www.instagram.com/reel/DXo7iKAu-DU/
+    - generic [ref=e268]:
+      - generic [ref=e269]:
+        - paragraph [ref=e270]: FÁBIO QUARAÍ & BANDA
+        - heading [level=2] [ref=e272]:
+          - text: O nosso lugaré
+          - emphasis [ref=e273]: no palco.
+        - paragraph [ref=e274]: Aperte o play e sinta o encontro da voz, da bandae da música feita para estar perto de você.
+      - link "Fábio Quaraí e músicos no projeto Dia de Mate e Gravação UMA RODA DE MÚSICA. UM BAITA ENCONTRO. Dia de Mate e Gravação ASSISTA AO PROJETO COMPLETO" [ref=e275] [cursor=pointer]:
+        - /url: https://www.youtube.com/watch?v=HoJ0QLgbIXE
+        - img "Fábio Quaraí e músicos no projeto Dia de Mate e Gravação" [ref=e276]
+        - generic [ref=e281]:
+          - generic [ref=e282]: UMA RODA DE MÚSICA. UM BAITA ENCONTRO.
+          - heading "Dia de Mate e Gravação" [level=3] [ref=e283]
+          - generic [ref=e284]: ASSISTA AO PROJETO COMPLETO
+    - generic [ref=e292]:
+      - generic [ref=e293]:
+        - generic [ref=e294]:
+          - paragraph [ref=e295]: O PRÓXIMO ENCONTRO
+          - heading [level=2] [ref=e297]:
+            - text: Nos vemos
+            - emphasis [ref=e298]: no baile.
+        - link "Acompanhe a agenda no Instagram" [ref=e299] [cursor=pointer]:
+          - /url: https://www.instagram.com/fabioquarai/
+      - generic [ref=e303]:
+        - generic [ref=e304]: EM BREVE
+        - generic [ref=e308]:
+          - generic [ref=e309]: AGENDA EM ATUALIZAÇÃO
+          - heading "A próxima parada pode ser na sua cidade." [level=3] [ref=e311]
+          - paragraph [ref=e312]: Novas datas, locais e informações de shows serão anunciados nos canais do artista.
+        - link "Ver novidades" [ref=e313] [cursor=pointer]:
+          - /url: https://www.instagram.com/fabioquarai/
+      - generic [ref=e317]:
+        - generic [ref=e318]: Quer levar esse show para o seu evento?
+        - button "Consulte uma data" [ref=e319] [cursor=pointer]
+    - region [ref=e322]:
+      - text: PARCEIROS
+      - generic [ref=e323]:
+        - generic [ref=e324]:
+          - paragraph [ref=e325]: MARCAS QUE FAZEM PARTE DA ESTRADA
+          - heading [level=2] [ref=e327]:
+            - text: Juntos, a música
+            - emphasis [ref=e328]: chega mais longe.
+          - paragraph [ref=e329]: Este espaço está preparado para apresentar patrocinadores e apoiadores oficiais do projeto Fábio Quaraí.
+        - generic [ref=e330]:
+          - generic [ref=e331]:
+            - generic [ref=e332]: PATROCINADOR MASTER
+            - strong [ref=e333]: SUA MARCA
+            - generic [ref=e334]: ESPAÇO RESERVADO
+            - text: +
+          - generic [ref=e335]:
+            - generic [ref=e336]: APOIO CULTURAL
+            - strong [ref=e337]: PARCEIRO
+            - generic [ref=e338]: ESPAÇO RESERVADO
+            - text: +
+          - generic [ref=e339]:
+            - generic [ref=e340]: APOIO CULTURAL
+            - strong [ref=e341]: PARCEIRO
+            - generic [ref=e342]: ESPAÇO RESERVADO
+            - text: +
+          - generic [ref=e343]:
+            - generic [ref=e344]: APOIADOR
+            - strong [ref=e345]: MARCA
+            - generic [ref=e346]: ESPAÇO RESERVADO
+            - text: +
+        - generic [ref=e347]:
+          - generic [ref=e348]:
+            - text: QUER CAMINHAR COM A GENTE?
+            - paragraph [ref=e349]: Converse com o escritório sobre ações, apoio e oportunidades de parceria.
+          - link "Quero ser parceiro" [ref=e350] [cursor=pointer]:
+            - /url: https://wa.me/5547997046147?text=Ol%C3%A1!%20Vim%20pelo%20site%20do%20F%C3%A1bio%20Quara%C3%AD%20e%20gostaria%20de%20conversar%20sobre%20uma%20proposta%20de%20patroc%C3%ADnio%20ou%20parceria.
+    - generic [ref=e355]:
+      - generic [aria-hidden]: QUARAÍ
+      - generic [ref=e356]:
+        - paragraph [ref=e357]: SHOWS, BAILES & EVENTOS
+        - heading [level=2] [ref=e359]:
+          - text: Vamos fazerum
+          - emphasis [ref=e360]: baita baile?
+        - paragraph [ref=e361]: Leve a música de Fábio Quaraí para o seu evento.Fale com o escritório e consulte a disponibilidade.
+      - generic [ref=e362]:
+        - button "Quero contratar o show" [ref=e363] [cursor=pointer]
+        - generic [ref=e368]: CONTATO COMERCIAL
+        - link "(47) 99704-6147" [ref=e369] [cursor=pointer]:
+          - /url: https://wa.me/5547997046147?text=Ol%C3%A1!%20Vim%20pelo%20site%20do%20F%C3%A1bio%20Quara%C3%AD%20e%20gostaria%20de%20consultar%20a%20disponibilidade%20e%20um%20or%C3%A7amento%20para%20um%20show.%20Posso%20passar%20a%20data%20e%20a%20cidade%20do%20evento%3F
+        - generic [ref=e370]: Marrom · Escritório Fábio Quaraí
+    - generic [ref=e371]:
+      - generic [ref=e372]:
+        - paragraph [ref=e373]: A MÚSICA CONTINUA POR AQUI
+        - heading [level=2] [ref=e374]:
+          - text: Chega mais.
+          - emphasis [ref=e375]: Fica por perto.
+      - button "Siga nas plataformas" [ref=e376] [cursor=pointer]
+  - contentinfo [ref=e384]:
+    - generic [ref=e385]:
+      - generic [ref=e386]:
+        - link "Fábio Quaraí — início" [ref=e387] [cursor=pointer]:
+          - /url: "#inicio"
+          - generic [ref=e388]: Fábio Quaraí
+        - generic [ref=e390]: Raiz no Sul.Música na alma.
+        - generic [ref=e391]:
+          - paragraph [ref=e392]: MÍDIAS & PLATAFORMAS DIGITAIS
+          - generic [ref=e393]:
+            - link "Instagram" [ref=e394] [cursor=pointer]:
+              - /url: https://www.instagram.com/fabioquarai/
+            - link "YouTube" [ref=e399] [cursor=pointer]:
+              - /url: https://www.youtube.com/@FabioQuarai
+            - link "Spotify" [ref=e403] [cursor=pointer]:
+              - /url: https://open.spotify.com/artist/0GoDFs2ReGdY7UmTChu1Fk
+            - link "Apple Music" [ref=e405] [cursor=pointer]:
+              - /url: https://music.apple.com/br/artist/fabio-quarai/1732527464
+            - link "Deezer" [ref=e410] [cursor=pointer]:
+              - /url: https://www.deezer.com/br/artist/13535401
+            - link "Facebook" [ref=e413] [cursor=pointer]:
+              - /url: https://www.facebook.com/fabioquaraioficial/
+      - generic [ref=e416]:
+        - paragraph [ref=e417]: © 2026 Fábio Quaraí. Todos os direitos reservados.
+        - paragraph [ref=e418]:
+          - text: Desenvolvido pela
+          - strong [ref=e419]: Gardsoft
+        - link "De volta ao topo" [ref=e420] [cursor=pointer]:
+          - /url: "#inicio"
+  - complementary "Plataformas digitais de Fábio Quaraí":
+    - generic: OUÇA & ACOMPANHE
+    - navigation:
+      - link "Ouça Fábio Quaraí no Spotify":
+        - /url: https://open.spotify.com/artist/0GoDFs2ReGdY7UmTChu1Fk
+        - generic: Ouça no Spotify
+      - link "Assista Fábio Quaraí no YouTube":
+        - /url: https://www.youtube.com/@FabioQuarai
+        - generic: Assista no YouTube
+      - link "Ouça Fábio Quaraí no Apple Music":
+        - /url: https://music.apple.com/br/artist/fabio-quarai/1732527464
+        - generic: Apple Music
+      - link "Ouça Fábio Quaraí no Deezer":
+        - /url: https://www.deezer.com/br/artist/13535401
+        - generic: Ouça no Deezer
+      - link "Acompanhe Fábio Quaraí no Instagram":
+        - /url: https://www.instagram.com/fabioquarai/
+        - generic: Acompanhe no Instagram
+    - generic:
+      - text: Leve a música
+      - strong: com você.
+  - button "Abrir atendimento do escritório" [ref=e425] [cursor=pointer]:
+    - generic [ref=e428]:
+      - generic [ref=e429]: CONTRATAÇÕES
+      - strong [ref=e430]: Falar com o escritório

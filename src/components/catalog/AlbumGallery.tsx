@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { useCallback, useEffect, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { publicAlbumService } from '@/services/public/publicAlbumService';
 import type { PublicAlbum, PublicAlbumImage } from '@/services/public/types';
 import { ErrorState, SkeletonRow } from '../ui/PublicDataState';
@@ -59,21 +60,27 @@ export function AlbumGallery({ slug }: { slug: string }) {
       {photos.length === 0 ? <p className="rounded-xl bg-white p-8 text-center">Este álbum ainda não possui fotos.</p> : (
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {photos.map((photo, index) => (
-            <button key={photo.id} onClick={() => setSelected(index)} className="relative aspect-[4/3] overflow-hidden rounded-xl bg-black/10 shadow-lg">
-              <Image src={photo.thumbnailUrl ?? photo.url} alt={photo.alt ?? album.title} fill loading="lazy" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" className="object-cover transition duration-300 hover:scale-105" />
+            <button key={photo.id} onClick={() => setSelected(index)} className="group relative aspect-[4/3] overflow-hidden rounded-xl bg-black/10 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
+              <Image src={photo.thumbnailUrl ?? photo.url} alt={photo.alt ?? album.title} fill loading="lazy" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" className="object-cover transition-transform duration-500 ease-out group-hover:scale-110" />
             </button>
           ))}
         </div>
       )}
       {cursor && <div className="mt-8 text-center"><button disabled={loadingMore} onClick={async () => { setLoadingMore(true); try { await loadPhotos(cursor); } finally { setLoadingMore(false); } }} className="rounded-full bg-gaucho-red px-8 py-3 font-black text-white disabled:opacity-50">{loadingMore ? 'Carregando…' : 'Carregar mais'}</button></div>}
-      {selected != null && photos[selected] && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 p-4" onClick={() => setSelected(null)} role="dialog" aria-modal="true">
-          <button aria-label="Fechar" className="absolute right-5 top-5 text-4xl text-white">×</button>
-          <button aria-label="Foto anterior" onClick={(event) => { event.stopPropagation(); setSelected((selected - 1 + photos.length) % photos.length); }} className="absolute left-3 text-5xl text-white md:left-8">‹</button>
-          <Image src={photos[selected].url} alt={photos[selected].alt ?? album.title} width={photos[selected].width ?? 1600} height={photos[selected].height ?? 1200} className="max-h-[90vh] w-auto max-w-[88vw] object-contain" priority />
-          <button aria-label="Próxima foto" onClick={(event) => { event.stopPropagation(); setSelected((selected + 1) % photos.length); }} className="absolute right-3 text-5xl text-white md:right-8">›</button>
-        </div>
-      )}
+      <AnimatePresence>
+        {selected != null && photos[selected] && (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }} className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 p-4" onClick={() => setSelected(null)} role="dialog" aria-modal="true">
+            <button aria-label="Fechar" className="absolute right-5 top-5 text-4xl text-white transition-transform hover:scale-110">×</button>
+            <button aria-label="Foto anterior" onClick={(event) => { event.stopPropagation(); setSelected((selected - 1 + photos.length) % photos.length); }} className="absolute left-3 text-5xl text-white transition-transform hover:scale-110 md:left-8">‹</button>
+            <AnimatePresence mode="wait">
+              <motion.div key={selected} initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.96 }} transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}>
+                <Image src={photos[selected].url} alt={photos[selected].alt ?? album.title} width={photos[selected].width ?? 1600} height={photos[selected].height ?? 1200} className="max-h-[90vh] w-auto max-w-[88vw] object-contain" priority />
+              </motion.div>
+            </AnimatePresence>
+            <button aria-label="Próxima foto" onClick={(event) => { event.stopPropagation(); setSelected((selected + 1) % photos.length); }} className="absolute right-3 text-5xl text-white transition-transform hover:scale-110 md:right-8">›</button>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }

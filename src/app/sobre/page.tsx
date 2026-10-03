@@ -15,7 +15,7 @@ import {
 import { Header } from '@/components/layout/Header';
 import { SocialFloat } from '@/components/layout/SocialFloat';
 import { Footer } from '@/components/layout/Footer';
-import { MotionSection } from '@/components/ui/Motion';
+import { MotionSection, MotionStagger, MotionStaggerItem, ParallaxHero } from '@/components/ui/Motion';
 import { VideoBackground } from '@/components/ui/VideoBackground';
 
 const courseHighlights = [
@@ -59,7 +59,9 @@ export default function SobrePage() {
       <SocialFloat />
 
       <section className="relative overflow-hidden bg-black px-6 pb-16 pt-36 text-white">
-        <VideoBackground page="about" position="center 35%" />
+        <ParallaxHero className="absolute inset-0 overflow-hidden" strength={80}>
+          <VideoBackground page="about" position="center 35%" />
+        </ParallaxHero>
         <div className="absolute inset-0 bg-gradient-to-r from-black via-black/78 to-gaucho-green/45" />
         <div className="relative mx-auto max-w-[1160px]">
           <p className="text-sm font-black tracking-[.24em] text-gaucho-gold">TRADIÇÃO • CULTURA • DANÇA</p>
@@ -134,17 +136,19 @@ export default function SobrePage() {
             </p>
           </div>
 
-          <div className="mt-9 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <MotionStagger className="mt-9 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {courseHighlights.map((item) => (
-              <article key={item.title} className="rounded-xl border border-black/5 bg-[#fbfbfb] p-6 shadow-lg shadow-black/5">
-                <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-gaucho-red text-xl text-white">
-                  <FontAwesomeIcon icon={item.icon} />
-                </div>
-                <h3 className="mt-5 text-xl font-black">{item.title}</h3>
-                <p className="mt-2 leading-7 text-black/65">{item.text}</p>
-              </article>
+              <MotionStaggerItem key={item.title}>
+                <article className="h-full rounded-xl border border-black/5 bg-[#fbfbfb] p-6 shadow-lg shadow-black/5 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-gaucho-red text-xl text-white">
+                    <FontAwesomeIcon icon={item.icon} />
+                  </div>
+                  <h3 className="mt-5 text-xl font-black">{item.title}</h3>
+                  <p className="mt-2 leading-7 text-black/65">{item.text}</p>
+                </article>
+              </MotionStaggerItem>
             ))}
-          </div>
+          </MotionStagger>
         </div>
       </MotionSection>
 
@@ -237,10 +241,10 @@ export default function SobrePage() {
             Conheça as próximas turmas e venha fazer parte do GD Coração Gaúcho.
           </p>
           <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
-            <Link href="/curso" className="rounded-lg bg-gaucho-red px-7 py-4 text-sm font-black uppercase text-white shadow-xl shadow-red-950/20 transition hover:bg-red-700">
+            <Link href="/curso" className="btn-premium rounded-lg bg-gaucho-red px-7 py-4 text-sm font-black uppercase text-white shadow-xl shadow-red-950/20 transition-colors hover:bg-red-700">
               Quero fazer minha inscrição
             </Link>
-            <Link href="/bilheteria" className="rounded-lg border border-gaucho-green px-7 py-4 text-sm font-black uppercase text-gaucho-green transition hover:bg-gaucho-green hover:text-white">
+            <Link href="/bilheteria" className="btn-premium rounded-lg border border-gaucho-green px-7 py-4 text-sm font-black uppercase text-gaucho-green transition-colors hover:bg-gaucho-green hover:text-white">
               Ver próximas turmas
             </Link>
           </div>

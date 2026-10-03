@@ -1,0 +1,563 @@
+- generic [active] [ref=f9e1]:
+  - banner [ref=f9e2]:
+    - link "Talagaço início" [ref=f9e3] [cursor=pointer]:
+      - /url: "#top"
+      - img "Talagaço" [ref=f9e4]
+    - generic [ref=f9e5]:
+      - navigation [ref=f9e6]:
+        - link "A banda" [ref=f9e7] [cursor=pointer]:
+          - /url: "#historia"
+        - link "Músicas" [ref=f9e8] [cursor=pointer]:
+          - /url: "#musicas"
+        - link "Clipes" [ref=f9e9] [cursor=pointer]:
+          - /url: "#videos"
+        - link "Agenda" [ref=f9e10] [cursor=pointer]:
+          - /url: "#agenda"
+        - link "Materiais" [ref=f9e11] [cursor=pointer]:
+          - /url: "#materiais"
+      - link "Contrate o Talagaço" [ref=f9e12] [cursor=pointer]:
+        - /url: https://api.whatsapp.com/send?phone=5542999614000&text=Olá!%20Gostaria%20de%20contratar%20o%20Talagaço%20para%20um%20evento.%20Podem%20me%20passar%20informações%20sobre%20disponibilidade%20e%20valores%3F
+  - main [ref=f9e13]:
+    - generic [ref=f9e14]:
+      - iframe [ref=f9e16]:
+        - generic [ref=f10e1]:
+          - generic "Player de vídeo do YouTube" [ref=f10e3]
+          - generic [ref=f10e6]:
+            - generic:
+              - generic:
+                - button "Ocultar controles do player" [ref=f10e7] [cursor=pointer]
+                - generic [ref=f10e9]:
+                  - generic:
+                    - generic [ref=f10e14]:
+                      - generic [ref=f10e15]:
+                        - link "Quem de nós dois - TalaGaço | EP Diferentão" [ref=f10e16] [cursor=pointer]:
+                          - /url: https://www.youtube.com/watch?v=zaZNx0rCQ7g
+                        - link "Talagaço" [ref=f10e17] [cursor=pointer]:
+                          - /url: /channel/UChRB8Ow5Qy1Bvh3SS32QGOQ
+                      - generic [ref=f10e19]:
+                        - button [ref=f10e20] [cursor=pointer]
+                        - generic [ref=f10e22]:
+                          - generic: Talagaço
+                          - generic: 114 mil inscritos
+                    - generic [ref=f10e24]:
+                      - button "Vídeo anterior" [ref=f10e26] [cursor=pointer]
+                      - button "Voltar 10 segundos" [ref=f10e31] [cursor=pointer]
+                      - button "Pausar vídeo" [ref=f10e33] [cursor=pointer]
+                      - button "Avançar 10 segundos" [ref=f10e37] [cursor=pointer]
+                      - button "Próximo vídeo" [ref=f10e39] [cursor=pointer]
+                  - generic [ref=f10e44]:
+                    - button "Compartilhar" [ref=f10e47] [cursor=pointer]
+                    - link "Assistir no YouTube" [ref=f10e58] [cursor=pointer]:
+                      - /url: https://www.youtube.com/watch?v=zaZNx0rCQ7g
+      - generic [ref=f9e19]:
+        - generic [ref=f9e20]: O bailão que atravessa gerações
+        - heading [level=1] [ref=f9e22]:
+          - text: O SUL INTEIRO
+          - emphasis [ref=f9e23]: CANTA JUNTO.
+        - paragraph [ref=f9e24]: Mais de duas décadas de estrada, grandes sucessos e um show que transforma qualquer palco em bailão.
+        - generic [ref=f9e25]:
+          - link "Leve o Talagaço para sua cidade ↗" [ref=f9e26] [cursor=pointer]:
+            - /url: https://api.whatsapp.com/send?phone=5542999614000&text=Olá!%20Quero%20levar%20o%20Talagaço%20para%20minha%20cidade.%20Como%20faço%20para%20consultar%20uma%20data%3F
+            - text: Leve o Talagaço para sua cidade
+            - generic [ref=f9e27]: ↗
+          - link "▶ Ouça agora" [ref=f9e28] [cursor=pointer]:
+            - /url: "#musicas"
+      - generic [ref=f9e29]:
+        - button "Ir para as músicas" [ref=f9e30]: ▶
+        - generic [ref=f9e31]:
+          - generic [ref=f9e32]: TOCANDO AGORA
+          - strong [ref=f9e33]: Quem de Nós Dois
+      - generic [ref=f9e39]: DESCUBRA ↓
+    - generic [ref=f9e40]: ◆ TALAGAÇO NA ESTRADA ◆ BAILÃO ◆ MÚSICA ◆ ENERGIA ◆ TALAGAÇO NA ESTRADA ◆ BAILÃO ◆ MÚSICA ◆ ENERGIA ◆
+    - generic [ref=f9e42]:
+      - generic [ref=f9e43]:
+        - img "Integrantes do Grupo Talagaço" [ref=f9e44]
+        - generic [ref=f9e45]:
+          - text: "+20"
+          - generic [ref=f9e46]: ANOS DEESTRADA
+      - generic [ref=f9e48]:
+        - generic [ref=f9e49]: NOSSA HISTÓRIA
+        - heading [level=2] [ref=f9e50]:
+          - text: DA AMIZADEPARA OS
+          - emphasis [ref=f9e51]: PALCOS.
+        - paragraph [ref=f9e52]: O Talagaço nasceu em agosto de 2001, em Ponta Grossa, Paraná. Cinco adolescentes, a tradição musical do Sul e uma vontade enorme de fazer o público dançar deram início a uma história que segue viva em cada acorde.
+        - paragraph [ref=f9e53]: "Entre clássicos, novas versões e projetos autorais, a banda construiu uma identidade própria: música popular, presença de palco e a energia inconfundível de um verdadeiro bailão."
+        - generic [ref=f9e54]:
+          - generic [ref=f9e55]:
+            - generic [ref=f9e56]: "0"
+            - generic [ref=f9e57]: O começo
+          - generic [ref=f9e58]:
+            - generic [ref=f9e59]: "0"
+            - generic [ref=f9e60]: Anos de história
+          - generic [ref=f9e61]:
+            - generic [ref=f9e62]: BRASIL
+            - generic [ref=f9e63]: Na estrada
+    - generic [ref=f9e64]:
+      - generic [ref=f9e65]:
+        - generic [ref=f9e66]:
+          - generic [ref=f9e67]: PLAY NO BAILÃO
+          - heading [level=2] [ref=f9e68]:
+            - text: CLIPES E
+            - emphasis [ref=f9e69]: LANÇAMENTOS
+        - paragraph [ref=f9e70]: Assista aos clipes sem sair da página. Selecione uma faixa da playlist e aumente o volume.
+      - generic [ref=f9e71]:
+        - generic [ref=f9e72]:
+          - iframe [ref=f9e73]:
+            - generic [ref=f11e1]:
+              - generic "Player de vídeo do YouTube" [ref=f11e3]
+              - generic [ref=f11e5]:
+                - generic:
+                  - generic:
+                    - generic [ref=f11e6] [cursor=pointer]
+                    - button "Assistir vídeo" [ref=f11e10] [cursor=pointer]
+                    - button "Ocultar controles do player" [ref=f11e12] [cursor=pointer]
+                    - generic [ref=f11e14]:
+                      - generic [ref=f11e19]:
+                        - generic [ref=f11e20]:
+                          - link "Quem de nós dois - TalaGaço | EP Diferentão" [ref=f11e21] [cursor=pointer]:
+                            - /url: https://www.youtube.com/watch?v=zaZNx0rCQ7g
+                          - link "Talagaço" [ref=f11e22] [cursor=pointer]:
+                            - /url: /channel/UChRB8Ow5Qy1Bvh3SS32QGOQ
+                        - generic [ref=f11e24]:
+                          - button [ref=f11e25] [cursor=pointer]
+                          - generic [ref=f11e27]:
+                            - generic: Talagaço
+                            - generic: 114 mil inscritos
+                      - generic [ref=f11e28]:
+                        - button "Compartilhar" [ref=f11e31] [cursor=pointer]
+                        - link "Assistir no YouTube" [ref=f11e42] [cursor=pointer]:
+                          - /url: https://www.youtube.com/watch?v=zaZNx0rCQ7g
+                          - generic [ref=f11e43]: Assista no
+          - generic [ref=f9e74]:
+            - generic [ref=f9e75]: REPRODUZINDO
+            - strong [ref=f9e76]: Quem de Nós Dois
+        - generic [ref=f9e77]:
+          - generic [ref=f9e78]:
+            - generic [ref=f9e79]: PLAYLIST OFICIAL
+            - generic [ref=f9e80]: EP DIFERENTÃO
+          - button "01 Quem de Nós Dois EP Diferentão ▶" [ref=f9e81] [cursor=pointer]:
+            - generic [ref=f9e82]: "01"
+            - generic [ref=f9e83]:
+              - generic [ref=f9e84]: Quem de Nós Dois
+              - generic [ref=f9e85]: EP Diferentão
+            - generic [ref=f9e86]: ▶
+          - button "02 Paredes Pintadas EP Diferentão ▶" [ref=f9e87] [cursor=pointer]:
+            - generic [ref=f9e88]: "02"
+            - generic [ref=f9e89]:
+              - generic [ref=f9e90]: Paredes Pintadas
+              - generic [ref=f9e91]: EP Diferentão
+            - generic [ref=f9e92]: ▶
+          - button "03 Sem Você Sou Nada EP Diferentão ▶" [ref=f9e93] [cursor=pointer]:
+            - generic [ref=f9e94]: "03"
+            - generic [ref=f9e95]:
+              - generic [ref=f9e96]: Sem Você Sou Nada
+              - generic [ref=f9e97]: EP Diferentão
+            - generic [ref=f9e98]: ▶
+          - button "04 Loira Tatuada feat. Rainha Musical ▶" [ref=f9e99] [cursor=pointer]:
+            - generic [ref=f9e100]: "04"
+            - generic [ref=f9e101]:
+              - generic [ref=f9e102]: Loira Tatuada
+              - generic [ref=f9e103]: feat. Rainha Musical
+            - generic [ref=f9e104]: ▶
+          - button "05 Amor de Lápis Talagaço 21 anos ▶" [ref=f9e105] [cursor=pointer]:
+            - generic [ref=f9e106]: "05"
+            - generic [ref=f9e107]:
+              - generic [ref=f9e108]: Amor de Lápis
+              - generic [ref=f9e109]: Talagaço 21 anos
+            - generic [ref=f9e110]: ▶
+      - generic [ref=f9e111]:
+        - generic [ref=f9e112]:
+          - generic [ref=f9e113]: DISCOGRAFIA
+          - heading "ÁLBUNS E FAIXAS" [level=3] [ref=f9e114]
+        - generic [ref=f9e115]:
+          - button "Anterior" [ref=f9e116] [cursor=pointer]: ←
+          - button "Próximo" [ref=f9e117] [cursor=pointer]: →
+      - generic [ref=f9e119]:
+        - link "EP • 2025–2026 EP Diferentão Ouvir agora ↗" [ref=f9e120] [cursor=pointer]:
+          - /url: https://open.spotify.com/intl-pt/artist/4T0ApgHx0HEEaIduhFlkIW
+          - generic [ref=f9e122]: EP • 2025–2026
+          - strong [ref=f9e123]: EP Diferentão
+          - emphasis [ref=f9e124]: Ouvir agora ↗
+        - link "ÁLBUM • 2021 As Melhores de Todos os Tempos Ouvir agora ↗" [ref=f9e125] [cursor=pointer]:
+          - /url: https://open.spotify.com/intl-pt/album/7fSZwo7jDH2OyVo4nZ6toA
+          - generic [ref=f9e127]: ÁLBUM • 2021
+          - strong [ref=f9e128]: As Melhores de Todos os Tempos
+          - emphasis [ref=f9e129]: Ouvir agora ↗
+        - 'link "ÁLBUM • 2020 #SextouComTalaGaço Conhecer ↗" [ref=f9e130] [cursor=pointer]':
+          - /url: https://www.deezer.com/br/album/176671772
+          - generic [ref=f9e132]: ÁLBUM • 2020
+          - strong [ref=f9e133]: "#SextouComTalaGaço"
+          - emphasis [ref=f9e134]: Conhecer ↗
+        - link "AO VIVO 21 PROJETO AO VIVO Talagaço 21 Anos Ouvir agora ↗" [ref=f9e135] [cursor=pointer]:
+          - /url: https://open.spotify.com/intl-pt/artist/4T0ApgHx0HEEaIduhFlkIW
+          - generic [ref=f9e136]:
+            - generic [ref=f9e137]: AO VIVO
+            - generic [ref=f9e138]: "21"
+          - generic [ref=f9e139]: PROJETO AO VIVO
+          - strong [ref=f9e140]: Talagaço 21 Anos
+          - emphasis [ref=f9e141]: Ouvir agora ↗
+        - link "SINGLE • 2025 Loira Tatuada Assistir ↗" [ref=f9e142] [cursor=pointer]:
+          - /url: https://www.youtube.com/watch?v=MNX39IaSkWY
+          - generic [ref=f9e144]: SINGLE • 2025
+          - strong [ref=f9e145]: Loira Tatuada
+          - emphasis [ref=f9e146]: Assistir ↗
+        - link "FAIXA AO VIVO Amor de Lápis Assistir ↗" [ref=f9e147] [cursor=pointer]:
+          - /url: https://www.youtube.com/watch?v=vpROtrGNKrU
+          - generic [ref=f9e149]: FAIXA AO VIVO
+          - strong [ref=f9e150]: Amor de Lápis
+          - emphasis [ref=f9e151]: Assistir ↗
+      - generic [ref=f9e152]:
+        - generic [ref=f9e153]:
+          - generic [ref=f9e154]: EM TODAS AS PLATAFORMAS
+          - heading "ESCOLHA ONDE OUVIR" [level=3] [ref=f9e155]
+        - generic [ref=f9e156]:
+          - link "Spotify Ouça o Talagaço ↗" [ref=f9e157] [cursor=pointer]:
+            - /url: https://open.spotify.com/intl-pt/artist/4T0ApgHx0HEEaIduhFlkIW
+            - generic [ref=f9e158]:
+              - generic [ref=f9e159]: Spotify
+              - generic [ref=f9e160]: Ouça o Talagaço
+            - generic [ref=f9e161]: ↗
+          - link "YouTube Clipes e DVDs ↗" [ref=f9e162] [cursor=pointer]:
+            - /url: https://www.youtube.com/results?search_query=Talagaço+Oficial
+            - generic [ref=f9e163]:
+              - generic [ref=f9e164]: YouTube
+              - generic [ref=f9e165]: Clipes e DVDs
+            - generic [ref=f9e166]: ↗
+          - link "YouTube Music Álbuns e singles ↗" [ref=f9e167] [cursor=pointer]:
+            - /url: https://music.youtube.com/search?q=Talagaço
+            - generic [ref=f9e168]:
+              - generic [ref=f9e169]: YouTube Music
+              - generic [ref=f9e170]: Álbuns e singles
+            - generic [ref=f9e171]: ↗
+          - link "Amazon Music Ouça agora ↗" [ref=f9e172] [cursor=pointer]:
+            - /url: https://music.amazon.com.br/search/Talagaço
+            - generic [ref=f9e173]:
+              - generic [ref=f9e174]: Amazon Music
+              - generic [ref=f9e175]: Ouça agora
+            - generic [ref=f9e176]: ↗
+          - link "Deezer Discografia completa ↗" [ref=f9e177] [cursor=pointer]:
+            - /url: https://www.deezer.com/br/artist/50032012
+            - generic [ref=f9e178]:
+              - generic [ref=f9e179]: Deezer
+              - generic [ref=f9e180]: Discografia completa
+            - generic [ref=f9e181]: ↗
+    - generic [ref=f9e182]:
+      - iframe [ref=f9e184]
+      - generic [ref=f9e185]:
+        - generic [ref=f9e186]: NOVO PROJETO
+        - heading "DIFERENTÃO" [level=2] [ref=f9e187]
+        - paragraph [ref=f9e188]: Um Talagaço que você já conhece, com uma sonoridade que vai te surpreender.
+        - link "Assistir no YouTube ↗" [ref=f9e189] [cursor=pointer]:
+          - /url: https://www.youtube.com/watch?v=zaZNx0rCQ7g
+      - link "▶ QUEM DE NÓS DOIS" [ref=f9e190] [cursor=pointer]:
+        - /url: https://www.youtube.com/watch?v=zaZNx0rCQ7g
+        - generic [ref=f9e191]: ▶
+        - generic [ref=f9e192]: QUEM DE NÓS DOIS
+      - text: T
+    - generic [ref=f9e193]:
+      - generic [ref=f9e194]:
+        - generic [ref=f9e195]: NA ESTRADA
+        - heading [level=2] [ref=f9e196]:
+          - text: ONDE TEM FESTA,
+          - emphasis [ref=f9e197]: TEM TALAGAÇO.
+        - paragraph [ref=f9e198]: Quilômetros, cidades, novos encontros e a mesma paixão. Acompanhe um pouco da rotina, dos encontros e da energia que move o Talagaço de palco em palco.
+        - link "LEVE O TALAGAÇO PARA SUA CIDADE →" [ref=f9e199] [cursor=pointer]:
+          - /url: https://api.whatsapp.com/send?phone=5542999614000&text=Olá!%20Vi%20os%20bastidores%20do%20Talagaço%20e%20quero%20levar%20a%20banda%20para%20minha%20cidade.%20Podem%20me%20ajudar%3F
+        - generic [ref=f9e200]:
+          - generic [ref=f9e201]: "01"
+          - generic [ref=f9e202]: / 03
+          - generic [ref=f9e203]:
+            - button "Reel anterior" [ref=f9e204] [cursor=pointer]: ←
+            - button "Próximo reel" [ref=f9e205] [cursor=pointer]: →
+      - generic [ref=f9e207]:
+        - article [ref=f9e208]:
+          - iframe [ref=f9e209]:
+            - generic [ref=f13e5]:
+              - generic [ref=f13e6]:
+                - generic [ref=f13e7]:
+                  - link [ref=f13e8] [cursor=pointer]:
+                    - /url: https://www.instagram.com/talagaco/?utm_source=ig_embed&ig_rid=AcQmfTErMnOGS7byts8DLWt
+                    - img "talagaco" [ref=f13e9]
+                  - link [ref=f13e10] [cursor=pointer]:
+                    - /url: https://www.instagram.com/salsicha_videomaker/?utm_source=ig_embed&ig_rid=AcQmfTErMnOGS7byts8DLWt
+                    - img "salsicha_videomaker" [ref=f13e11]
+                - generic [ref=f13e12]:
+                  - generic [ref=f13e13]:
+                    - link "salsicha_videomaker" [ref=f13e14] [cursor=pointer]:
+                      - /url: https://www.instagram.com/salsicha_videomaker/?utm_source=ig_embed&ig_rid=AcQmfTErMnOGS7byts8DLWt
+                    - generic [ref=f13e16]: e
+                    - link "talagaco" [ref=f13e17] [cursor=pointer]:
+                      - /url: https://www.instagram.com/talagaco/?utm_source=ig_embed&ig_rid=AcQmfTErMnOGS7byts8DLWt
+                  - generic [ref=f13e19]: TalaGaço, Rainha Musical · Loira Tatuada
+                - link "Ver perfil" [ref=f13e21] [cursor=pointer]:
+                  - /url: https://www.instagram.com/salsicha_videomaker/?utm_source=ig_embed&ig_rid=AcQmfTErMnOGS7byts8DLWt
+              - link "Post do Instagram compartilhado por @salsicha_videomaker Reproduzir Assistir no Instagram" [ref=f13e23] [cursor=pointer]:
+                - /url: https://www.instagram.com/reel/DaU790eCpz-/?utm_source=ig_embed&ig_rid=AcQmfTErMnOGS7byts8DLWt
+                - img "Post do Instagram compartilhado por @salsicha_videomaker"
+                - generic [ref=f13e24]:
+                  - generic [ref=f13e25]: Reproduzir
+                  - generic [ref=f13e27]: Assistir no Instagram
+              - generic [ref=f13e28]:
+                - link "salsicha_videomaker salsicha_videomaker 333 posts · 5K seguidores" [ref=f13e29] [cursor=pointer]:
+                  - /url: https://www.instagram.com/salsicha_videomaker/?utm_source=ig_embed&ig_rid=AcQmfTErMnOGS7byts8DLWt
+                  - generic [ref=f13e30]:
+                    - img "salsicha_videomaker" [ref=f13e31]
+                    - generic [ref=f13e32]:
+                      - generic [ref=f13e33]: salsicha_videomaker
+                      - generic [ref=f13e35]: 333 posts · 5K seguidores
+                - link "Ver mais no Instagram" [ref=f13e41] [cursor=pointer]:
+                  - /url: https://www.instagram.com/salsicha_videomaker/?utm_source=ig_embed&ig_rid=AcQmfTErMnOGS7byts8DLWt
+              - generic [ref=f13e42]:
+                - link "Curtir" [ref=f13e43] [cursor=pointer]:
+                  - /url: https://www.instagram.com/reel/DaU790eCpz-/?utm_source=ig_embed&ig_rid=AcQmfTErMnOGS7byts8DLWt
+                - link "Comentar" [ref=f13e45] [cursor=pointer]:
+                  - /url: https://www.instagram.com/reel/DaU790eCpz-/?utm_source=ig_embed&ig_rid=AcQmfTErMnOGS7byts8DLWt
+                - link "Compartilhar" [ref=f13e48] [cursor=pointer]:
+                  - /url: https://www.instagram.com/reel/DaU790eCpz-/?utm_source=ig_embed&ig_rid=AcQmfTErMnOGS7byts8DLWt
+                - link "Salvar" [ref=f13e51] [cursor=pointer]:
+                  - /url: https://www.instagram.com/reel/DaU790eCpz-/?utm_source=ig_embed&ig_rid=AcQmfTErMnOGS7byts8DLWt
+              - link "927 curtidas" [ref=f13e55] [cursor=pointer]:
+                - /url: https://www.instagram.com/reel/DaU790eCpz-/?utm_source=ig_embed&ig_rid=AcQmfTErMnOGS7byts8DLWt
+              - generic [ref=f13e56]:
+                - link "Adicione um comentário..." [ref=f13e57] [cursor=pointer]:
+                  - /url: https://www.instagram.com/reel/DaU790eCpz-/?utm_source=ig_embed&ig_rid=AcQmfTErMnOGS7byts8DLWt
+                - link "Instagram" [ref=f13e58] [cursor=pointer]:
+                  - /url: https://www.instagram.com/reel/DaU790eCpz-/?utm_source=ig_embed&ig_rid=AcQmfTErMnOGS7byts8DLWt
+          - link "VER NO INSTAGRAM ↗" [ref=f9e210] [cursor=pointer]:
+            - /url: https://www.instagram.com/reel/DaU790eCpz-/
+        - article [ref=f9e211]:
+          - iframe [ref=f9e212]:
+            - generic [ref=f14e5]:
+              - generic [ref=f14e6]:
+                - generic [ref=f14e7]:
+                  - link [ref=f14e8] [cursor=pointer]:
+                    - /url: https://www.instagram.com/marlonmoraes/?utm_source=ig_embed&ig_rid=AS8RxPBioDTb1IpO8xCbT1a
+                    - img "marlonmoraes" [ref=f14e9]
+                  - link [ref=f14e10] [cursor=pointer]:
+                    - /url: https://www.instagram.com/andre__bordignon/?utm_source=ig_embed&ig_rid=AS8RxPBioDTb1IpO8xCbT1a
+                    - img "andre__bordignon" [ref=f14e11]
+                - generic [ref=f14e12]:
+                  - generic [ref=f14e13]:
+                    - link "andre__bordignon" [ref=f14e14] [cursor=pointer]:
+                      - /url: https://www.instagram.com/andre__bordignon/?utm_source=ig_embed&ig_rid=AS8RxPBioDTb1IpO8xCbT1a
+                    - generic [ref=f14e16]: e
+                    - link "marlonmoraes" [ref=f14e17] [cursor=pointer]:
+                      - /url: https://www.instagram.com/marlonmoraes/?utm_source=ig_embed&ig_rid=AS8RxPBioDTb1IpO8xCbT1a
+                  - generic [ref=f14e19]: Áudio original
+                - link "Ver perfil" [ref=f14e21] [cursor=pointer]:
+                  - /url: https://www.instagram.com/andre__bordignon/?utm_source=ig_embed&ig_rid=AS8RxPBioDTb1IpO8xCbT1a
+              - generic [ref=f14e22]:
+                - link "Post do Instagram compartilhado por @andre__bordignon" [ref=f14e23] [cursor=pointer]:
+                  - /url: https://www.instagram.com/reel/DWfol8XjKdt/?utm_source=ig_embed&ig_rid=AS8RxPBioDTb1IpO8xCbT1a
+                  - img "Post do Instagram compartilhado por @andre__bordignon"
+                - generic [ref=f14e25]:
+                  - button "Reproduzir" [ref=f14e29]
+                  - button "Controlar" [ref=f14e30] [cursor=pointer]
+              - generic [ref=f14e31]:
+                - link "andre__bordignon andre__bordignon 650 posts · 11K seguidores" [ref=f14e32] [cursor=pointer]:
+                  - /url: https://www.instagram.com/andre__bordignon/?utm_source=ig_embed&ig_rid=AS8RxPBioDTb1IpO8xCbT1a
+                  - generic [ref=f14e33]:
+                    - img "andre__bordignon" [ref=f14e34]
+                    - generic [ref=f14e35]:
+                      - generic [ref=f14e36]: andre__bordignon
+                      - generic [ref=f14e38]: 650 posts · 11K seguidores
+                - link "Ver mais no Instagram" [ref=f14e44] [cursor=pointer]:
+                  - /url: https://www.instagram.com/andre__bordignon/?utm_source=ig_embed&ig_rid=AS8RxPBioDTb1IpO8xCbT1a
+              - generic [ref=f14e45]:
+                - link "Curtir" [ref=f14e46] [cursor=pointer]:
+                  - /url: https://www.instagram.com/reel/DWfol8XjKdt/?utm_source=ig_embed&ig_rid=AS8RxPBioDTb1IpO8xCbT1a
+                - link "Comentar" [ref=f14e48] [cursor=pointer]:
+                  - /url: https://www.instagram.com/reel/DWfol8XjKdt/?utm_source=ig_embed&ig_rid=AS8RxPBioDTb1IpO8xCbT1a
+                - link "Compartilhar" [ref=f14e51] [cursor=pointer]:
+                  - /url: https://www.instagram.com/reel/DWfol8XjKdt/?utm_source=ig_embed&ig_rid=AS8RxPBioDTb1IpO8xCbT1a
+                - link "Salvar" [ref=f14e54] [cursor=pointer]:
+                  - /url: https://www.instagram.com/reel/DWfol8XjKdt/?utm_source=ig_embed&ig_rid=AS8RxPBioDTb1IpO8xCbT1a
+              - link "595 curtidas" [ref=f14e58] [cursor=pointer]:
+                - /url: https://www.instagram.com/reel/DWfol8XjKdt/?utm_source=ig_embed&ig_rid=AS8RxPBioDTb1IpO8xCbT1a
+              - generic [ref=f14e59]:
+                - link "Adicione um comentário..." [ref=f14e60] [cursor=pointer]:
+                  - /url: https://www.instagram.com/reel/DWfol8XjKdt/?utm_source=ig_embed&ig_rid=AS8RxPBioDTb1IpO8xCbT1a
+                - link "Instagram" [ref=f14e61] [cursor=pointer]:
+                  - /url: https://www.instagram.com/reel/DWfol8XjKdt/?utm_source=ig_embed&ig_rid=AS8RxPBioDTb1IpO8xCbT1a
+          - link "VER NO INSTAGRAM ↗" [ref=f9e213] [cursor=pointer]:
+            - /url: https://www.instagram.com/reel/DWfol8XjKdt/
+        - article [ref=f9e214]:
+          - iframe [ref=f9e215]:
+            - generic [ref=f15e5]:
+              - generic [ref=f15e6]:
+                - generic [ref=f15e7]:
+                  - link [ref=f15e8] [cursor=pointer]:
+                    - /url: https://www.instagram.com/talagaco/?utm_source=ig_embed&ig_rid=AUg8Hqa2VAoA6xrZMpJbxJN
+                    - img "talagaco" [ref=f15e9]
+                  - link [ref=f15e10] [cursor=pointer]:
+                    - /url: https://www.instagram.com/bailaodobruno/?utm_source=ig_embed&ig_rid=AUg8Hqa2VAoA6xrZMpJbxJN
+                    - img "bailaodobruno" [ref=f15e11]
+                - generic [ref=f15e12]:
+                  - generic [ref=f15e13]:
+                    - link "bailaodobruno" [ref=f15e14] [cursor=pointer]:
+                      - /url: https://www.instagram.com/bailaodobruno/?utm_source=ig_embed&ig_rid=AUg8Hqa2VAoA6xrZMpJbxJN
+                    - generic [ref=f15e16]: e
+                    - link "talagaco" [ref=f15e17] [cursor=pointer]:
+                      - /url: https://www.instagram.com/talagaco/?utm_source=ig_embed&ig_rid=AUg8Hqa2VAoA6xrZMpJbxJN
+                  - generic [ref=f15e19]: TalaGaço · Quem de Nós Dois
+                - link "Ver perfil" [ref=f15e21] [cursor=pointer]:
+                  - /url: https://www.instagram.com/bailaodobruno/?utm_source=ig_embed&ig_rid=AUg8Hqa2VAoA6xrZMpJbxJN
+              - link "Post do Instagram compartilhado por @bailaodobruno Reproduzir Assistir no Instagram" [ref=f15e23] [cursor=pointer]:
+                - /url: https://www.instagram.com/reel/DVjATFXjqeQ/?utm_source=ig_embed&ig_rid=AUg8Hqa2VAoA6xrZMpJbxJN
+                - img "Post do Instagram compartilhado por @bailaodobruno"
+                - generic [ref=f15e24]:
+                  - generic [ref=f15e25]: Reproduzir
+                  - generic [ref=f15e27]: Assistir no Instagram
+              - generic [ref=f15e28]:
+                - link "bailaodobruno bailaodobruno 2.829 posts · 30K seguidores" [ref=f15e29] [cursor=pointer]:
+                  - /url: https://www.instagram.com/bailaodobruno/?utm_source=ig_embed&ig_rid=AUg8Hqa2VAoA6xrZMpJbxJN
+                  - generic [ref=f15e30]:
+                    - img "bailaodobruno" [ref=f15e31]
+                    - generic [ref=f15e32]:
+                      - generic [ref=f15e33]: bailaodobruno
+                      - generic [ref=f15e35]: 2.829 posts · 30K seguidores
+                - link "Ver mais no Instagram" [ref=f15e41] [cursor=pointer]:
+                  - /url: https://www.instagram.com/bailaodobruno/?utm_source=ig_embed&ig_rid=AUg8Hqa2VAoA6xrZMpJbxJN
+              - generic [ref=f15e42]:
+                - link "Curtir" [ref=f15e43] [cursor=pointer]:
+                  - /url: https://www.instagram.com/reel/DVjATFXjqeQ/?utm_source=ig_embed&ig_rid=AUg8Hqa2VAoA6xrZMpJbxJN
+                - link "Comentar" [ref=f15e45] [cursor=pointer]:
+                  - /url: https://www.instagram.com/reel/DVjATFXjqeQ/?utm_source=ig_embed&ig_rid=AUg8Hqa2VAoA6xrZMpJbxJN
+                - link "Compartilhar" [ref=f15e48] [cursor=pointer]:
+                  - /url: https://www.instagram.com/reel/DVjATFXjqeQ/?utm_source=ig_embed&ig_rid=AUg8Hqa2VAoA6xrZMpJbxJN
+                - link "Salvar" [ref=f15e51] [cursor=pointer]:
+                  - /url: https://www.instagram.com/reel/DVjATFXjqeQ/?utm_source=ig_embed&ig_rid=AUg8Hqa2VAoA6xrZMpJbxJN
+              - generic [ref=f15e54]:
+                - link "Adicione um comentário..." [ref=f15e55] [cursor=pointer]:
+                  - /url: https://www.instagram.com/reel/DVjATFXjqeQ/?utm_source=ig_embed&ig_rid=AUg8Hqa2VAoA6xrZMpJbxJN
+                - link "Instagram" [ref=f15e56] [cursor=pointer]:
+                  - /url: https://www.instagram.com/reel/DVjATFXjqeQ/?utm_source=ig_embed&ig_rid=AUg8Hqa2VAoA6xrZMpJbxJN
+          - link "VER NO INSTAGRAM ↗" [ref=f9e216] [cursor=pointer]:
+            - /url: https://www.instagram.com/reel/DVjATFXjqeQ/
+    - generic [ref=f9e217]:
+      - generic [ref=f9e218]:
+        - generic [ref=f9e219]:
+          - generic [ref=f9e220]: PRÓXIMOS DESTINOS
+          - heading [level=2] [ref=f9e221]:
+            - text: AGENDA
+            - emphasis [ref=f9e222]: DE SHOWS
+        - link "VER AGENDA COMPLETA →" [ref=f9e223] [cursor=pointer]:
+          - /url: https://www.talagaco.com/
+      - generic [ref=f9e224]:
+        - article [ref=f9e225]:
+          - time [ref=f9e226]:
+            - generic [ref=f9e227]: EM BREVE
+            - generic [ref=f9e228]: NOVA DATA
+          - generic [ref=f9e229]:
+            - strong [ref=f9e230]: Talagaço na sua cidade
+            - text: Brasil
+          - link "SOLICITAR SHOW ↗" [ref=f9e231] [cursor=pointer]:
+            - /url: https://api.whatsapp.com/send?phone=5542999614000&text=Olá!%20Gostaria%20de%20solicitar%20um%20show%20do%20Talagaço.%20Podem%20me%20informar%20como%20funciona%20a%20contratação%3F
+        - article [ref=f9e232]:
+          - time [ref=f9e233]:
+            - generic [ref=f9e234]: "2026"
+            - generic [ref=f9e235]: NA ESTRADA
+          - generic [ref=f9e236]:
+            - strong [ref=f9e237]: Novas datas sendo anunciadas
+            - text: Acompanhe as redes oficiais
+          - link "ACOMPANHAR ↓" [ref=f9e238] [cursor=pointer]:
+            - /url: "#social"
+    - generic [ref=f9e239]:
+      - generic [ref=f9e240]:
+        - generic [ref=f9e241]:
+          - generic [ref=f9e242]: BASTIDORES E NOVIDADES
+          - heading [level=2] [ref=f9e243]:
+            - text: ACOMPANHE O
+            - emphasis [ref=f9e244]: TALAGAÇO
+        - paragraph [ref=f9e245]: Shows, lançamentos, bastidores da estrada e tudo o que acontece antes das cortinas abrirem.
+      - generic [ref=f9e246]:
+        - link "Instagram @talagaco • Siga agora ↗" [ref=f9e247] [cursor=pointer]:
+          - /url: https://www.instagram.com/talagaco/
+          - generic [ref=f9e248]: Instagram
+          - generic [ref=f9e249]: "@talagaco • Siga agora ↗"
+        - link "YouTube Inscreva-se para novos clipes ↗" [ref=f9e250] [cursor=pointer]:
+          - /url: https://www.youtube.com/results?search_query=Talagaço+Oficial
+          - generic [ref=f9e251]: YouTube
+          - generic [ref=f9e252]: Inscreva-se para novos clipes ↗
+        - link "Facebook Agenda, fotos e novidades ↗" [ref=f9e253] [cursor=pointer]:
+          - /url: https://www.facebook.com/TalaGaco
+          - generic [ref=f9e254]: Facebook
+          - generic [ref=f9e255]: Agenda, fotos e novidades ↗
+        - link "TikTok Encontre o Talagaço ↗" [ref=f9e256] [cursor=pointer]:
+          - /url: https://www.tiktok.com/search?q=talagaco
+          - generic [ref=f9e257]: TikTok
+          - generic [ref=f9e258]: Encontre o Talagaço ↗
+        - link "X Encontre o Talagaço ↗" [ref=f9e259] [cursor=pointer]:
+          - /url: https://x.com/search?q=Talagaço
+          - generic [ref=f9e260]: X
+          - generic [ref=f9e261]: Encontre o Talagaço ↗
+        - link "Threads Encontre o Talagaço ↗" [ref=f9e262] [cursor=pointer]:
+          - /url: https://www.threads.net/search?q=talagaco
+          - generic [ref=f9e263]: Threads
+          - generic [ref=f9e264]: Encontre o Talagaço ↗
+    - generic [ref=f9e265]:
+      - generic [ref=f9e266]:
+        - generic [ref=f9e267]: ÁREA DO CONTRATANTE
+        - heading [level=2] [ref=f9e268]:
+          - text: TUDO PARA
+          - emphasis [ref=f9e269]: DIVULGAR O SHOW.
+        - paragraph [ref=f9e270]: Materiais preparados para produtores, casas de eventos, imprensa e equipes de criação divulgarem a passagem do Talagaço pela sua cidade.
+        - link "Solicitar kit completo ↗" [ref=f9e271] [cursor=pointer]:
+          - /url: https://api.whatsapp.com/send?phone=5542999614000&text=Olá!%20Sou%20contratante%20e%20gostaria%20de%20receber%20o%20kit%20de%20mídia%20oficial%20do%20Talagaço.
+      - generic [ref=f9e272]:
+        - link "PNG • ALTA RESOLUÇÃO Logo oficial Versão horizontal para fundos escuros BAIXAR ↓" [ref=f9e273] [cursor=pointer]:
+          - /url: assets/logo-talagaco.png
+          - generic [ref=f9e274]: PNG • ALTA RESOLUÇÃO
+          - generic [ref=f9e275]: Logo oficial
+          - generic [ref=f9e276]: Versão horizontal para fundos escuros
+          - generic [ref=f9e277]: BAIXAR ↓
+        - link "FOTOS • IMPRENSA Fotos oficiais Imagens aprovadas para cartazes e mídia SOLICITAR ↗" [ref=f9e278] [cursor=pointer]:
+          - /url: https://api.whatsapp.com/send?phone=5542999614000&text=Olá!%20Preciso%20das%20fotos%20oficiais%20do%20Talagaço%20para%20divulgação%20de%20um%20evento.
+          - generic [ref=f9e279]: FOTOS • IMPRENSA
+          - generic [ref=f9e280]: Fotos oficiais
+          - generic [ref=f9e281]: Imagens aprovadas para cartazes e mídia
+          - generic [ref=f9e282]: SOLICITAR ↗
+        - link "PDF • RELEASE Release da banda História, formação e informações oficiais SOLICITAR ↗" [ref=f9e283] [cursor=pointer]:
+          - /url: https://api.whatsapp.com/send?phone=5542999614000&text=Olá!%20Preciso%20do%20release%20oficial%20do%20Talagaço%20para%20divulgação.
+          - generic [ref=f9e284]: PDF • RELEASE
+          - generic [ref=f9e285]: Release da banda
+          - generic [ref=f9e286]: História, formação e informações oficiais
+          - generic [ref=f9e287]: SOLICITAR ↗
+        - link "PRODUÇÃO • TÉCNICO Rider e mapa de palco Material reservado para eventos contratados SOLICITAR ↗" [ref=f9e288] [cursor=pointer]:
+          - /url: https://api.whatsapp.com/send?phone=5542999614000&text=Olá!%20Sou%20contratante%20e%20preciso%20do%20rider%20técnico%20e%20mapa%20de%20palco%20do%20Talagaço.
+          - generic [ref=f9e289]: PRODUÇÃO • TÉCNICO
+          - generic [ref=f9e290]: Rider e mapa de palco
+          - generic [ref=f9e291]: Material reservado para eventos contratados
+          - generic [ref=f9e292]: SOLICITAR ↗
+    - generic [ref=f9e294]:
+      - generic [ref=f9e295]: SEU EVENTO MERECE ESSE BAILÃO
+      - heading [level=2] [ref=f9e296]:
+        - text: VAMOS FAZER
+        - emphasis [ref=f9e297]: HISTÓRIA JUNTOS?
+      - paragraph [ref=f9e298]: Consulte disponibilidade, estrutura e condições para levar o Talagaço até você.
+      - generic [ref=f9e299]:
+        - link "Falar com comercial ↗" [ref=f9e300] [cursor=pointer]:
+          - /url: https://api.whatsapp.com/send?phone=5542999614000&text=Olá!%20Gostaria%20de%20falar%20com%20o%20setor%20comercial%20sobre%20a%20contratação%20do%20Talagaço%20para%20um%20evento.
+        - link "vendas@talagaco.com" [ref=f9e301] [cursor=pointer]:
+          - /url: mailto:vendas@talagaco.com
+  - contentinfo [ref=f9e302]:
+    - generic [ref=f9e303]:
+      - link [ref=f9e304] [cursor=pointer]:
+        - /url: "#top"
+        - img "Talagaço" [ref=f9e305]
+      - paragraph [ref=f9e306]: O bailão que atravessa gerações.
+      - generic [ref=f9e307]:
+        - link "(42) 3229-3622" [ref=f9e308] [cursor=pointer]:
+          - /url: tel:+554232293622
+        - link "escritorio@talagaco.com" [ref=f9e309] [cursor=pointer]:
+          - /url: mailto:escritorio@talagaco.com
+    - generic [ref=f9e310]: Desenvolvido pela Gardsoft
+  - link "Quer levar o Talagaço para sua cidade?" [ref=f9e311] [cursor=pointer]:
+    - /url: https://api.whatsapp.com/send?phone=5542999614000&text=Olá!%20Quero%20saber%20mais%20sobre%20como%20contratar%20o%20Talagaço%20para%20um%20show.
+  - generic [ref=f9e314]:
+    - button "Fechar" [ref=f9e315]: ×
+    - generic [ref=f9e316]: O BAILÃO ESTÁ TE CHAMANDO
+    - strong [ref=f9e317]: Quer levar o Talagaço para sua cidade?
+    - paragraph [ref=f9e318]: Consulte datas e condições diretamente com o comercial.
+    - link "CONSULTAR DATA ↗" [ref=f9e319] [cursor=pointer]:
+      - /url: https://api.whatsapp.com/send?phone=5542999614000&text=Olá!%20Gostaria%20de%20consultar%20uma%20data%20para%20um%20show%20do%20Talagaço.

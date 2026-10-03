@@ -1,0 +1,93 @@
+- main [ref=f1e2]:
+  - generic [ref=f1e4]:
+    - link "Página inicial" [ref=f1e5] [cursor=pointer]:
+      - /url: /
+      - img "Grupo de Danças Coração Gaúcho" [ref=f1e6]
+    - navigation "Navegação institucional" [ref=f1e7]:
+      - link "HOME" [ref=f1e8] [cursor=pointer]:
+        - /url: /
+      - link "SOBRE" [ref=f1e9] [cursor=pointer]:
+        - /url: /sobre
+      - link "BLOG" [ref=f1e10] [cursor=pointer]:
+        - /url: /blog
+      - link "CONTATO" [ref=f1e11] [cursor=pointer]:
+        - /url: /#contato
+    - link "Bilheteria" [ref=f1e12] [cursor=pointer]:
+      - /url: /bilheteria
+    - button "Abrir menu" [ref=f1e15]
+  - generic [ref=f1e17]:
+    - link "Falar com o Coração Gaúcho no WhatsApp" [ref=f1e18] [cursor=pointer]:
+      - /url: https://wa.me/554892210952?text=Ol%C3%A1!%20Vim%20pelo%20site%20do%20GD%20Cora%C3%A7%C3%A3o%20Ga%C3%BAcho%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es.
+    - link "Coração Gaúcho no Instagram" [ref=f1e21] [cursor=pointer]:
+      - /url: https://www.instagram.com/gdcoracaogaucho/
+    - link "Coração Gaúcho no YouTube" [ref=f1e24] [cursor=pointer]:
+      - /url: https://www.youtube.com/@nossoscaminhos_gdcoracaogaucho
+  - generic [ref=f1e27]:
+    - generic [ref=f1e29]:
+      - paragraph [ref=f1e30]: TRADIÇÃO • CULTURA • FAMÍLIA
+      - heading "O coração da tradição gaúcha bate aqui." [level=1] [ref=f1e31]
+      - paragraph [ref=f1e32]: Há mais de 13 anos formando dançarinos, amizades e histórias.
+      - link "Comprar ingressos" [ref=f1e33] [cursor=pointer]:
+        - /url: /bilheteria
+    - generic [ref=f1e36]:
+      - generic [ref=f1e37]: 13+Anos
+      - generic [ref=f1e41]: 500+Alunos
+      - generic [ref=f1e45]: 100+Eventos
+      - generic [ref=f1e49]: 1000+Famílias impactadas
+  - heading "NOSSOS APOIADORES" [level=2] [ref=f1e54]
+  - heading "ÁLBUNS DE FORMATURA" [level=2] [ref=f1e56]
+  - generic [ref=f1e57]:
+    - heading "PRÓXIMOS EVENTOS" [level=2] [ref=f1e58]
+    - link "Ver todos os eventos" [ref=f1e60] [cursor=pointer]:
+      - /url: /bilheteria
+  - heading "TURMAS DISPONÍVEIS E FUTURAS" [level=2] [ref=f1e62]
+  - generic [ref=f1e63]:
+    - heading "FALE CONOSCO" [level=2] [ref=f1e64]
+    - generic [ref=f1e65]:
+      - generic [ref=f1e66]:
+        - heading "Estamos prontos para falar com você." [level=3] [ref=f1e67]
+        - paragraph [ref=f1e68]: Tire dúvidas sobre cursos, eventos, formaturas e ingressos.
+        - paragraph [ref=f1e69]:
+          - link "Falar com o Coração Gaúcho no WhatsApp" [ref=f1e72] [cursor=pointer]:
+            - /url: https://wa.me/554892210952?text=Ol%C3%A1%21%20Vim%20pelo%20site%20do%20GD%20Cora%C3%A7%C3%A3o%20Ga%C3%BAcho%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es.
+            - text: +55 48 9221-0952
+        - paragraph [ref=f1e73]: contato@coracaogaucho.com.br
+      - generic [ref=f1e76]:
+        - generic [ref=f1e77]:
+          - textbox "Nome completo" [ref=f1e78]
+          - textbox "E-mail" [ref=f1e79]
+          - textbox "Telefone / WhatsApp" [ref=f1e80]
+          - textbox "Assunto" [ref=f1e81]
+        - textbox "Sua mensagem" [ref=f1e82]
+        - button "Enviar mensagem" [ref=f1e83]
+  - generic [ref=f1e86]:
+    - generic [ref=f1e87]:
+      - img "Grupo de Danças Coração Gaúcho" [ref=f1e89]
+      - generic [ref=f1e90]:
+        - heading "INSTITUCIONAL" [level=4] [ref=f1e91]
+        - generic [ref=f1e92]:
+          - paragraph [ref=f1e93]: Sobre o Grupo
+          - paragraph [ref=f1e94]: Curso de Dança
+          - paragraph [ref=f1e95]: Bilheteria
+          - paragraph [ref=f1e96]: Blog
+      - generic [ref=f1e97]:
+        - heading "LINKS RÁPIDOS" [level=4] [ref=f1e98]
+        - generic [ref=f1e99]:
+          - link "Home" [ref=f1e100] [cursor=pointer]:
+            - /url: /
+          - paragraph [ref=f1e101]: Álbuns
+          - link "Eventos" [ref=f1e102] [cursor=pointer]:
+            - /url: /bilheteria
+          - link "Contato" [ref=f1e103] [cursor=pointer]:
+            - /url: /#contato
+      - generic [ref=f1e104]:
+        - heading "CONTATO" [level=4] [ref=f1e105]
+        - paragraph [ref=f1e106]:
+          - link "Falar com o Coração Gaúcho no WhatsApp" [ref=f1e107] [cursor=pointer]:
+            - /url: https://wa.me/554892210952
+            - text: +55 48 9221-0952
+          - text: contato@coracaogaucho.com.br
+      - generic [ref=f1e108]:
+        - heading "HORÁRIOS" [level=4] [ref=f1e109]
+        - paragraph [ref=f1e110]: Segunda a Sexta13h30 às 22h00Sábados08h00 às 12h00
+    - generic [ref=f1e111]: © 2025 Grupo de Danças Coração Gaúcho. Todos os direitos reservados. Desenvolvido por Gardsoft.

@@ -1,6 +1,7 @@
 'use client';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
+import { AnimatePresence } from 'framer-motion';
 import { PromotionalCtaModal } from './PromotionalCtaModal';
 import { promotionalCtaDefinitions, type PromotionalCta } from './promotionalCtaDefinitions';
 import { PromotionalCtaContext } from './usePromotionalCta';
@@ -41,5 +42,5 @@ export function PromotionalCtaProvider({ children }: { children: React.ReactNode
   useEffect(() => { if (!armed || active) return; choose(); const timer = window.setInterval(choose, 2_000); return () => clearInterval(timer); }, [active, armed, choose]);
   const close = useCallback((clicked = false) => { setActive((current) => { if (!current) return null; const local = read<LocalHistory>(STORAGE_KEY, emptyLocal()); const field = clicked ? 'clickedAt' : closeReason.current; write(STORAGE_KEY, { items: { ...local.items, [current.id]: { ...local.items[current.id], [field]: Date.now() } } }); return null; }); }, []);
   const context = useMemo(() => ({ active, close }), [active, close]);
-  return <PromotionalCtaContext.Provider value={context}>{children}{active && <PromotionalCtaModal cta={active} onClose={() => close(false)} onAction={() => { closeReason.current = 'clickedAt'; close(true); }}/>}</PromotionalCtaContext.Provider>;
+  return <PromotionalCtaContext.Provider value={context}>{children}<AnimatePresence>{active && <PromotionalCtaModal key={active.id} cta={active} onClose={() => close(false)} onAction={() => { closeReason.current = 'clickedAt'; close(true); }}/>}</AnimatePresence></PromotionalCtaContext.Provider>;
 }
