@@ -1,6 +1,12 @@
 {
   "version": 1,
   "skills": {
+    "21st.dev Magic MCP": {
+      "source": "yousefnabil-soc/claude-apex",
+      "sourceType": "github",
+      "skillPath": "skills/21st-dev-magic/SKILL.md",
+      "computedHash": "89e92e254a202b591068dbb02f2a595f57a591abc82b1cb3617ac1995d31eba7"
+    },
     "design-taste-frontend": {
       "source": "leonxlnx/taste-skill",
       "sourceType": "github",
@@ -36,6 +42,12 @@
       "sourceType": "github",
       "skillPath": "skills/playwright-cli/SKILL.md",
       "computedHash": "d4983e06b5daae441e48604b4b813a0c38784f3d87ea58f8391d2b5ffeb803fd"
+    },
+    "shadcn": {
+      "source": "shadcn-ui/ui",
+      "sourceType": "github",
+      "skillPath": "skills/shadcn/SKILL.md",
+      "computedHash": "d04e43ec01e921558b93bb8046c14a42a22556689a2827243df900825a4e1604"
     },
     "ui-ux-pro-max": {
       "source": "nextlevelbuilder/ui-ux-pro-max-skill",

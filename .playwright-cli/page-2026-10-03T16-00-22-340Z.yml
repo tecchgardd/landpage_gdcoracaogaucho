@@ -1,0 +1,21 @@
+- dialog [ref=e315]:
+  - generic [ref=e316]:
+    - generic [ref=e317]:
+      - generic [ref=e318]:
+        - navigation [ref=e319]:
+          - button "previous" [disabled] [ref=e320]:
+            - img "previous" [ref=e321]
+          - button "next" [disabled] [ref=e323]:
+            - img "next" [ref=e324]
+          - generic [ref=e326]: 1 of 1 error
+          - generic [ref=e327]:
+            - text: Next.js (14.2.35) is outdated
+            - link "(learn more)" [ref=e329] [cursor=pointer]:
+              - /url: https://nextjs.org/docs/messages/version-staleness
+        - button "Close" [ref=e330] [cursor=pointer]
+      - heading "Unhandled Runtime Error" [level=1] [ref=e335]
+      - paragraph [ref=e336]: "NotFoundError: Failed to execute 'removeChild' on 'Node': The node to be removed is not a child of this node."
+    - generic [ref=e337]:
+      - heading "Call Stack" [level=2] [ref=e338]
+      - group [ref=e339]:
+        - generic "React" [ref=e340] [cursor=pointer]

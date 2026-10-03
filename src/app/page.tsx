@@ -5,6 +5,7 @@ import { Header } from '@/components/layout/Header';
 import { SocialFloat } from '@/components/layout/SocialFloat';
 import { Footer } from '@/components/layout/Footer';
 import { MotionDiv, MotionSection, MotionStagger, MotionStaggerItem, ParallaxHero } from '@/components/ui/Motion';
+import { FlagWave } from '@/components/ui/FlagWave';
 import { PublicAlbumsCarousel } from '@/components/catalog/PublicAlbumsCarousel';
 import { PublicEventsCarousel } from '@/components/catalog/PublicEventsCarousel';
 import { PublicClassesSection } from '@/components/catalog/PublicClassesSection';
@@ -29,10 +30,10 @@ export default function Home() {
           <VideoBackground page="home" position="center 38%" />
         </ParallaxHero>
         <div className="absolute inset-0 bg-gradient-to-r from-black via-black/75 to-black/45" />
-        <div className="relative mx-auto max-w-[1160px] px-6 pb-28 pt-[150px]">
+        <div className="relative mx-auto max-w-[1160px] px-6 pb-28 pt-28 md:pt-32">
           <MotionDiv className="max-w-[720px]">
-            <p className="mb-3 text-sm font-black tracking-wide text-gaucho-gold">TRADIÇÃO • CULTURA • FAMÍLIA</p>
-            <h1 className="text-stroke font-display text-[52px] font-black leading-[.94] md:text-[64px]">
+            <p className="mb-3 flex items-center gap-3 text-sm font-black tracking-wide text-gaucho-gold"><i className="h-px w-8 bg-gaucho-gold/70" aria-hidden="true" />TRADIÇÃO • CULTURA • FAMÍLIA</p>
+            <h1 className="text-stroke font-display text-[52px] font-black leading-[1.05] md:text-[64px]">
               O coração da <span className="text-gaucho-gold">tradição gaúcha</span> bate aqui.
             </h1>
             <p className="mt-5 max-w-[430px] text-xl leading-7 text-white/90">Há mais de 13 anos formando dançarinos, amizades e histórias.</p>
@@ -50,6 +51,7 @@ export default function Home() {
           ))}
         </MotionStagger>
         <div className="h-20" />
+        <FlagWave />
       </section>
 
       <MotionSection className="mx-auto max-w-[1160px] px-6 py-10">

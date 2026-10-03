@@ -22,7 +22,8 @@ function write(key: string, value: unknown, session = false) { try { (session ? 
 function routeBlocksAll(pathname: string) { return pathname === '/checkout' || pathname === '/login' || pathname === '/cadastro' || pathname.startsWith('/minha-conta') || pathname.startsWith('/pedido'); }
 function allowedOnRoute(cta: PromotionalCta, pathname: string) {
   if (routeBlocksAll(pathname)) return false;
-  if (cta.id === 'online-ticketing' && (pathname === '/bilheteria' || pathname === '/carrinho')) return false;
+  if (cta.id === 'bilheteria-social' && (pathname === '/bilheteria' || pathname === '/carrinho')) return false;
+  if (cta.id === 'new-events-classes' && (pathname === '/bilheteria' || pathname === '/curso')) return false;
   if (cta.id === 'graduation-albums' && pathname.startsWith('/blog')) return false;
   return true;
 }

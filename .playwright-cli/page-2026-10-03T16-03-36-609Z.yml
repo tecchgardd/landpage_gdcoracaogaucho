@@ -1,0 +1,184 @@
+- generic [active] [ref=e1]:
+  - main [ref=e157]:
+    - generic [ref=e161]:
+      - link "Página inicial" [ref=e162] [cursor=pointer]:
+        - /url: /
+        - img "Grupo de Danças Coração Gaúcho" [ref=e163]
+      - navigation "Navegação institucional" [ref=e164]:
+        - link "HOME" [ref=e165] [cursor=pointer]:
+          - /url: /
+        - link "SOBRE" [ref=e166] [cursor=pointer]:
+          - /url: /sobre
+        - link "BLOG" [ref=e167] [cursor=pointer]:
+          - /url: /blog
+        - link "CONTATO" [ref=e168] [cursor=pointer]:
+          - /url: /#contato
+      - link "Bilheteria" [ref=e169] [cursor=pointer]:
+        - /url: /bilheteria
+    - generic [ref=e172]:
+      - generic:
+        - link "WhatsApp do Coração Gaúcho":
+          - /url: https://wa.me/554892210952?text=Ol%C3%A1!%20Vim%20pelo%20site%20do%20GD%20Cora%C3%A7%C3%A3o%20Ga%C3%BAcho%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es.
+        - link "Instagram do Coração Gaúcho":
+          - /url: https://www.instagram.com/gdcoracaogaucho/
+        - link "YouTube do Coração Gaúcho":
+          - /url: https://www.youtube.com/@nossoscaminhos_gdcoracaogaucho
+      - generic [ref=e173] [cursor=pointer]: Redes sociais
+    - generic [ref=e179]:
+      - paragraph [ref=e180]: TRADIÇÃO • CULTURA • DANÇA
+      - heading "Sobre o GD Coração Gaúcho" [level=1] [ref=e182]
+      - paragraph [ref=e183]: Tradição, cultura e dança que conectam gerações.
+    - generic [ref=e184]:
+      - generic [ref=e185]:
+        - paragraph [ref=e186]: Nossa trajetória
+        - heading "Nossa História" [level=2] [ref=e187]
+        - generic [ref=e188]:
+          - paragraph [ref=e189]: Fundado em 2012, o Grupo de Dança Coração Gaúcho nasceu da paixão pela cultura e tradição do Rio Grande do Sul. Ao longo de mais de 13 anos, construímos uma trajetória marcada pelo compromisso em ensinar, preservar e transmitir os valores da tradição gaúcha por meio da dança.
+          - paragraph [ref=e190]: Cada ensaio, apresentação e evento representa muito mais do que uma coreografia. É a oportunidade de manter viva uma cultura que atravessa gerações, unindo técnica, emoção e identidade em cada passo.
+          - paragraph [ref=e191]: Ao longo dessa caminhada, tivemos a honra de participar de festivais, eventos culturais, apresentações comunitárias e formar centenas de alunos, sempre levando conosco o orgulho de representar a tradição gaúcha.
+          - paragraph [ref=e192]: Nossa missão é formar pessoas apaixonadas pela cultura do nosso estado, preservando suas raízes e inspirando novas gerações a manter viva essa história.
+      - img "Identidade institucional do Grupo de Danças Coração Gaúcho" [ref=e195]
+    - generic [ref=e196]:
+      - img "Professor Alan de Abreu e Eliane, responsáveis pelo GD Coração Gaúcho" [ref=e199]
+      - generic [ref=e200]:
+        - paragraph [ref=e201]: Alan e Eliane
+        - heading "Quem está por trás dessa história" [level=2] [ref=e202]
+        - generic [ref=e203]:
+          - paragraph [ref=e204]: À frente do Grupo de Dança Coração Gaúcho estão o Professor Alan de Abreu e sua esposa Eliane, que dedicam suas vidas ao ensino da dança tradicional gaúcha.
+          - paragraph [ref=e205]: Com carinho, dedicação e muita experiência, Alan conduz cada turma respeitando o tempo de aprendizado de cada aluno, enquanto Eliane transforma cada encontro em um ambiente acolhedor, leve e familiar.
+          - paragraph [ref=e206]: Essa parceria vai muito além da dança. Ela representa um compromisso verdadeiro com a cultura, a formação de novas amizades e a preservação das tradições gaúchas.
+          - paragraph [ref=e207]: Mais do que professores, eles se tornaram referência para centenas de alunos que encontraram no grupo um espaço para aprender, crescer e criar memórias inesquecíveis.
+    - generic [ref=e209]:
+      - generic [ref=e210]:
+        - paragraph [ref=e211]: Curso de dança
+        - heading "Nosso Curso de Dança" [level=2] [ref=e212]
+        - paragraph [ref=e213]: Uma experiência para aprender, se divertir e viver a tradição gaúcha.
+        - paragraph [ref=e214]: O Curso de Dança do Grupo Coração Gaúcho é a oportunidade ideal para quem deseja aprender a dançar com alegria, tradição e qualidade. O curso é acessível, acolhedor e foi desenvolvido para receber tanto quem nunca dançou quanto quem já possui experiência.
+      - generic [ref=e215]:
+        - article [ref=e217]:
+          - heading "Taxa única" [level=3] [ref=e221]
+          - paragraph [ref=e222]: Apenas R$ 30,00 de inscrição.
+        - article [ref=e224]:
+          - heading "Sem mensalidade" [level=3] [ref=e228]
+          - paragraph [ref=e229]: Nenhuma cobrança mensal durante o curso.
+        - article [ref=e231]:
+          - heading "10 aulas" [level=3] [ref=e235]
+          - paragraph [ref=e236]: Encontros realizados uma vez por semana.
+        - article [ref=e238]:
+          - heading "Não precisa ter par" [level=3] [ref=e242]
+          - paragraph [ref=e243]: Todos podem participar e serão bem recebidos.
+    - generic [ref=e244]:
+      - generic [ref=e245]:
+        - paragraph [ref=e246]: Informações práticas
+        - heading "Como funciona" [level=2] [ref=e247]
+        - generic [ref=e248]:
+          - paragraph [ref=e249]: O curso possui duração de 10 aulas, realizadas uma vez por semana, em horário e local definidos para cada turma. O conteúdo foi planejado para proporcionar aprendizado progressivo, convivência saudável e experiências marcantes no universo da cultura gaúcha.
+          - paragraph [ref=e250]: Os professores acompanham o desenvolvimento de cada participante com atenção, paciência e dedicação, esclarecendo dúvidas e respeitando o ritmo individual de aprendizado.
+      - generic [ref=e251]:
+        - paragraph [ref=e252]: Ritmos ensinados
+        - heading "Ritmos ensinados" [level=2] [ref=e253]
+        - generic [ref=e254]:
+          - generic [ref=e255]: Bugio
+          - generic [ref=e258]: Marchinha
+          - generic [ref=e261]: Vanera
+          - generic [ref=e264]: Chamamé
+          - generic [ref=e267]: Milonga
+          - generic [ref=e270]: Valsa
+          - generic [ref=e273]: Shote
+          - generic [ref=e276]: Outros ritmos tradicionais
+    - generic [ref=e279]:
+      - generic [ref=e280]:
+        - paragraph [ref=e281]: Para todos
+        - heading "Um curso para todos" [level=2] [ref=e282]
+        - generic [ref=e283]:
+          - paragraph [ref=e284]: O curso é indicado tanto para quem nunca dançou quanto para quem já tem experiência e deseja evoluir sua técnica e estilo. Não é necessário ter par para participar.
+          - paragraph [ref=e285]: Durante as aulas, também não é obrigatório utilizar trajes tradicionais. Cada participante pode usar roupas livres e confortáveis. O mais importante é estar à vontade para aprender, se movimentar e aproveitar cada encontro.
+      - generic [ref=e286]:
+        - generic [ref=e287]: Iniciantes são bem-vindos
+        - generic [ref=e290]: Não precisa ter par
+        - generic [ref=e293]: Roupa confortável
+        - generic [ref=e296]: Ambiente acolhedor
+        - generic [ref=e299]: Acompanhamento dos professores
+        - generic [ref=e302]: Aprendizado no próprio ritmo
+    - generic [ref=e306]:
+      - generic [ref=e312]:
+        - paragraph [ref=e313]: Encerramento do curso
+        - heading "Baile de Formatura" [level=2] [ref=e314]
+      - generic [ref=e316]:
+        - paragraph [ref=e317]: "Ao final das 10 aulas, acontece um dos momentos mais esperados do curso: o Baile de Formatura."
+        - paragraph [ref=e318]: Nesse evento, os alunos realizam uma apresentação especial mostrando tudo o que aprenderam durante a jornada. Familiares e amigos são convidados para prestigiar essa conquista.
+        - paragraph [ref=e319]: Mais do que um baile, é a celebração de uma nova história construída dentro da cultura gaúcha, numa noite de emoção, dança, convivência e tradição.
+    - generic [ref=e321]:
+      - paragraph [ref=e322]: Inscrições
+      - heading "Pronto para viver essa experiência?" [level=2] [ref=e323]
+      - paragraph [ref=e324]: Conheça as próximas turmas e venha fazer parte do GD Coração Gaúcho.
+      - generic [ref=e325]:
+        - link "Quero fazer minha inscrição" [ref=e326] [cursor=pointer]:
+          - /url: /curso
+        - link "Ver próximas turmas" [ref=e327] [cursor=pointer]:
+          - /url: /bilheteria
+    - generic [ref=e328]:
+      - generic [ref=e329]:
+        - generic [ref=e330]:
+          - link "Página inicial" [ref=e331] [cursor=pointer]:
+            - /url: /
+            - img "Grupo de Danças Coração Gaúcho" [ref=e332]
+          - paragraph [ref=e333]: Tradição gaúcha, cultura e dança que conectam gerações desde 2012.
+          - generic [ref=e334]:
+            - link "WhatsApp" [ref=e335] [cursor=pointer]:
+              - /url: https://wa.me/554892210952?text=Ol%C3%A1%21%20Vim%20pelo%20site%20do%20GD%20Cora%C3%A7%C3%A3o%20Ga%C3%BAcho%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es.
+            - link "Instagram" [ref=e338] [cursor=pointer]:
+              - /url: https://www.instagram.com/gdcoracaogaucho/
+            - link "YouTube" [ref=e341] [cursor=pointer]:
+              - /url: https://www.youtube.com/@nossoscaminhos_gdcoracaogaucho
+        - generic [ref=e344]:
+          - heading "INSTITUCIONAL" [level=4] [ref=e345]
+          - generic [ref=e346]:
+            - link "Sobre o Grupo" [ref=e347] [cursor=pointer]:
+              - /url: /sobre
+            - link "Curso de Dança" [ref=e348] [cursor=pointer]:
+              - /url: /curso
+            - link "Bilheteria" [ref=e349] [cursor=pointer]:
+              - /url: /bilheteria
+            - link "Blog" [ref=e350] [cursor=pointer]:
+              - /url: /blog
+        - generic [ref=e351]:
+          - heading "LINKS RÁPIDOS" [level=4] [ref=e352]
+          - generic [ref=e353]:
+            - link "Home" [ref=e354] [cursor=pointer]:
+              - /url: /
+            - link "Álbuns" [ref=e355] [cursor=pointer]:
+              - /url: /blog
+            - link "Eventos" [ref=e356] [cursor=pointer]:
+              - /url: /bilheteria
+            - link "Contato" [ref=e357] [cursor=pointer]:
+              - /url: /#contato
+        - generic [ref=e358]:
+          - heading "CONTATO E HORÁRIOS" [level=4] [ref=e359]
+          - generic [ref=e360]:
+            - link "Falar com o Coração Gaúcho no WhatsApp" [ref=e361] [cursor=pointer]:
+              - /url: https://wa.me/554892210952
+              - text: +55 48 9221-0952
+            - link "contato@coracaogaucho.com.br" [ref=e364] [cursor=pointer]:
+              - /url: mailto:contato@coracaogaucho.com.br
+            - paragraph [ref=e367]:
+              - generic [ref=e370]: Segunda a sexta, 13h30 às 22h00Sábados, 08h00 às 12h00
+      - generic [ref=e371]: © 2025 Grupo de Danças Coração Gaúcho. Todos os direitos reservados. Desenvolvido por Gardsoft.
+  - iframe [ref=e372]:
+    - generic [ref=f1e1]:
+      - generic "Player de vídeo do YouTube" [ref=f1e3]
+      - generic [ref=f1e5]:
+        - generic:
+          - generic:
+            - button "Mostrar controles do player" [ref=f1e6] [cursor=pointer]
+            - generic [ref=f1e11]:
+              - generic: Chê Lokedo
+              - generic: 72,7 mil inscritos
+  - alert [ref=e156]
+  - generic [ref=e373]:
+    - button "Pausar música" [ref=e374] [cursor=pointer]
+    - generic [ref=e377]:
+      - paragraph [ref=e378]: Tocando agora
+      - paragraph [ref=e381]: Chê Lokedo • TRANCO VÉIO FANDANGUEIRO
+    - button "Ativar som" [ref=e382] [cursor=pointer]
+    - button "Fechar player" [ref=e385] [cursor=pointer]

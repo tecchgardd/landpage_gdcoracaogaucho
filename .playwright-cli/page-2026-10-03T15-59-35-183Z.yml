@@ -1,0 +1,218 @@
+- generic [ref=e1]:
+  - main [ref=e2]:
+    - generic [ref=e6]:
+      - link "Página inicial" [ref=e7] [cursor=pointer]:
+        - /url: /
+        - img "Grupo de Danças Coração Gaúcho" [ref=e8]
+      - navigation "Navegação institucional" [ref=e9]:
+        - link "HOME" [ref=e10] [cursor=pointer]:
+          - /url: /
+        - link "SOBRE" [ref=e11] [cursor=pointer]:
+          - /url: /sobre
+        - link "BLOG" [ref=e12] [cursor=pointer]:
+          - /url: /blog
+        - link "CONTATO" [ref=e13] [cursor=pointer]:
+          - /url: /#contato
+      - link "Bilheteria" [ref=e14] [cursor=pointer]:
+        - /url: /bilheteria
+    - generic [ref=e16]:
+      - link "WhatsApp do Coração Gaúcho" [ref=e17] [cursor=pointer]:
+        - /url: https://wa.me/554892210952?text=Ol%C3%A1!%20Vim%20pelo%20site%20do%20GD%20Cora%C3%A7%C3%A3o%20Ga%C3%BAcho%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es.
+        - generic: WhatsApp
+      - link "Instagram do Coração Gaúcho" [ref=e21] [cursor=pointer]:
+        - /url: https://www.instagram.com/gdcoracaogaucho/
+        - generic: Instagram
+      - link "YouTube do Coração Gaúcho" [ref=e25] [cursor=pointer]:
+        - /url: https://www.youtube.com/@nossoscaminhos_gdcoracaogaucho
+        - generic: YouTube
+    - generic [ref=e29]:
+      - generic [ref=e34]:
+        - paragraph [ref=e35]: TRADIÇÃO • CULTURA • FAMÍLIA
+        - heading "O coração da tradição gaúcha bate aqui." [level=1] [ref=e37]
+        - paragraph [ref=e38]: Há mais de 13 anos formando dançarinos, amizades e histórias.
+        - link "Comprar ingressos" [ref=e39] [cursor=pointer]:
+          - /url: /bilheteria
+      - generic [ref=e42]:
+        - generic [ref=e46]:
+          - generic [ref=e47]: 13+
+          - text: Anos
+        - generic [ref=e51]:
+          - generic [ref=e52]: 500+
+          - text: Alunos
+        - generic [ref=e56]:
+          - generic [ref=e57]: 100+
+          - text: Eventos
+        - generic [ref=e61]:
+          - generic [ref=e62]: 1000+
+          - text: Famílias impactadas
+    - generic [ref=e64]:
+      - heading "NOSSOS APOIADORES" [level=2] [ref=e65]
+      - paragraph [ref=e168]: Em breve, novas empresas parceiras estarão conosco.
+    - generic [ref=e73]:
+      - heading "ÁLBUNS DE FORMATURA" [level=2] [ref=e74]
+      - generic [ref=e169]:
+        - heading "Nenhum álbum disponível no momento" [level=3] [ref=e172]
+        - paragraph [ref=e173]: Em breve teremos novos registros para compartilhar com você.
+    - generic [ref=e82]:
+      - heading "PRÓXIMOS EVENTOS" [level=2] [ref=e83]
+      - article [ref=e176]:
+        - generic [ref=e177]:
+          - img "Banner de BAILE DO ANO — FORMATURA 2026" [ref=e178]
+          - generic [ref=e180]:
+            - generic [ref=e181]: "22"
+            - text: SET
+          - generic [ref=e182]: BAILE
+        - generic [ref=e183]:
+          - generic [ref=e184]: BAILE
+          - heading "BAILE DO ANO — FORMATURA 2026" [level=3] [ref=e185]
+          - generic [ref=e186]:
+            - paragraph [ref=e187]: 22 SET
+            - paragraph [ref=e190]: 20:59
+            - paragraph [ref=e193]: Clube União Rio Bonito — Bairro Rio Bonito, Braço do Norte • Braço do Norte
+            - paragraph [ref=e196]:
+              - strong [ref=e199]: "Entrada: R$ 1,00"
+            - paragraph [ref=e200]: 2999 vagas disponíveis
+          - generic [ref=e203]:
+            - link "Ver detalhes de BAILE DO ANO — FORMATURA 2026" [ref=e204] [cursor=pointer]:
+              - /url: /bilheteria/eventos/9
+              - text: VER DETALHES
+            - 'link "COMPRAR INGRESSO: BAILE DO ANO — FORMATURA 2026" [ref=e205] [cursor=pointer]':
+              - /url: /bilheteria/eventos/9
+              - text: COMPRAR INGRESSO
+      - link "Ver todos os eventos" [ref=e91] [cursor=pointer]:
+        - /url: /bilheteria
+    - generic [ref=e92]:
+      - heading "TURMAS DISPONÍVEIS E FUTURAS" [level=2] [ref=e93]
+      - generic [ref=e206]:
+        - article [ref=e208]:
+          - generic [ref=e209]:
+            - img "Banner de Curso de Danças" [ref=e210]
+            - generic [ref=e212]:
+              - generic [ref=e213]: "12"
+              - text: AGO
+            - generic [ref=e214]: CURSO
+          - generic [ref=e215]:
+            - generic [ref=e216]: CURSO • TURMA
+            - heading "Curso de Danças" [level=3] [ref=e217]
+            - generic [ref=e218]:
+              - paragraph [ref=e219]: 12 AGO
+              - paragraph [ref=e222]: 20:00
+              - paragraph [ref=e225]: Ctg Vaqueanos do Litoral • Palhoça
+              - paragraph [ref=e228]:
+                - strong [ref=e231]: "Taxa: R$ 30,00"
+              - paragraph [ref=e232]: 199 vagas disponíveis
+            - generic [ref=e235]:
+              - link "Ver detalhes de Curso de Danças" [ref=e236] [cursor=pointer]:
+                - /url: /bilheteria/eventos/16
+                - text: VER DETALHES
+              - 'link "FAZER INSCRIÇÃO: Curso de Danças" [ref=e237] [cursor=pointer]':
+                - /url: /bilheteria/eventos/16
+                - text: FAZER INSCRIÇÃO
+        - article [ref=e239]:
+          - generic [ref=e240]:
+            - img "Banner de Curso de dança- angelina" [ref=e241]
+            - generic [ref=e243]:
+              - generic [ref=e244]: "19"
+              - text: AGO
+            - generic [ref=e245]: CURSO
+          - generic [ref=e246]:
+            - generic [ref=e247]: CURSO • TURMA
+            - heading "Curso de dança- angelina" [level=3] [ref=e248]
+            - generic [ref=e249]:
+              - paragraph [ref=e250]: 19 AGO
+              - paragraph [ref=e253]: 11:51
+              - paragraph [ref=e256]: Centro comunitário Angelina • Angelina -sc
+              - paragraph [ref=e259]:
+                - strong [ref=e262]: "Taxa: R$ 30,00"
+              - paragraph [ref=e263]: 300 vagas disponíveis
+            - generic [ref=e266]:
+              - link "Ver detalhes de Curso de dança- angelina" [ref=e267] [cursor=pointer]:
+                - /url: /bilheteria/eventos/17
+                - text: VER DETALHES
+              - 'link "FAZER INSCRIÇÃO: Curso de dança- angelina" [ref=e268] [cursor=pointer]':
+                - /url: /bilheteria/eventos/17
+                - text: FAZER INSCRIÇÃO
+    - generic [ref=e99]:
+      - heading "FALE CONOSCO" [level=2] [ref=e100]
+      - generic [ref=e101]:
+        - generic [ref=e102]:
+          - heading "Estamos prontos para falar com você." [level=3] [ref=e103]
+          - paragraph [ref=e104]: Tire dúvidas sobre cursos, eventos, formaturas e ingressos.
+          - paragraph [ref=e105]:
+            - link "Falar com o Coração Gaúcho no WhatsApp" [ref=e108] [cursor=pointer]:
+              - /url: https://wa.me/554892210952?text=Ol%C3%A1%21%20Vim%20pelo%20site%20do%20GD%20Cora%C3%A7%C3%A3o%20Ga%C3%BAcho%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es.
+              - text: +55 48 9221-0952
+          - paragraph [ref=e109]: contato@coracaogaucho.com.br
+        - generic [ref=e112]:
+          - generic [ref=e113]:
+            - textbox "Nome completo" [ref=e114]
+            - textbox "E-mail" [ref=e115]
+            - textbox "Telefone / WhatsApp" [ref=e116]
+            - textbox "Assunto" [ref=e117]
+          - textbox "Sua mensagem" [ref=e118]
+          - button "Enviar mensagem" [ref=e119] [cursor=pointer]
+    - generic [ref=e122]:
+      - generic [ref=e123]:
+        - generic [ref=e124]:
+          - link "Página inicial" [ref=e125] [cursor=pointer]:
+            - /url: /
+            - img "Grupo de Danças Coração Gaúcho" [ref=e126]
+          - paragraph [ref=e127]: Tradição gaúcha, cultura e dança que conectam gerações desde 2012.
+          - generic [ref=e128]:
+            - link "WhatsApp" [ref=e129] [cursor=pointer]:
+              - /url: https://wa.me/554892210952?text=Ol%C3%A1%21%20Vim%20pelo%20site%20do%20GD%20Cora%C3%A7%C3%A3o%20Ga%C3%BAcho%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es.
+            - link "Instagram" [ref=e132] [cursor=pointer]:
+              - /url: https://www.instagram.com/gdcoracaogaucho/
+            - link "YouTube" [ref=e135] [cursor=pointer]:
+              - /url: https://www.youtube.com/@nossoscaminhos_gdcoracaogaucho
+        - generic [ref=e138]:
+          - heading "INSTITUCIONAL" [level=4] [ref=e139]
+          - generic [ref=e140]:
+            - link "Sobre o Grupo" [ref=e141] [cursor=pointer]:
+              - /url: /sobre
+            - link "Curso de Dança" [ref=e142] [cursor=pointer]:
+              - /url: /curso
+            - link "Bilheteria" [ref=e143] [cursor=pointer]:
+              - /url: /bilheteria
+            - link "Blog" [ref=e144] [cursor=pointer]:
+              - /url: /blog
+        - generic [ref=e145]:
+          - heading "LINKS RÁPIDOS" [level=4] [ref=e146]
+          - generic [ref=e147]:
+            - link "Home" [ref=e148] [cursor=pointer]:
+              - /url: /
+            - link "Álbuns" [ref=e149] [cursor=pointer]:
+              - /url: /blog
+            - link "Eventos" [ref=e150] [cursor=pointer]:
+              - /url: /bilheteria
+            - link "Contato" [ref=e151] [cursor=pointer]:
+              - /url: /#contato
+        - generic [ref=e152]:
+          - heading "CONTATO E HORÁRIOS" [level=4] [ref=e153]
+          - generic [ref=e154]:
+            - link "Falar com o Coração Gaúcho no WhatsApp" [ref=e155] [cursor=pointer]:
+              - /url: https://wa.me/554892210952
+              - text: +55 48 9221-0952
+            - link "contato@coracaogaucho.com.br" [ref=e158] [cursor=pointer]:
+              - /url: mailto:contato@coracaogaucho.com.br
+            - paragraph [ref=e161]:
+              - generic [ref=e164]: Segunda a sexta, 13h30 às 22h00Sábados, 08h00 às 12h00
+      - generic [ref=e165]: © 2025 Grupo de Danças Coração Gaúcho. Todos os direitos reservados. Desenvolvido por Gardsoft.
+  - iframe [ref=e269]:
+    - generic [ref=f1e1]:
+      - generic "Player de vídeo do YouTube" [ref=f1e3]
+      - generic [ref=f1e5]:
+        - generic:
+          - generic:
+            - button "Mostrar controles do player" [ref=f1e6] [cursor=pointer]
+            - generic [ref=f1e11]:
+              - generic: Chê Lokedo
+              - generic: 72,7 mil inscritos
+  - alert [ref=e166]
+  - generic [ref=e270]:
+    - button "Pausar música" [ref=e271] [cursor=pointer]
+    - generic [ref=e274]:
+      - paragraph [ref=e275]: Tocando agora
+      - paragraph [ref=e278]: Chê Lokedo • TRANCO VÉIO FANDANGUEIRO
+    - button "Silenciar" [active] [ref=e312] [cursor=pointer]
+    - button "Fechar player" [ref=e282] [cursor=pointer]

@@ -2,4 +2,5 @@
 import { AuthProvider } from './AuthProvider';
 import { CartProvider } from './CartProvider';
 import { PromotionalCtaProvider } from '../promotional-cta/PromotionalCtaProvider';
-export function Providers({ children }: { children: React.ReactNode }) { return <AuthProvider><CartProvider><PromotionalCtaProvider>{children}</PromotionalCtaProvider></CartProvider></AuthProvider>; }
+import { YoutubePlaylistPlayer } from '../layout/YoutubePlaylistPlayer';
+export function Providers({ children }: { children: React.ReactNode }) { return <AuthProvider><CartProvider><PromotionalCtaProvider>{children}<YoutubePlaylistPlayer /></PromotionalCtaProvider></CartProvider></AuthProvider>; }

@@ -1,0 +1,144 @@
+- generic [ref=e797]:
+  - generic [ref=e799]:
+    - link [ref=e802] [cursor=pointer]:
+      - /url: /
+      - img "Instagram" [ref=e805]
+    - generic [ref=e816]:
+      - link "Entrar" [ref=e818] [cursor=pointer]:
+        - /url: /accounts/login/?next=%2Fheiko.kostiantyn%2F&source=desktop_nav
+      - link "Cadastre-se" [ref=e820] [cursor=pointer]:
+        - /url: /accounts/emailsignup/
+  - main [ref=e821]:
+    - generic [ref=e823]:
+      - generic [ref=e824]:
+        - link [ref=e828] [cursor=pointer]:
+          - /url: /heiko.kostiantyn/
+          - img "Foto do perfil de heiko.kostiantyn" [ref=e829]
+        - generic [ref=e832]:
+          - heading "heiko.kostiantyn" [level=2] [ref=e836]
+          - button [ref=e839] [cursor=pointer]:
+            - img "Opções" [ref=e841]
+        - list [ref=e846]:
+          - listitem [ref=e847]:
+            - link "232 seguidores" [ref=e849] [cursor=pointer]:
+              - /url: "#"
+              - generic [ref=e850]:
+                - generic "232" [ref=e851]
+                - text: seguidores
+          - listitem [ref=e852]:
+            - link "351 seguindo" [ref=e854] [cursor=pointer]:
+              - /url: "#"
+              - generic [ref=e855]:
+                - generic [ref=e856]: "351"
+                - text: seguindo
+        - generic [ref=e858]:
+          - generic [ref=e859]: Kostiantyn Heiko
+          - button [ref=e862] [cursor=pointer]:
+            - generic [ref=e863]: Dnipro, Ukraine 🇺🇦Daddy🇧🇾🇹🇷🇪🇬🇲🇹🇮🇹🇺🇸🇩🇪🇳🇱🇭🇷🇪🇸🇵🇱🇫🇷🇧🇪🇦🇹🇱🇺
+          - generic [ref=e864]:
+            - img "Ícone de link" [ref=e866]
+            - link "lawoffice.dp.ua" [ref=e870] [cursor=pointer]:
+              - /url: https://l.instagram.com/?u=http%3A%2F%2Flawoffice.dp.ua%2F&e=AUBP2TwSUOax5uJkptEBmEOMOxTHljVNdYtAPc5eRU1ZAfL58taad0luWAbTbNrBl4PqozULlh03I5VskSduopr7YWZuaAWBCmwqJFujNBmHPgCfs-MgwTEnFxSQvQMIkfQ_WYQVMOP1A_5A5MuQsg
+      - separator [ref=e872]
+      - generic [ref=e874]:
+        - heading "Este perfil é privado" [level=3] [ref=e876]
+        - generic [ref=e877]:
+          - text: Já segue heiko.kostiantyn?
+          - link "Entrar" [ref=e878] [cursor=pointer]:
+            - /url: /accounts/login/?next=%2Fheiko.kostiantyn%2F&source=private_profile
+          - text: para ver as fotos e vídeos desse usuário.
+  - contentinfo [ref=e879]:
+    - generic [ref=e880]:
+      - generic [ref=e882]:
+        - link "Meta" [ref=e884] [cursor=pointer]:
+          - /url: https://about.meta.com/
+        - link "Sobre" [ref=e887] [cursor=pointer]:
+          - /url: https://about.instagram.com/
+        - link "Blog" [ref=e890] [cursor=pointer]:
+          - /url: https://about.instagram.com/blog/
+        - link "Carreiras" [ref=e893] [cursor=pointer]:
+          - /url: https://about.instagram.com/about-us/careers
+        - link "Ajuda" [ref=e896] [cursor=pointer]:
+          - /url: https://help.instagram.com/
+        - link "API" [ref=e899] [cursor=pointer]:
+          - /url: https://developers.facebook.com/docs/instagram
+        - link "Privacidade" [ref=e902] [cursor=pointer]:
+          - /url: /legal/privacy/
+        - link "Termos" [ref=e905] [cursor=pointer]:
+          - /url: /legal/terms/
+        - link "Localizações" [ref=e908] [cursor=pointer]:
+          - /url: /explore/locations/
+        - link "Popular" [ref=e911] [cursor=pointer]:
+          - /url: /popular/
+        - link "Instagram Lite" [ref=e914] [cursor=pointer]:
+          - /url: /web/lite/
+        - link "Meta AI" [ref=e917] [cursor=pointer]:
+          - /url: https://www.meta.ai/?utm_source=foa_web_footer
+        - link "Muse" [ref=e920] [cursor=pointer]:
+          - /url: https://muse.ai/
+        - link "Threads" [ref=e923] [cursor=pointer]:
+          - /url: https://www.threads.com/
+        - link "Upload de contatos e não usuários" [ref=e926] [cursor=pointer]:
+          - /url: https://www.facebook.com/help/instagram/261704639352628
+        - link "Meta Verified" [ref=e929] [cursor=pointer]:
+          - /url: /accounts/meta_verified/?entrypoint=web_footer
+      - generic [ref=e931]:
+        - generic [ref=e932] [cursor=pointer]:
+          - generic [ref=e933]:
+            - generic [ref=e934]: Português (Brasil)
+            - img "Ícone de seta para baixo" [ref=e937]
+          - combobox "Trocar idioma de exibição" [ref=e939]:
+            - option "Afrikaans"
+            - option "العربية"
+            - option "Čeština"
+            - option "Dansk"
+            - option "Deutsch"
+            - option "Ελληνικά"
+            - option "English"
+            - option "English (UK)"
+            - option "Español (España)"
+            - option "Español"
+            - option "فارسی"
+            - option "Suomi"
+            - option "Français"
+            - option "עברית"
+            - option "Bahasa Indonesia"
+            - option "Italiano"
+            - option "日本語"
+            - option "한국어"
+            - option "Bahasa Melayu"
+            - option "Norsk"
+            - option "Nederlands"
+            - option "Polski"
+            - option "Português (Brasil)" [selected]
+            - option "Português (Portugal)"
+            - option "Русский"
+            - option "Svenska"
+            - option "ภาษาไทย"
+            - option "Filipino"
+            - option "Türkçe"
+            - option "中文(简体)"
+            - option "中文(台灣)"
+            - option "বাংলা"
+            - option "ગુજરાતી"
+            - option "हिन्दी"
+            - option "Hrvatski"
+            - option "Magyar"
+            - option "ಕನ್ನಡ"
+            - option "മലയാളം"
+            - option "मराठी"
+            - option "नेपाली"
+            - option "ਪੰਜਾਬੀ"
+            - option "සිංහල"
+            - option "Slovenčina"
+            - option "தமிழ்"
+            - option "తెలుగు"
+            - option "اردو"
+            - option "Tiếng Việt"
+            - option "中文(香港)"
+            - option "Български"
+            - option "Français (Canada)"
+            - option "Română"
+            - option "Српски"
+            - option "Українська"
+        - generic [ref=e940]: © 2026 Instagram from Meta

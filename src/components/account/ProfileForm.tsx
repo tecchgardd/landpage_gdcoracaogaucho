@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { meService, type Profile } from '@/services/account/meService';
 import { findAddressByCep } from '@/services/account/cepService';
+import { isValidBirthDate, isValidCpf, isValidPhone } from '@/utils/validators';
 import { useAuth } from '../providers/AuthProvider';
 
 const STATES = [
@@ -77,7 +78,14 @@ export function ProfileForm() {
   const update = (field: keyof Profile, value: string) => setProfile({ ...profile, [field]: value, complete: false });
   const save = async (event: React.FormEvent) => {
     event.preventDefault();
-    setSaving(true); setMessage(''); setError('');
+    setMessage(''); setError('');
+    if (!cpfLocked && !isValidCpf(profile.cpf)) return setError('Informe um CPF válido.');
+    if (!isValidPhone(profile.phone)) return setError('Informe um telefone válido com DDD (ex: (48) 99221-0952).');
+    if (!isValidBirthDate(profile.birthDate)) return setError('Informe uma data de nascimento válida.');
+    if ((profile.cep ?? '').replace(/\D/g, '').length !== 8) return setError('Informe um CEP válido.');
+    if (cepStatus.error) return setError('Não encontramos esse CEP. Confira o número informado.');
+    if (cepStatus.loading) return setError('Aguarde a verificação do CEP terminar.');
+    setSaving(true);
     try {
       const saved = await meService.updateProfile(profile);
       setProfile(saved);

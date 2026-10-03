@@ -14,8 +14,8 @@ const config: Config = {
         }
       },
       fontFamily: {
-        display: ['Georgia', 'serif'],
-        sans: ['Inter', 'Arial', 'sans-serif']
+        display: ['var(--font-display)', 'Georgia', 'serif'],
+        sans: ['var(--font-sans)', 'Arial', 'sans-serif']
       },
       boxShadow: {
         premium: '0 24px 60px rgba(0,0,0,.25)'

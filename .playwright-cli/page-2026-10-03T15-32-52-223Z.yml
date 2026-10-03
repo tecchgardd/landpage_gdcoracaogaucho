@@ -1,0 +1,490 @@
+- generic [ref=f4e11]:
+  - generic [ref=f4e13]:
+    - link [ref=f4e16] [cursor=pointer]:
+      - /url: /
+      - img "Instagram" [ref=f4e19]
+    - generic [ref=f4e30]:
+      - link "Entrar" [ref=f4e32] [cursor=pointer]:
+        - /url: /accounts/login/?next=%2Fp%2FDcB3FQfjF5B%2F%3Fimg_index%3D2&source=desktop_nav
+      - link "Cadastre-se" [ref=f4e34] [cursor=pointer]:
+        - /url: /accounts/emailsignup/
+  - main [ref=f4e35]:
+    - dialog [ref=f4e40]:
+      - generic [ref=f4e41]:
+        - button [ref=f4e43] [cursor=pointer]:
+          - img "Fechar" [ref=f4e45]
+        - generic [ref=f4e49]:
+          - generic [ref=f4e50]:
+            - link [ref=f4e52] [cursor=pointer]:
+              - img "Foto do perfil de frontendjoe" [ref=f4e53]
+            - generic [ref=f4e55]:
+              - generic [ref=f4e56]: Não perca nenhum post de frontendjoe
+              - generic [ref=f4e57]: Cadastre-se no Instagram para ficar por dentro das novidades.
+              - generic [ref=f4e60]:
+                - text: Ao continuar, você concorda com os
+                - link "Termos de Uso" [ref=f4e61] [cursor=pointer]:
+                  - /url: https://help.instagram.com/581066165581870/?locale=pt_BR
+                - text: e a
+                - link "Política de Privacidade" [ref=f4e62] [cursor=pointer]:
+                  - /url: https://privacycenter.instagram.com/policy/
+                - text: do Instagram.
+          - generic [ref=f4e63]:
+            - link "Cadastre-se" [ref=f4e66] [cursor=pointer]:
+              - /url: /accounts/emailsignup/
+            - link "Entrar" [ref=f4e69] [cursor=pointer]:
+              - /url: /accounts/login/?source=desktop_dynamic_landing_dialog
+    - generic [ref=f4e70]:
+      - generic [ref=f4e72]:
+        - 'img "Photo by Joe · Frontend Developer on August 14, 2026. Pode ser um gráfico de texto que diz \"CSS Logins Part#18 Part#18 #18 Part frontendjoe\"." [ref=f4e78]'
+        - generic [ref=f4e81]:
+          - generic [ref=f4e83]:
+            - link [ref=f4e85] [cursor=pointer]:
+              - img "Foto do perfil de frontendjoe" [ref=f4e86]
+            - generic [ref=f4e89]:
+              - link "frontendjoe" [ref=f4e92] [cursor=pointer]:
+                - /url: /frontendjoe/
+              - generic [ref=f4e96]:
+                - generic [ref=f4e97]: •
+                - button "Seguir" [ref=f4e99] [cursor=pointer]
+            - button [ref=f4e102] [cursor=pointer]:
+              - img "Mais opções" [ref=f4e105]
+          - separator [ref=f4e109]
+          - generic [ref=f4e111]:
+            - generic [ref=f4e113]:
+              - link [ref=f4e115] [cursor=pointer]:
+                - /url: /frontendjoe/
+                - img "Foto do perfil de frontendjoe" [ref=f4e116]
+              - generic [ref=f4e120]:
+                - generic [ref=f4e121]:
+                  - link "frontendjoe" [ref=f4e122] [cursor=pointer]:
+                    - /url: /frontendjoe/
+                  - time [ref=f4e127]: 7 sem
+                - generic [ref=f4e128]: CSS Logins Part 18 🔥⁣⁣Comment “Login18” for the code 🔗⁣⁣Font is Euclid Circular B / Poppins 🆎⁣⁣Heart animation from animatedbackgrounds.me ❤️⁣⁣Svgs from SVGRepo 🚀⁣⁣Icons are Material ✅⁣⁣Was it useful?⁣⁣Let me know in the comments 👇🏽
+            - button [ref=f4e130] [cursor=pointer]:
+              - img "Carregar mais comentários" [ref=f4e132]
+            - generic [ref=f4e134]:
+              - generic [ref=f4e137]:
+                - link [ref=f4e139] [cursor=pointer]:
+                  - /url: /ameer_x3m/
+                  - img "Foto do perfil de ameer_x3m" [ref=f4e140]
+                - generic [ref=f4e142]:
+                  - generic [ref=f4e144]:
+                    - generic [ref=f4e145]:
+                      - link "ameer_x3m" [ref=f4e147] [cursor=pointer]:
+                        - /url: /ameer_x3m/
+                      - link [ref=f4e152] [cursor=pointer]:
+                        - /url: /p/DcB3FQfjF5B/c/18109955123467781/
+                        - time [ref=f4e153]: 1 sem
+                    - generic [ref=f4e154]: Login18
+                  - generic [ref=f4e156]:
+                    - button "Curtir" [ref=f4e157] [cursor=pointer]
+                    - button "Responder" [ref=f4e159] [cursor=pointer]
+              - generic [ref=f4e164]:
+                - link [ref=f4e166] [cursor=pointer]:
+                  - /url: /4r7hur/
+                  - img "Foto do perfil de 4r7hur" [ref=f4e167]
+                - generic [ref=f4e169]:
+                  - generic [ref=f4e171]:
+                    - generic [ref=f4e172]:
+                      - link "4r7hur" [ref=f4e174] [cursor=pointer]:
+                        - /url: /4r7hur/
+                      - link [ref=f4e179] [cursor=pointer]:
+                        - /url: /p/DcB3FQfjF5B/c/18075664421407378/
+                        - time [ref=f4e180]: 1 sem
+                    - generic [ref=f4e181]: Login18
+                  - generic [ref=f4e183]:
+                    - button "Curtir" [ref=f4e184] [cursor=pointer]
+                    - button "Responder" [ref=f4e186] [cursor=pointer]
+              - generic [ref=f4e191]:
+                - link [ref=f4e193] [cursor=pointer]:
+                  - /url: /_divakar26/
+                  - img "Foto do perfil de _divakar26" [ref=f4e194]
+                - generic [ref=f4e196]:
+                  - generic [ref=f4e198]:
+                    - generic [ref=f4e199]:
+                      - link "_divakar26" [ref=f4e201] [cursor=pointer]:
+                        - /url: /_divakar26/
+                      - link [ref=f4e206] [cursor=pointer]:
+                        - /url: /p/DcB3FQfjF5B/c/18099171533013351/
+                        - time [ref=f4e207]: 4 sem
+                    - generic [ref=f4e208]: Login18
+                  - generic [ref=f4e210]:
+                    - button "1 curtida" [ref=f4e211] [cursor=pointer]
+                    - button "Responder" [ref=f4e214] [cursor=pointer]
+              - generic [ref=f4e219]:
+                - link [ref=f4e221] [cursor=pointer]:
+                  - /url: /mohamadusef_sartipi/
+                  - img "Foto do perfil de mohamadusef_sartipi" [ref=f4e222]
+                - generic [ref=f4e224]:
+                  - generic [ref=f4e226]:
+                    - generic [ref=f4e227]:
+                      - link "mohamadusef_sartipi" [ref=f4e229] [cursor=pointer]:
+                        - /url: /mohamadusef_sartipi/
+                      - link [ref=f4e234] [cursor=pointer]:
+                        - /url: /p/DcB3FQfjF5B/c/18077399384341933/
+                        - time [ref=f4e235]: 4 sem
+                    - generic [ref=f4e236]: Login18
+                  - generic [ref=f4e238]:
+                    - button "Curtir" [ref=f4e239] [cursor=pointer]
+                    - button "Responder" [ref=f4e241] [cursor=pointer]
+              - generic [ref=f4e246]:
+                - link [ref=f4e248] [cursor=pointer]:
+                  - /url: /bram.codes/
+                  - img "Foto do perfil de bram.codes" [ref=f4e249]
+                - generic [ref=f4e251]:
+                  - generic [ref=f4e253]:
+                    - generic [ref=f4e254]:
+                      - link "bram.codes" [ref=f4e256] [cursor=pointer]:
+                        - /url: /bram.codes/
+                      - link [ref=f4e261] [cursor=pointer]:
+                        - /url: /p/DcB3FQfjF5B/c/18105275324590460/
+                        - time [ref=f4e262]: 5 sem
+                    - generic [ref=f4e263]: Yes super useful as always 👌👏☺️
+                  - generic [ref=f4e265]:
+                    - button "1 curtida" [ref=f4e266] [cursor=pointer]
+                    - button "Responder" [ref=f4e269] [cursor=pointer]
+              - generic [ref=f4e274]:
+                - link [ref=f4e276] [cursor=pointer]:
+                  - /url: /y6.xx_/
+                  - img "Foto do perfil de y6.xx_" [ref=f4e277]
+                - generic [ref=f4e279]:
+                  - generic [ref=f4e281]:
+                    - generic [ref=f4e282]:
+                      - link "y6.xx_" [ref=f4e284] [cursor=pointer]:
+                        - /url: /y6.xx_/
+                      - link [ref=f4e289] [cursor=pointer]:
+                        - /url: /p/DcB3FQfjF5B/c/18162170503472256/
+                        - time [ref=f4e290]: 5 sem
+                    - generic [ref=f4e291]: 👏
+                  - generic [ref=f4e293]:
+                    - button "1 curtida" [ref=f4e294] [cursor=pointer]
+                    - button "Responder" [ref=f4e297] [cursor=pointer]
+              - generic [ref=f4e302]:
+                - link [ref=f4e304] [cursor=pointer]:
+                  - /url: /aboutsardar/
+                  - img "Foto do perfil de aboutsardar" [ref=f4e305]
+                - generic [ref=f4e307]:
+                  - generic [ref=f4e309]:
+                    - generic [ref=f4e310]:
+                      - link "aboutsardar" [ref=f4e312] [cursor=pointer]:
+                        - /url: /aboutsardar/
+                      - link [ref=f4e317] [cursor=pointer]:
+                        - /url: /p/DcB3FQfjF5B/c/18109933205013127/
+                        - time [ref=f4e318]: 6 sem
+                    - generic [ref=f4e319]: Login 18
+                  - generic [ref=f4e321]:
+                    - button "1 curtida" [ref=f4e322] [cursor=pointer]
+                    - button "Responder" [ref=f4e325] [cursor=pointer]
+              - generic [ref=f4e330]:
+                - link [ref=f4e332] [cursor=pointer]:
+                  - /url: /renatoalves_86/
+                  - img "Foto do perfil de renatoalves_86" [ref=f4e333]
+                - generic [ref=f4e335]:
+                  - generic [ref=f4e337]:
+                    - generic [ref=f4e338]:
+                      - link "renatoalves_86" [ref=f4e340] [cursor=pointer]:
+                        - /url: /renatoalves_86/
+                      - link [ref=f4e345] [cursor=pointer]:
+                        - /url: /p/DcB3FQfjF5B/c/17941150791300358/
+                        - time [ref=f4e346]: 6 sem
+                    - generic [ref=f4e347]: Login18
+                  - generic [ref=f4e349]:
+                    - button "1 curtida" [ref=f4e350] [cursor=pointer]
+                    - button "Responder" [ref=f4e353] [cursor=pointer]
+              - generic [ref=f4e358]:
+                - link [ref=f4e360] [cursor=pointer]:
+                  - /url: /momin_sajid74/
+                  - img "Foto do perfil de momin_sajid74" [ref=f4e361]
+                - generic [ref=f4e363]:
+                  - generic [ref=f4e365]:
+                    - generic [ref=f4e366]:
+                      - link "momin_sajid74" [ref=f4e368] [cursor=pointer]:
+                        - /url: /momin_sajid74/
+                      - link [ref=f4e373] [cursor=pointer]:
+                        - /url: /p/DcB3FQfjF5B/c/18057203903786277/
+                        - time [ref=f4e374]: 6 sem
+                    - generic [ref=f4e375]: Nice❤️
+                  - generic [ref=f4e377]:
+                    - button "1 curtida" [ref=f4e378] [cursor=pointer]
+                    - button "Responder" [ref=f4e381] [cursor=pointer]
+              - generic [ref=f4e386]:
+                - link [ref=f4e388] [cursor=pointer]:
+                  - /url: /codewithehsanbahrami/
+                  - img "Foto do perfil de codewithehsanbahrami" [ref=f4e389]
+                - generic [ref=f4e391]:
+                  - generic [ref=f4e393]:
+                    - generic [ref=f4e394]:
+                      - link "codewithehsanbahrami" [ref=f4e396] [cursor=pointer]:
+                        - /url: /codewithehsanbahrami/
+                      - link [ref=f4e401] [cursor=pointer]:
+                        - /url: /p/DcB3FQfjF5B/c/18117812608909441/
+                        - time [ref=f4e402]: 6 sem
+                    - generic [ref=f4e403]: Great 👏👏
+                  - generic [ref=f4e405]:
+                    - button "2 curtidas" [ref=f4e406] [cursor=pointer]
+                    - button "Responder" [ref=f4e409] [cursor=pointer]
+              - generic [ref=f4e414]:
+                - link [ref=f4e416] [cursor=pointer]:
+                  - /url: /yet.another.index/
+                  - img "Foto do perfil de yet.another.index" [ref=f4e417]
+                - generic [ref=f4e419]:
+                  - generic [ref=f4e421]:
+                    - generic [ref=f4e422]:
+                      - link "yet.another.index" [ref=f4e424] [cursor=pointer]:
+                        - /url: /yet.another.index/
+                      - link [ref=f4e429] [cursor=pointer]:
+                        - /url: /p/DcB3FQfjF5B/c/18124622560696562/
+                        - time [ref=f4e430]: 6 sem
+                    - generic [ref=f4e431]: Login18
+                  - generic [ref=f4e433]:
+                    - button "1 curtida" [ref=f4e434] [cursor=pointer]
+                    - button "Responder" [ref=f4e437] [cursor=pointer]
+              - generic [ref=f4e442]:
+                - link [ref=f4e444] [cursor=pointer]:
+                  - /url: /yet.another.index/
+                  - img "Foto do perfil de yet.another.index" [ref=f4e445]
+                - generic [ref=f4e447]:
+                  - generic [ref=f4e449]:
+                    - generic [ref=f4e450]:
+                      - link "yet.another.index" [ref=f4e452] [cursor=pointer]:
+                        - /url: /yet.another.index/
+                      - link [ref=f4e457] [cursor=pointer]:
+                        - /url: /p/DcB3FQfjF5B/c/18081105143695355/
+                        - time [ref=f4e458]: 6 sem
+                    - generic [ref=f4e459]: 😍
+                  - generic [ref=f4e461]:
+                    - button "1 curtida" [ref=f4e462] [cursor=pointer]
+                    - button "Responder" [ref=f4e465] [cursor=pointer]
+              - generic [ref=f4e470]:
+                - link [ref=f4e472] [cursor=pointer]:
+                  - /url: /ffaaidil/
+                  - img "Foto do perfil de ffaaidil" [ref=f4e473]
+                - generic [ref=f4e475]:
+                  - generic [ref=f4e477]:
+                    - generic [ref=f4e478]:
+                      - link "ffaaidil" [ref=f4e480] [cursor=pointer]:
+                        - /url: /ffaaidil/
+                      - link [ref=f4e485] [cursor=pointer]:
+                        - /url: /p/DcB3FQfjF5B/c/18030092930836674/
+                        - time [ref=f4e486]: 7 sem
+                    - generic [ref=f4e487]: Login18
+                  - generic [ref=f4e489]:
+                    - button "2 curtidas" [ref=f4e490] [cursor=pointer]
+                    - button "Responder" [ref=f4e493] [cursor=pointer]
+              - generic [ref=f4e498]:
+                - link [ref=f4e500] [cursor=pointer]:
+                  - /url: /heiko.kostiantyn/
+                  - img "Foto do perfil de heiko.kostiantyn" [ref=f4e501]
+                - generic [ref=f4e503]:
+                  - generic [ref=f4e505]:
+                    - generic [ref=f4e506]:
+                      - link "heiko.kostiantyn" [ref=f4e508] [cursor=pointer]:
+                        - /url: /heiko.kostiantyn/
+                      - link [ref=f4e513] [cursor=pointer]:
+                        - /url: /p/DcB3FQfjF5B/c/18115210313296597/
+                        - time [ref=f4e514]: 7 sem
+                    - generic [ref=f4e515]: Login18
+                  - generic [ref=f4e517]:
+                    - button "2 curtidas" [ref=f4e518] [cursor=pointer]
+                    - button "Responder" [ref=f4e521] [cursor=pointer]
+              - generic [ref=f4e526]:
+                - link [ref=f4e528] [cursor=pointer]:
+                  - /url: /julianvelez1997/
+                  - img "Foto do perfil de julianvelez1997" [ref=f4e529]
+                - generic [ref=f4e531]:
+                  - generic [ref=f4e533]:
+                    - generic [ref=f4e534]:
+                      - link "julianvelez1997" [ref=f4e536] [cursor=pointer]:
+                        - /url: /julianvelez1997/
+                      - link [ref=f4e541] [cursor=pointer]:
+                        - /url: /p/DcB3FQfjF5B/c/17940942864308482/
+                        - time [ref=f4e542]: 7 sem
+                    - generic [ref=f4e543]: 🔥🔥🔥🔥
+                  - generic [ref=f4e545]:
+                    - button "4 curtidas" [ref=f4e546] [cursor=pointer]
+                    - button "Responder" [ref=f4e549] [cursor=pointer]
+              - progressbar [ref=f4e554]:
+                - img "Carregando..." [ref=f4e555]
+          - generic [ref=f4e568]:
+            - generic [ref=f4e569]:
+              - generic [ref=f4e570]:
+                - button [ref=f4e573] [cursor=pointer]:
+                  - img "Curtir" [ref=f4e576]
+                - button "1,2 mil" [ref=f4e578] [cursor=pointer]
+                - button [ref=f4e580] [cursor=pointer]:
+                  - img "Comentar" [ref=f4e582]
+                - button "38" [ref=f4e584] [cursor=pointer]
+                - button [ref=f4e585] [cursor=pointer]:
+                  - img "Compartilhar" [ref=f4e586]
+              - button [ref=f4e590] [cursor=pointer]:
+                - img "Salvar" [ref=f4e592]
+            - link [ref=f4e596] [cursor=pointer]:
+              - /url: /frontendjoe/p/DcB3FQfjF5B/
+              - time [ref=f4e598]: 14 de agosto
+          - generic [ref=f4e603]:
+            - link "Entrar" [ref=f4e604] [cursor=pointer]:
+              - /url: /accounts/login/?next=%2Fp%2FDcB3FQfjF5B%2F&source=post_comment_input
+            - text: para curtir ou comentar.
+      - separator [ref=f4e606]
+      - generic [ref=f4e607]:
+        - generic [ref=f4e609]:
+          - text: Mais posts de
+          - link "frontendjoe" [ref=f4e610] [cursor=pointer]:
+            - /url: /frontendjoe/
+        - generic [ref=f4e613]:
+          - generic [ref=f4e614]:
+            - link "Clipe" [ref=f4e616] [cursor=pointer]:
+              - /url: /frontendjoe/reel/Dd9CrUGAHBQ/
+              - generic:
+                - generic:
+                  - generic:
+                    - img "Clipe"
+            - link "Clipe" [ref=f4e621] [cursor=pointer]:
+              - /url: /frontendjoe/reel/DZupxaGsT2U/
+              - generic:
+                - generic:
+                  - generic:
+                    - img "Clipe"
+            - link "Clipe" [ref=f4e626] [cursor=pointer]:
+              - /url: /frontendjoe/reel/DZVNcUWML2V/
+              - generic:
+                - generic:
+                  - generic:
+                    - img "Clipe"
+          - generic [ref=f4e630]:
+            - link "Carrossel" [ref=f4e632] [cursor=pointer]:
+              - /url: /frontendjoe/p/DeAmBvWjBsA/
+              - generic:
+                - generic:
+                  - generic:
+                    - img "Carrossel"
+            - link "Carrossel" [ref=f4e637] [cursor=pointer]:
+              - /url: /frontendjoe/p/Dd2N9lYDHur/
+              - generic:
+                - generic:
+                  - generic:
+                    - img "Carrossel"
+            - link "Carrossel" [ref=f4e642] [cursor=pointer]:
+              - /url: /frontendjoe/p/DduftGqgMiK/
+              - generic:
+                - generic:
+                  - generic:
+                    - img "Carrossel"
+          - generic [ref=f4e646]:
+            - link "Carrossel" [ref=f4e648] [cursor=pointer]:
+              - /url: /frontendjoe/p/DdkPzcBDK64/
+              - generic:
+                - generic:
+                  - generic:
+                    - img "Carrossel"
+            - link "Carrossel" [ref=f4e653] [cursor=pointer]:
+              - /url: /frontendjoe/p/DdXfSSqDMRd/
+              - generic:
+                - generic:
+                  - generic:
+                    - img "Carrossel"
+            - link "Carrossel" [ref=f4e658] [cursor=pointer]:
+              - /url: /frontendjoe/p/DdSSwMmDPNB/
+              - generic:
+                - generic:
+                  - generic:
+                    - img "Carrossel"
+        - generic [ref=f4e662]:
+          - link "Ver mais posts" [ref=f4e664] [cursor=pointer]:
+            - /url: /frontendjoe/
+          - separator [ref=f4e666]
+  - contentinfo [ref=f4e667]:
+    - generic [ref=f4e668]:
+      - generic [ref=f4e670]:
+        - link "Meta" [ref=f4e672] [cursor=pointer]:
+          - /url: https://about.meta.com/
+        - link "Sobre" [ref=f4e675] [cursor=pointer]:
+          - /url: https://about.instagram.com/
+        - link "Blog" [ref=f4e678] [cursor=pointer]:
+          - /url: https://about.instagram.com/blog/
+        - link "Carreiras" [ref=f4e681] [cursor=pointer]:
+          - /url: https://about.instagram.com/about-us/careers
+        - link "Ajuda" [ref=f4e684] [cursor=pointer]:
+          - /url: https://help.instagram.com/
+        - link "API" [ref=f4e687] [cursor=pointer]:
+          - /url: https://developers.facebook.com/docs/instagram
+        - link "Privacidade" [ref=f4e690] [cursor=pointer]:
+          - /url: /legal/privacy/
+        - link "Termos" [ref=f4e693] [cursor=pointer]:
+          - /url: /legal/terms/
+        - link "Localizações" [ref=f4e696] [cursor=pointer]:
+          - /url: /explore/locations/
+        - link "Popular" [ref=f4e699] [cursor=pointer]:
+          - /url: /popular/
+        - link "Instagram Lite" [ref=f4e702] [cursor=pointer]:
+          - /url: /web/lite/
+        - link "Meta AI" [ref=f4e705] [cursor=pointer]:
+          - /url: https://www.meta.ai/?utm_source=foa_web_footer
+        - link "Muse" [ref=f4e708] [cursor=pointer]:
+          - /url: https://muse.ai/
+        - link "Threads" [ref=f4e711] [cursor=pointer]:
+          - /url: https://www.threads.com/
+        - link "Upload de contatos e não usuários" [ref=f4e714] [cursor=pointer]:
+          - /url: https://www.facebook.com/help/instagram/261704639352628
+        - link "Meta Verified" [ref=f4e717] [cursor=pointer]:
+          - /url: /accounts/meta_verified/?entrypoint=web_footer
+      - generic [ref=f4e719]:
+        - generic [ref=f4e720] [cursor=pointer]:
+          - generic [ref=f4e721]:
+            - generic [ref=f4e722]: Português (Brasil)
+            - img "Ícone de seta para baixo" [ref=f4e725]
+          - combobox "Trocar idioma de exibição" [ref=f4e727]:
+            - option "Afrikaans"
+            - option "العربية"
+            - option "Čeština"
+            - option "Dansk"
+            - option "Deutsch"
+            - option "Ελληνικά"
+            - option "English"
+            - option "English (UK)"
+            - option "Español (España)"
+            - option "Español"
+            - option "فارسی"
+            - option "Suomi"
+            - option "Français"
+            - option "עברית"
+            - option "Bahasa Indonesia"
+            - option "Italiano"
+            - option "日本語"
+            - option "한국어"
+            - option "Bahasa Melayu"
+            - option "Norsk"
+            - option "Nederlands"
+            - option "Polski"
+            - option "Português (Brasil)" [selected]
+            - option "Português (Portugal)"
+            - option "Русский"
+            - option "Svenska"
+            - option "ภาษาไทย"
+            - option "Filipino"
+            - option "Türkçe"
+            - option "中文(简体)"
+            - option "中文(台灣)"
+            - option "বাংলা"
+            - option "ગુજરાતી"
+            - option "हिन्दी"
+            - option "Hrvatski"
+            - option "Magyar"
+            - option "ಕನ್ನಡ"
+            - option "മലയാളം"
+            - option "मराठी"
+            - option "नेपाली"
+            - option "ਪੰਜਾਬੀ"
+            - option "සිංහල"
+            - option "Slovenčina"
+            - option "தமிழ்"
+            - option "తెలుగు"
+            - option "اردو"
+            - option "Tiếng Việt"
+            - option "中文(香港)"
+            - option "Български"
+            - option "Français (Canada)"
+            - option "Română"
+            - option "Српски"
+            - option "Українська"
+        - generic [ref=f4e728]: © 2026 Instagram from Meta

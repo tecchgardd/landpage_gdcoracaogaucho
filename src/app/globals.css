@@ -49,8 +49,24 @@ select option {
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 0;
-  height: 76px;
+  bottom: -1px;
+  height: 46px;
+  pointer-events: none;
+}
+
+.hero-flag--top {
+  top: -1px;
+  bottom: auto;
+  transform: rotate(180deg);
+}
+
+.hero-flag-green,
+.hero-flag-red,
+.hero-flag-gold {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .hero-flag-green {
@@ -71,18 +87,21 @@ select option {
 .section-title {
   position: relative;
   text-align: center;
-  font-size: 1.125rem;
-  font-weight: 900;
-  letter-spacing: .04em;
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 1.75rem;
+  font-weight: 800;
+  letter-spacing: .01em;
 }
 
 .section-title::after {
   content: '';
-  display: block;
-  width: 120px;
-  height: 2px;
-  margin: 10px auto 0;
-  background: linear-gradient(90deg, transparent, #f6c545, transparent);
+  display: flex;
+  width: 46px;
+  height: 4px;
+  margin: 14px auto 0;
+  border-radius: 2px;
+  overflow: hidden;
+  background: linear-gradient(90deg, #005b25 0 33%, #f6c545 33% 66%, #cf1616 66% 100%);
 }
 
 .no-scrollbar::-webkit-scrollbar {
@@ -160,6 +179,16 @@ div[role="menu"][aria-label="Menu da conta"] {
   box-shadow: 0 24px 70px rgba(0, 0, 0, 0.68) !important;
   -webkit-backdrop-filter: none !important;
   backdrop-filter: none !important;
+}
+
+.auth-card input:-webkit-autofill,
+.auth-card input:-webkit-autofill:hover,
+.auth-card input:-webkit-autofill:focus {
+  -webkit-text-fill-color: #fff;
+  -webkit-box-shadow: 0 0 0px 1000px rgba(255, 255, 255, 0.06) inset;
+  box-shadow: 0 0 0px 1000px rgba(255, 255, 255, 0.06) inset;
+  caret-color: #fff;
+  transition: background-color 9999s ease-in-out 0s;
 }
 
 .btn-premium {

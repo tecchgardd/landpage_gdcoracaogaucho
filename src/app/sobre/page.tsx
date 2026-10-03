@@ -17,6 +17,7 @@ import { SocialFloat } from '@/components/layout/SocialFloat';
 import { Footer } from '@/components/layout/Footer';
 import { MotionSection, MotionStagger, MotionStaggerItem, ParallaxHero } from '@/components/ui/Motion';
 import { VideoBackground } from '@/components/ui/VideoBackground';
+import { FlagWave } from '@/components/ui/FlagWave';
 
 const courseHighlights = [
   {
@@ -58,16 +59,17 @@ export default function SobrePage() {
       <Header active="sobre" />
       <SocialFloat />
 
-      <section className="relative overflow-hidden bg-black px-6 pb-16 pt-36 text-white">
+      <section className="relative overflow-hidden bg-black px-6 pb-20 pt-28 text-white md:pt-32">
         <ParallaxHero className="absolute inset-0 overflow-hidden" strength={80}>
           <VideoBackground page="about" position="center 35%" />
         </ParallaxHero>
         <div className="absolute inset-0 bg-gradient-to-r from-black via-black/78 to-gaucho-green/45" />
         <div className="relative mx-auto max-w-[1160px]">
-          <p className="text-sm font-black tracking-[.24em] text-gaucho-gold">TRADIÇÃO • CULTURA • DANÇA</p>
-          <h1 className="mt-4 max-w-3xl font-display text-5xl font-black leading-tight md:text-6xl">Sobre o GD Coração Gaúcho</h1>
+          <p className="flex items-center gap-3 text-sm font-black tracking-[.24em] text-gaucho-gold"><i className="h-px w-8 bg-gaucho-gold/70" aria-hidden="true" />TRADIÇÃO • CULTURA • DANÇA</p>
+          <h1 className="mt-4 max-w-3xl font-display text-5xl font-black leading-[1.1] md:text-6xl">Sobre o GD Coração Gaúcho</h1>
           <p className="mt-4 max-w-2xl text-xl leading-8 text-white/85">Tradição, cultura e dança que conectam gerações.</p>
         </div>
+        <FlagWave />
       </section>
 
       <MotionSection className="mx-auto grid max-w-[1160px] items-center gap-10 px-6 py-16 md:grid-cols-[1.02fr_.98fr]">
@@ -209,26 +211,22 @@ export default function SobrePage() {
       </MotionSection>
 
       <MotionSection className="mx-auto max-w-[1160px] px-6 py-12">
-        <div className="relative overflow-hidden rounded-xl bg-black p-8 text-white shadow-premium md:p-10">
+        <div className="relative overflow-hidden rounded-xl bg-black p-8 text-white shadow-premium md:p-12">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_82%_18%,rgba(246,197,69,.28),transparent_28%),linear-gradient(135deg,rgba(207,22,22,.86),rgba(0,91,37,.88)_52%,rgba(0,0,0,.94))]" />
-          <div className="relative grid gap-8 md:grid-cols-[.85fr_1.15fr]">
-            <div className="flex items-start gap-4">
-              <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-gaucho-gold text-2xl text-black">
-                <FontAwesomeIcon icon={faHeart} />
-              </div>
-              <div>
-                <SectionEyebrow light>Encerramento do curso</SectionEyebrow>
-                <h2 className="font-display text-4xl font-black leading-tight">Baile de Formatura</h2>
-              </div>
+          <div className="relative flex items-center gap-4">
+            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-gaucho-gold text-2xl text-black">
+              <FontAwesomeIcon icon={faHeart} />
             </div>
-            <div className="space-y-5 text-lg leading-8 text-white/84">
-              <p>Ao final das 10 aulas, acontece um dos momentos mais esperados do curso: o Baile de Formatura.</p>
-              <p>
-                Nesse evento, os alunos realizam uma apresentação especial mostrando tudo o que aprenderam durante a jornada. Familiares
-                e amigos são convidados para prestigiar essa conquista em uma noite de emoção, dança, convivência, cultura e tradição.
-              </p>
-              <p>Mais do que um baile, é a celebração de uma nova história construída dentro da cultura gaúcha.</p>
+            <div>
+              <SectionEyebrow light>Encerramento do curso</SectionEyebrow>
+              <h2 className="font-display text-4xl font-black leading-tight">Baile de Formatura</h2>
             </div>
+          </div>
+          <i aria-hidden="true" className="relative mt-7 block h-px w-20 bg-gaucho-gold/50" />
+          <div className="relative mt-7 grid gap-6 text-lg leading-8 text-white/84 md:grid-cols-2 md:gap-x-10">
+            <p className="md:col-span-2 max-w-[65ch] text-xl font-bold leading-8 text-white">Ao final das 10 aulas, acontece um dos momentos mais esperados do curso: o Baile de Formatura.</p>
+            <p>Nesse evento, os alunos realizam uma apresentação especial mostrando tudo o que aprenderam durante a jornada. Familiares e amigos são convidados para prestigiar essa conquista.</p>
+            <p>Mais do que um baile, é a celebração de uma nova história construída dentro da cultura gaúcha, numa noite de emoção, dança, convivência e tradição.</p>
           </div>
         </div>
       </MotionSection>

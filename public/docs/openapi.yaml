@@ -206,11 +206,12 @@ paths:
           application/json:
             schema:
               type: object
-              required: [name, email, cpf, cep, address, password]
+              required: [name, email, cpf, phone, cep, address, password]
               properties:
                 name: { type: string }
                 email: { type: string, format: email }
                 cpf: { type: string, description: "Somente dígitos (11 caracteres)" }
+                phone: { type: string, description: "Somente dígitos, com DDD (10-11 caracteres)" }
                 cep: { type: string, description: "Somente dígitos (8 caracteres)" }
                 address: { type: string }
                 password: { type: string, format: password, minLength: 8 }

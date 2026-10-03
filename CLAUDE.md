@@ -140,7 +140,7 @@ public/
 
 - `src/components/providers/AuthProvider.tsx`: contexto React com `user`, `loading`, `signIn`, `signUp`, `signOut`, `refresh`. Carrega a sessão em `useEffect` via `authService.getSession()` (`GET /api/auth/get-session`).
 - Login por e-mail/senha (`POST /api/auth/sign-in/email`) ou Google OAuth (`POST /api/auth/sign-in/social` → redireciona para `response.url`).
-- Cadastro (`POST /api/customer-auth/sign-up`) pede apenas nome, e-mail, CPF, CEP, endereço e senha — telefone, data de nascimento, gênero e endereço completo são preenchidos depois em `/minha-conta/perfil` (`ProfileForm`), que é **pré-requisito para finalizar checkout** (`hasCompleteProfile` em `src/app/checkout/page.tsx`).
+- Cadastro (`POST /api/customer-auth/sign-up`) pede nome, e-mail, CPF, telefone, CEP, endereço (rua) e senha — data de nascimento, gênero e os detalhes do endereço (número, complemento, bairro, estado, cidade) são preenchidos depois em `/minha-conta/perfil` (`ProfileForm`), que é **pré-requisito para finalizar checkout** (`hasCompleteProfile` em `src/app/checkout/page.tsx`).
 - Páginas protegidas (`AccountShell`, `src/app/checkout/page.tsx`) redirecionam para `/login?returnTo=<rota>` quando `!loading && !user`. Sempre preserve esse padrão `returnTo` ao criar novas rotas protegidas.
 - O backend usa um padrão compatível com better-auth (rotas `/api/auth/*` e cookie de sessão) — ver `cookieAuth` no OpenAPI spec.
 
@@ -193,6 +193,7 @@ Ver `.env.example`. Imagens remotas: `next.config.mjs` permite apenas `res.cloud
 - Os mappers em `src/services/public/mappers.ts` são tolerantes a múltiplas variantes de nome de campo (PT/EN) vindas do backend (`title ?? titulo ?? name ?? nome`, etc.) — isso é proposital porque o backend evoluiu o contrato ao longo do tempo. Ao adicionar um campo novo, siga esse padrão de fallback em vez de assumir um único nome de campo.
 - `src/services/account/meService.ts` tem vários tipos `Record<string, unknown>` (ex. `CustomerOrder.items`, tickets, enrollments) — o backend não tem contrato 100% tipado para esses payloads ainda. Não force tipagem forte sem confirmar o shape real.
 - Não existe camada de cache/SWR/React Query — cada componente busca com `useEffect` + `useState` próprio. É um padrão consistente no projeto; não introduza uma lib de data-fetching sem alinhar antes, pois afetaria todos os componentes de `catalog/` e `account/`.
+- O backend às vezes retorna URLs de imagem do Cloudinary em `http://` em vez de `https://` (confirmado em produção via `res.cloudinary.com`). `next.config.mjs` libera os dois protocolos para esse host em `images.remotePatterns` — se aparecer um novo erro "hostname is not configured" do `next/image`, confira o protocolo da URL antes de assumir que é só o hostname que falta.
 
 ## 12. Documentação e automação complementar
 

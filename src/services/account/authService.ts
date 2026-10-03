@@ -2,7 +2,7 @@ import { publicApiGet, publicApiPost } from '../public/apiClient';
 
 export type SessionUser = { id: string; name: string; email: string; role?: string; image?: string | null };
 export type SessionResponse = { user: SessionUser | null; session?: unknown } | null;
-export type CustomerSignUpInput = { name: string; email: string; cpf: string; cep: string; address: string; password: string };
+export type CustomerSignUpInput = { name: string; email: string; cpf: string; phone: string; cep: string; address: string; password: string };
 type SocialSignInResponse = { url?: string; redirect?: boolean };
 
 export const authService = {

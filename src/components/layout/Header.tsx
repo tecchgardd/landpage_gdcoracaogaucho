@@ -27,10 +27,11 @@ export function Header({ active = 'home', variant: requestedVariant }: { active?
   const [institutionalMenuOpen, setInstitutionalMenuOpen] = useState(false);
 
   return (
-    <header className="absolute inset-x-0 top-0 z-[100] w-full border-b-2 border-gaucho-gold/80 bg-[#07130d] text-white shadow-[0_16px_40px_rgba(0,0,0,0.38)]">
+    <header className="absolute inset-x-0 top-0 z-[100] w-full bg-[#07130d] text-white shadow-[0_16px_40px_rgba(0,0,0,0.38)]">
       <div className="absolute inset-0 bg-gradient-to-r from-[#07130d] via-[#11110d] to-[#190806]" aria-hidden="true" />
+      <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-[3px] bg-gradient-to-r from-gaucho-green via-gaucho-gold to-gaucho-red" />
       {variant === 'institutional' ? (
-        <div className="relative mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 md:h-[92px]">
+        <div className="relative mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6">
           <Logo />
           <nav aria-label="Navegação institucional" className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-8 text-[13px] font-black md:flex">
             {institutionalLinks.map(([key, label, href]) => <Link key={key} href={href} className={`pb-2 transition-colors ${active === key ? 'border-b-2 border-gaucho-gold text-gaucho-gold' : 'text-white/90 hover:text-gaucho-gold'}`}>{label}</Link>)}
@@ -39,20 +40,60 @@ export function Header({ active = 'home', variant: requestedVariant }: { active?
           <button onClick={() => setInstitutionalMenuOpen((open) => !open)} aria-expanded={institutionalMenuOpen} aria-label={institutionalMenuOpen ? 'Fechar menu' : 'Abrir menu'} className="flex h-11 w-11 items-center justify-center rounded-md border border-white/20 md:hidden"><FontAwesomeIcon icon={institutionalMenuOpen ? faXmark : faBars} /></button>
         </div>
       ) : (
-        <div className="relative mx-auto grid h-20 max-w-7xl grid-cols-[1fr_auto_1fr] items-center gap-2 px-3 sm:px-5 md:h-[92px]">
+        <div className="relative mx-auto grid h-20 max-w-7xl grid-cols-[1fr_auto_1fr] items-center gap-2 px-3 sm:px-5">
           <Link href="/" aria-label="Voltar à Home" className="flex h-11 w-fit items-center rounded-md border border-white/20 px-3 text-xs font-black transition hover:border-gaucho-gold hover:text-gaucho-gold sm:px-4"><FontAwesomeIcon icon={faArrowLeft} /><span className="ml-2 hidden sm:inline">Voltar à Home</span><span className="ml-2 sm:hidden">Voltar</span></Link>
           <Logo centered />
           <div className="flex items-center justify-end gap-2 sm:gap-3"><CartMenu user={user} />{user ? <ProfileMenu user={user} signOut={signOut} /> : <Link href="/login?returnTo=/bilheteria" className="flex h-11 items-center rounded-md border border-white/20 px-3 text-xs font-black hover:border-gaucho-gold hover:text-gaucho-gold sm:px-4">Entrar</Link>}</div>
         </div>
       )}
 
-      {variant === 'institutional' && institutionalMenuOpen && <nav aria-label="Menu institucional mobile" className="relative grid gap-1 border-t border-white/10 bg-[#07130d] px-4 py-4 shadow-xl md:hidden">{institutionalLinks.map(([key, label, href]) => <Link key={key} href={href} onClick={() => setInstitutionalMenuOpen(false)} className={`rounded-lg px-4 py-3 text-sm font-black ${active === key ? 'bg-white/10 text-gaucho-gold' : 'text-white'}`}>{label}</Link>)}<Link href="/bilheteria" onClick={() => setInstitutionalMenuOpen(false)} className="mt-2 rounded-lg bg-gaucho-red px-4 py-3 text-center text-sm font-black uppercase"><FontAwesomeIcon icon={faTicket} className="mr-2" />Bilheteria</Link></nav>}
+      {variant === 'institutional' && <MobileNav open={institutionalMenuOpen} onClose={() => setInstitutionalMenuOpen(false)} active={active} />}
     </header>
   );
 }
 
+function MobileNav({ open, onClose, active }: { open: boolean; onClose: () => void; active: string }) {
+  const panelRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (!open) return;
+    const body = document.body;
+    body.style.overflow = 'hidden';
+    const keydown = (event: KeyboardEvent) => { if (event.key === 'Escape') onClose(); };
+    document.addEventListener('keydown', keydown);
+    panelRef.current?.focus();
+    return () => { document.removeEventListener('keydown', keydown); body.style.overflow = ''; };
+  }, [open, onClose]);
+
+  return (
+    <AnimatePresence>
+      {open && (
+        <>
+          <motion.div key="backdrop" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.25 }} className="fixed inset-0 z-[150] bg-black/70 backdrop-blur-sm md:hidden" onClick={onClose} />
+          <motion.div key="panel" ref={panelRef} tabIndex={-1} role="dialog" aria-modal="true" aria-label="Menu institucional" initial={{ x: '100%' }} animate={{ x: 0 }} exit={{ x: '100%' }} transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }} className="fixed inset-y-0 right-0 z-[160] flex w-[82vw] max-w-sm flex-col bg-[#07130d] shadow-2xl outline-none md:hidden">
+            <div aria-hidden="true" className="absolute inset-y-0 left-0 w-[3px] bg-gradient-to-b from-gaucho-green via-gaucho-gold to-gaucho-red" />
+            <div className="flex items-center justify-between border-b border-white/10 px-6 py-5">
+              <span className="font-display text-xl font-black text-gaucho-gold">Coração Gaúcho</span>
+              <button onClick={onClose} aria-label="Fechar menu" className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-white transition-colors hover:border-gaucho-gold hover:text-gaucho-gold"><FontAwesomeIcon icon={faXmark} /></button>
+            </div>
+            <nav aria-label="Navegação institucional mobile" className="flex flex-1 flex-col gap-1 px-4 py-6">
+              {institutionalLinks.map(([key, label, href], index) => (
+                <motion.div key={key} initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.08 + index * 0.05, duration: 0.3 }}>
+                  <Link href={href} onClick={onClose} className={`block rounded-xl px-4 py-3.5 font-display text-lg font-bold transition-colors ${active === key ? 'bg-white/10 text-gaucho-gold' : 'text-white/90 hover:bg-white/5 hover:text-gaucho-gold'}`}>{label}</Link>
+                </motion.div>
+              ))}
+            </nav>
+            <div className="border-t border-white/10 p-4">
+              <Link href="/bilheteria" onClick={onClose} className="btn-premium flex items-center justify-center gap-2 rounded-xl bg-gaucho-red py-4 text-sm font-black uppercase text-white shadow-lg shadow-red-950/30"><FontAwesomeIcon icon={faTicket} />Bilheteria</Link>
+            </div>
+          </motion.div>
+        </>
+      )}
+    </AnimatePresence>
+  );
+}
+
 function Logo({ centered = false }: { centered?: boolean }) {
-  return <Link href={centered ? '/bilheteria' : '/'} aria-label={centered ? 'Ir para a bilheteria' : 'Página inicial'} className="shrink-0"><Image src="/assets/logo4.png" alt="Grupo de Danças Coração Gaúcho" width={112} height={112} className="h-[66px] w-[76px] object-contain drop-shadow-2xl md:h-[84px] md:w-[100px]" priority /></Link>;
+  return <Link href={centered ? '/bilheteria' : '/'} aria-label={centered ? 'Ir para a bilheteria' : 'Página inicial'} className="shrink-0"><Image src="/assets/logo4.png" alt="Grupo de Danças Coração Gaúcho" width={112} height={112} className="h-14 w-16 object-contain drop-shadow-2xl" priority /></Link>;
 }
 
 const popoverMotion = {

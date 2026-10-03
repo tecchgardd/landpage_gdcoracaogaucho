@@ -1,0 +1,29 @@
+- generic [active] [ref=e1]:
+  - main [ref=e2]:
+    - generic [ref=e6]:
+      - link "Voltar à Home" [ref=e7] [cursor=pointer]:
+        - /url: /
+      - link "Ir para a bilheteria" [ref=e11] [cursor=pointer]:
+        - /url: /bilheteria
+        - img "Grupo de Danças Coração Gaúcho" [ref=e12]
+      - generic [ref=e13]:
+        - button "Abrir carrinho com 0 itens" [ref=e15] [cursor=pointer]
+        - link "Entrar" [ref=e18] [cursor=pointer]:
+          - /url: /login?returnTo=/bilheteria
+    - generic [ref=e26]:
+      - heading "Entre na sua conta" [level=1] [ref=e27]
+      - paragraph [ref=e28]: Seu carrinho está salvo. Entre para continuar com segurança.
+      - button "Continuar com Google" [ref=e29] [cursor=pointer]
+      - generic [ref=e32]: ou entre com e-mail
+      - generic [ref=e35]:
+        - text: E-mail
+        - textbox "E-mail" [ref=e36]
+      - generic [ref=e37]:
+        - text: Senha
+        - textbox "Senha" [ref=e38]
+      - button "Entrar" [ref=e39] [cursor=pointer]
+      - paragraph [ref=e40]:
+        - text: Ainda não possui conta?
+        - link "Criar conta" [ref=e41] [cursor=pointer]:
+          - /url: /cadastro?returnTo=%2Fminha-conta
+  - alert [ref=e42]
