@@ -13,6 +13,6 @@ export function PublicClassesSection() {
   if (loading) return <SkeletonRow count={3} className="h-[560px] w-[320px]" />;
   if (error) return <ErrorState text="Não foi possível carregar as turmas disponíveis. Tente novamente em instantes." />;
   if (!classes.length) return <EmptyState title="Novas turmas em breve" text="No momento não temos turmas abertas, mas logo teremos novas oportunidades para você aprender e viver a tradição gaúcha." />;
-  return <AutoCarousel itemClassName="w-[min(88vw,340px)]" speed="slow">{classes.map((item) => { const href = `/bilheteria/eventos/${encodeURIComponent(item.slug ?? item.id)}`; return <EventCard key={item.id} event={toCard(item)} detailsHref={href} buyHref={href} actionLabel="FAZER INSCRIÇÃO"/>; })}</AutoCarousel>;
+  return <AutoCarousel itemClassName="w-[min(88vw,340px)]" speed="slow">{classes.map((item) => { const href = `/loja/eventos/${encodeURIComponent(item.slug ?? item.id)}`; return <EventCard key={item.id} event={toCard(item)} detailsHref={href} buyHref={href} actionLabel="FAZER INSCRIÇÃO"/>; })}</AutoCarousel>;
 }
 function toCard(item: PublicClass): EventCardData { const short = formatShortDate(item.startsAt); return { id: item.id, title: item.title, city: item.city ?? '', place: item.place ?? '', date: short.day, month: short.month, time: item.time ?? formatEventTime(item.startsAt), price: item.signupFee ?? 0, remain: item.availableSpots, image: item.image ?? '/assets/bg-hero.png', type: 'CURSO' }; }

@@ -4,12 +4,10 @@ import { ApiListResponse, PublicClass, PublicClassApi } from './types';
 
 export const publicClassService = {
   async listAvailable(): Promise<PublicClass[]> {
-    const response = await publicApiGet<ApiListResponse<PublicClassApi>>('/api/public/events?type=CURSO&upcoming=false&limit=100');
-    return unwrapList(response).map(mapClassFromApi);
+    return unwrapList(await publicApiGet<ApiListResponse<PublicClassApi>>('/api/public/events?type=CURSO&upcoming=false&limit=100')).map(mapClassFromApi);
   },
 
   async getBySlug(slug: string): Promise<PublicClass> {
-    const response = await publicApiGet<PublicClassApi>(`/api/public/events/${encodeURIComponent(slug)}`);
-    return mapClassFromApi(response);
+    return mapClassFromApi(await publicApiGet<PublicClassApi>(`/api/public/events/${encodeURIComponent(slug)}`));
   }
 };

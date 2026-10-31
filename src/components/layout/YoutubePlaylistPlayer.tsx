@@ -84,7 +84,7 @@ export function YoutubePlaylistPlayer() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 16, scale: 0.95 }}
             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed bottom-5 left-5 z-[140] flex max-w-[280px] items-center gap-3 rounded-full border border-white/10 bg-[#07130d]/95 py-2 pl-2 pr-3 text-white shadow-[0_18px_50px_rgba(0,0,0,.5)] backdrop-blur"
+            className="fixed bottom-5 left-5 z-[140] hidden max-w-[280px] items-center md:flex gap-3 rounded-full border border-white/10 bg-[#07130d]/95 py-2 pl-2 pr-3 text-white shadow-[0_18px_50px_rgba(0,0,0,.5)] backdrop-blur"
           >
             <button onClick={togglePlay} aria-label={playing ? 'Pausar música' : 'Tocar música'} className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gaucho-gold text-black transition-transform hover:scale-105">
               <FontAwesomeIcon icon={playing ? faPause : faPlay} />

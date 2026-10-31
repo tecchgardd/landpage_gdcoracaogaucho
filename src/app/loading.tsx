@@ -1,2 +1,8 @@
 import Image from 'next/image';
-export default function Loading(){return <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-gaucho-green via-black to-gaucho-red px-6 text-white"><div className="text-center"><Image src="/assets/logo4.png" alt="Logo do Grupo de Danças Coração Gaúcho" width={240} height={240} className="mx-auto h-56 w-56 object-contain drop-shadow-[0_0_50px_rgba(246,197,69,.8)]"/><h1 className="mt-6 font-display text-4xl font-black">Carregando tradição...</h1><p className="mt-2 text-white/80">Aguarde um instante, algo especial está por vir!</p><div className="mx-auto mt-8 h-3 w-full max-w-96 overflow-hidden rounded-full bg-white/20"><div className="loading-bar h-full rounded-full bg-gradient-to-r from-green-500 via-gaucho-gold to-gaucho-red"/></div></div></div>}
+
+export default function Loading() {
+  return <div className="paper flex min-h-screen flex-col items-center justify-center gap-6 px-6" role="status" aria-label="Carregando">
+    <Image src="/assets/logo.jpg" alt="" width={160} height={160} priority className="h-40 w-40 animate-pulse object-contain mix-blend-multiply" />
+    <div className="flex h-2 w-48 overflow-hidden rounded-full"><span className="loading-bar flag-sash h-full" /></div>
+  </div>;
+}

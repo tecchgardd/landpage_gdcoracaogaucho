@@ -71,6 +71,6 @@ function mapEventToCard(event: PublicEvent): EventCardData {
     image: event.image ?? '/assets/bg-hero.png',
     type: event.type ?? 'EVENTO',
     color: event.type === 'BAILE' ? 'red' : 'gold',
-    href: `/bilheteria/eventos/${encodeURIComponent(event.slug ?? event.id)}`
+    href: `/loja/eventos/${encodeURIComponent(event.slug ?? event.id)}`
   };
 }

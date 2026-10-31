@@ -1,15 +1,15 @@
 import { publicApiGet } from './apiClient';
+import { ticketService } from './ticketService';
 import { mapEventFromApi, unwrapList } from './mappers';
 import { ApiListResponse, PublicEvent, PublicEventApi } from './types';
 
 export const publicEventService = {
   async list(): Promise<PublicEvent[]> {
-    const response = await publicApiGet<ApiListResponse<PublicEventApi>>('/api/public/events?upcoming=false&limit=100');
-    return unwrapList(response).map(mapEventFromApi).filter((event) => event.type !== 'CURSO');
+    // Mesma URL do ticketService: chamadas simultâneas são unificadas pelo apiClient e pelo cache do servidor.
+    return unwrapList(await publicApiGet<ApiListResponse<PublicEventApi>>('/api/public/events?upcoming=false&limit=100')).map(mapEventFromApi).filter((event) => event.type !== 'CURSO');
   },
 
   async getBySlug(slug: string): Promise<PublicEvent> {
-    const response = await publicApiGet<PublicEventApi>(`/api/public/events/${encodeURIComponent(slug)}`);
-    return mapEventFromApi(response);
+    return ticketService.getEvent(slug);
   }
 };

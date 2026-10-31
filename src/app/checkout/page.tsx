@@ -2,12 +2,12 @@
 
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Header } from '@/components/layout/Header';
 import { useAuth } from '@/components/providers/AuthProvider';
 import { useCart } from '@/components/providers/CartProvider';
-import { meService, type CartValidation, type CheckoutResult, type Profile } from '@/services/account/meService';
-import { ApiError } from '@/services/public/apiClient';
+import { meService, validatedKey, type CartValidation, type CheckoutResult, type Profile } from '@/services/account/meService';
+import { ApiError, newIdempotencyKey } from '@/services/public/apiClient';
 import { rememberCheckoutOrder } from '@/services/checkout/checkoutRecovery';
 
 const money = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
@@ -37,6 +37,7 @@ export default function CheckoutPage() {
   const [loading, setLoading] = useState(true);
   const [result, setResult] = useState<CheckoutResult | null>(null);
   const [confirmedChanges, setConfirmedChanges] = useState(false);
+  const attemptKey = useRef('');
 
   useEffect(() => {
     if (!authLoading && !user) router.replace('/login?returnTo=/checkout');
@@ -45,6 +46,8 @@ export default function CheckoutPage() {
   useEffect(() => {
     if (!user) return;
     setProfile((current) => current ?? emptyProfile(user));
+    if (!cart.ready) return;
+    attemptKey.current = newIdempotencyKey();
     if (!cart.items.length) { setLoading(false); return; }
 
     let active = true;
@@ -59,7 +62,7 @@ export default function CheckoutPage() {
       })
       .finally(() => { if (active) setLoading(false); });
     return () => { active = false; };
-  }, [user, cart.items]);
+  }, [user, cart.items, cart.ready]);
 
   const profileComplete = hasCompleteProfile(profile);
   const hasInvalidItems = Boolean(validation?.invalidItems.length);
@@ -68,7 +71,7 @@ export default function CheckoutPage() {
   const finish = async () => {
     setActionError(''); setLoading(true);
     try {
-      const checkout = await meService.checkout(cart.items);
+      const checkout = await meService.checkout(cart.items, attemptKey.current || newIdempotencyKey());
       rememberCheckoutOrder(checkout.orderId);
       setResult(checkout);
       if (checkout.checkoutUrl) window.location.assign(checkout.checkoutUrl);
@@ -79,8 +82,8 @@ export default function CheckoutPage() {
     } finally { setLoading(false); }
   };
 
-  if (authLoading || (!profile && loading)) return <main className="min-h-screen bg-gaucho-cream"><Header /><div className="mx-auto max-w-5xl px-5 pt-36"><div className="h-72 animate-pulse rounded-3xl bg-black/10" /></div></main>;
-  if (!cart.items.length && !result) return <main className="min-h-screen bg-gaucho-cream"><Header /><section className="mx-auto max-w-3xl px-5 pb-20 pt-36 text-center"><span className="text-5xl">🛒</span><h1 className="mt-5 font-display text-4xl font-black">Seu carrinho está vazio</h1><p className="mt-2 text-black/55">Escolha um evento para iniciar seu pedido.</p><Link href="/bilheteria" className="mt-6 inline-block rounded-xl bg-gaucho-red px-6 py-3 font-black text-white">Explorar bilheteria</Link></section></main>;
+  if (authLoading || !cart.ready || (!profile && loading)) return <main className="min-h-screen bg-gaucho-cream"><Header /><div className="mx-auto max-w-5xl px-5 pt-36"><div className="h-72 animate-pulse rounded-3xl bg-black/10" /></div></main>;
+  if (!cart.items.length && !result) return <main className="min-h-screen bg-gaucho-cream"><Header /><section className="mx-auto max-w-3xl px-5 pb-20 pt-36 text-center"><span className="text-5xl">🛒</span><h1 className="mt-5 font-display text-4xl font-black">Seu carrinho está vazio</h1><p className="mt-2 text-black/55">Escolha um baile, curso ou produto para iniciar seu pedido.</p><Link href="/loja" className="mt-6 inline-block rounded-xl bg-gaucho-red px-6 py-3 font-black text-white">Explorar a loja</Link></section></main>;
 
   return (
     <main className="min-h-screen bg-gaucho-cream text-black">
@@ -93,7 +96,7 @@ export default function CheckoutPage() {
         </div>
 
         {result ? (
-          <div className="mt-8 rounded-3xl border border-green-200 bg-white p-8 text-center shadow-xl sm:p-12"><span className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-green-100 text-2xl text-gaucho-green">✓</span><h2 className="mt-5 text-3xl font-black">Pedido confirmado!</h2><p className="mt-2 text-black/55">Seu evento é gratuito e a inscrição foi concluída.</p><Link href="/minha-conta/ingressos" className="mt-6 inline-block rounded-xl bg-gaucho-green px-7 py-4 font-black text-white">Ver meus ingressos</Link></div>
+          <div className="mt-8 rounded-3xl border border-green-200 bg-white p-8 text-center shadow-xl sm:p-12"><span className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-green-100 text-2xl text-gaucho-green">✓</span><h2 className="mt-5 text-3xl font-black">Pedido confirmado!</h2><p className="mt-2 text-black/55">Seu pedido gratuito foi concluído.</p><Link href="/minha-conta" className="mt-6 inline-block rounded-xl bg-gaucho-green px-7 py-4 font-black text-white">Ir para a minha conta</Link></div>
         ) : (
           <div className="mt-8 grid items-start gap-6 lg:grid-cols-[minmax(0,1fr)_360px]">
             <div className="space-y-5">
@@ -104,8 +107,8 @@ export default function CheckoutPage() {
               <Card number="2" title="Itens do pedido" subtitle={`${cart.count} ${cart.count === 1 ? 'item' : 'itens'} no carrinho`}>
                 {validationError && <Alert tone="error">Não foi possível validar preços e disponibilidade: {validationError}</Alert>}
                 {loading && !validation ? <div className="space-y-3"><div className="h-20 animate-pulse rounded-2xl bg-black/5" /><p className="text-center text-xs font-bold text-black/40">Validando disponibilidade e valores…</p></div> : validation ? <div className="space-y-3">
-                  {validation.validItems.map((item) => <article key={item.eventId} className="flex flex-col gap-4 rounded-2xl border border-black/10 p-4 sm:flex-row sm:items-center sm:justify-between"><div><span className="rounded-full bg-gaucho-green/10 px-2.5 py-1 text-[10px] font-black text-gaucho-green">{item.type}</span><h3 className="mt-2 font-black">{item.name}</h3><p className="mt-1 text-sm text-black/50">{item.quantity} × {money.format(item.unitPrice)}</p>{item.quantityAdjusted && <p className="mt-1 text-xs font-bold text-amber-700">Quantidade ajustada à disponibilidade.</p>}</div><b className="text-lg">{money.format(item.total)}</b></article>)}
-                  {validation.invalidItems.map((item) => <article key={item.eventId} className="rounded-2xl border border-red-200 bg-red-50 p-4 sm:flex sm:items-center sm:justify-between sm:gap-4"><div><span className="text-[10px] font-black uppercase tracking-wider text-red-600">Indisponível</span><h3 className="mt-1 font-black text-red-900">{item.name ?? 'Item do carrinho'}</h3><p className="mt-1 text-sm text-red-700">{item.reason}</p></div><button onClick={() => cart.remove(item.eventId)} className="mt-3 text-sm font-black text-red-700 underline underline-offset-4 sm:mt-0">Remover item</button></article>)}
+                  {validation.validItems.map((item) => <article key={validatedKey(item)} className="flex flex-col gap-4 rounded-2xl border border-black/10 p-4 sm:flex-row sm:items-center sm:justify-between"><div><span className="rounded-full bg-gaucho-green/10 px-2.5 py-1 text-[10px] font-black text-gaucho-green">{item.type}</span><h3 className="mt-2 font-black">{item.name}</h3><p className="mt-1 text-sm text-black/50">{item.quantity} × {money.format(item.unitPrice)}</p>{item.itemType === 'ONLINE_COURSE' && <p className="mt-1 text-xs font-bold text-gaucho-green">Acesso liberado na Área do aluno após a confirmação do pagamento.</p>}{item.quantityAdjusted && <p className="mt-1 text-xs font-bold text-amber-700">Quantidade ajustada à disponibilidade.</p>}</div><b className="text-lg">{money.format(item.total)}</b></article>)}
+                  {validation.invalidItems.map((item) => <article key={validatedKey(item)} className="rounded-2xl border border-red-200 bg-red-50 p-4 sm:flex sm:items-center sm:justify-between sm:gap-4"><div><span className="text-[10px] font-black uppercase tracking-wider text-red-600">Indisponível</span><h3 className="mt-1 font-black text-red-900">{item.name ?? 'Item do carrinho'}</h3><p className="mt-1 text-sm text-red-700">{item.reason}</p></div><button onClick={() => cart.remove(validatedKey(item))} className="mt-3 text-sm font-black text-red-700 underline underline-offset-4 sm:mt-0">Remover item</button></article>)}
                 </div> : null}
               </Card>
             </div>
@@ -118,7 +121,7 @@ export default function CheckoutPage() {
               {actionError && <div className="mt-4"><Alert tone="error">{actionError}</Alert></div>}
               <button disabled={!canFinish} onClick={finish} className="btn-premium mt-6 w-full rounded-xl bg-gaucho-red py-4 font-black uppercase tracking-wide text-white shadow-lg shadow-red-950/15 transition-colors hover:bg-red-700 disabled:cursor-not-allowed disabled:shadow-none disabled:grayscale disabled:opacity-40 disabled:hover:translate-y-0">{loading ? 'Validando…' : 'Confirmar pedido'}</button>
               <CheckoutHint loading={loading} validation={validation} profileComplete={profileComplete} />
-              <p className="mt-5 flex items-center justify-center gap-2 border-t pt-4 text-xs text-black/40"><span>🔒</span> Ambiente seguro para sua compra</p>
+              <p className="mt-5 flex items-center justify-center gap-2 border-t pt-4 text-xs text-black/40"><span>🔒</span> Pagamento por Pix, boleto ou cartão com nota fiscal</p>
             </aside>
           </div>
         )}

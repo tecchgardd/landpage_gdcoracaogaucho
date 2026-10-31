@@ -242,7 +242,7 @@ export default function SobrePage() {
             <Link href="/curso" className="btn-premium rounded-lg bg-gaucho-red px-7 py-4 text-sm font-black uppercase text-white shadow-xl shadow-red-950/20 transition-colors hover:bg-red-700">
               Quero fazer minha inscrição
             </Link>
-            <Link href="/bilheteria" className="btn-premium rounded-lg border border-gaucho-green px-7 py-4 text-sm font-black uppercase text-gaucho-green transition-colors hover:bg-gaucho-green hover:text-white">
+            <Link href="/loja" className="btn-premium rounded-lg border border-gaucho-green px-7 py-4 text-sm font-black uppercase text-gaucho-green transition-colors hover:bg-gaucho-green hover:text-white">
               Ver próximas turmas
             </Link>
           </div>

@@ -12,15 +12,18 @@ info:
     integração: se o backend mudar um contrato, esta spec deve ser atualizada
     manualmente.
 
-    Em produção, todas as chamadas do frontend são feitas para o path relativo
-    (`/api/...`) na própria origem do site, e o `next.config.mjs` faz o rewrite
-    de `/api/:path*` para `NEXT_PUBLIC_API_URL`, preservando cookies de sessão
-    first-party (ver `services/public/apiClient.ts`).
+    O navegador só chama a própria origem do site (`/api/...`). No servidor do Next:
+    `/api/public/**` passa por um cache de leitura (60s, invalidável via
+    `POST /api/revalidate`) e as demais rotas por um BFF com lista fechada
+    (`src/app/api/[...path]/route.ts`) — rotas do backend fora desta spec não são
+    acessíveis pelo site. O BFF repassa cookies nos dois sentidos, o header
+    `Idempotency-Key` e `X-Forwarded-For` (IP real do cliente, para rate limit).
+    Requisitos completos para o backend: `docs/CONTRATO_BACKEND.md`.
   contact:
     name: GD Coração Gaúcho
 servers:
   - url: /
-    description: Origem do site (Next.js faz o proxy para o backend via rewrites)
+    description: Origem do site (servidor do Next faz cache/BFF para o backend)
 
 tags:
   - name: Público — Catálogo
@@ -31,6 +34,12 @@ tags:
     description: Perfil, pedidos, ingressos e inscrições do usuário autenticado.
   - name: Pagamentos
     description: Checkout, status e retentativa de pagamento (Stripe por trás do backend).
+  - name: Carrinho
+    description: Carrinho no servidor (visitante via cookie httpOnly cg_cart; mesclado ao entrar na conta).
+  - name: Privacidade (LGPD)
+    description: Registro de consentimento de cookies.
+  - name: Site (Next.js)
+    description: Rotas implementadas no próprio frontend, chamadas pelo backend.
 
 paths:
   /api/public/events:
@@ -244,7 +253,7 @@ paths:
   /api/auth/sign-in/social:
     post:
       tags: [Autenticação]
-      summary: Inicia login social (Google)
+      summary: Inicia login social (Apple, Facebook, Google ou Microsoft)
       requestBody:
         required: true
         content:
@@ -253,7 +262,7 @@ paths:
               type: object
               required: [provider, callbackURL]
               properties:
-                provider: { type: string, example: google }
+                provider: { type: string, enum: [apple, facebook, google, microsoft], example: google }
                 callbackURL: { type: string, format: uri }
       responses:
         "200":
@@ -340,6 +349,8 @@ paths:
         preço e disponibilidade são sempre recalculados no backend (ver teste
         `tests/payment-contract.test.mjs`).
       security: [{ cookieAuth: [] }]
+      parameters:
+        - $ref: "#/components/parameters/IdempotencyKey"
       requestBody:
         required: true
         content:
@@ -370,6 +381,8 @@ paths:
           content:
             application/json:
               schema: { $ref: "#/components/schemas/ApiErrorBody" }
+        "429":
+          $ref: "#/components/responses/TooManyRequests"
 
   /api/payments/{orderId}/status:
     get:
@@ -400,6 +413,7 @@ paths:
       summary: Abre uma nova sessão de pagamento para um pedido pendente/falho
       security: [{ cookieAuth: [] }]
       parameters:
+        - $ref: "#/components/parameters/IdempotencyKey"
         - name: orderId
           in: path
           required: true
@@ -491,17 +505,232 @@ paths:
                     type: array
                     items: { type: object, additionalProperties: true }
 
+  # ---------------------------------------------------------------------------
+  # PLANEJADO — ainda não existe no backend. O frontend já consome estas rotas e,
+  # com NEXT_PUBLIC_USE_MOCKS=true, simula tudo em localStorage. Ver docs/ARQUITETURA.md.
+  # ---------------------------------------------------------------------------
+  /api/public/products:
+    get:
+      tags: [Loja (planejado)]
+      summary: Lista produtos ativos da loja (camisetas, bonés, pilcha...)
+      responses:
+        "200":
+          description: Lista (array ou { data })
+          content: { application/json: { schema: { type: array, items: { $ref: '#/components/schemas/Product' } } } }
+  /api/public/products/{slug}:
+    get:
+      tags: [Loja (planejado)]
+      summary: Detalhe do produto por slug ou id
+      parameters: [{ name: slug, in: path, required: true, schema: { type: string } }]
+      responses:
+        "200": { description: Produto, content: { application/json: { schema: { $ref: '#/components/schemas/Product' } } } }
+        "404": { description: Não encontrado }
+  /api/public/courses:
+    get:
+      tags: [Cursos online (planejado)]
+      summary: Lista cursos online à venda (com grade de módulos/aulas, sem URLs de vídeo)
+      responses:
+        "200":
+          description: Lista
+          content: { application/json: { schema: { type: array, items: { $ref: '#/components/schemas/OnlineCourse' } } } }
+  /api/public/courses/{slug}:
+    get:
+      tags: [Cursos online (planejado)]
+      summary: Página de venda do curso
+      parameters: [{ name: slug, in: path, required: true, schema: { type: string } }]
+      responses:
+        "200": { description: Curso, content: { application/json: { schema: { $ref: '#/components/schemas/OnlineCourse' } } } }
+  /api/me/courses:
+    get:
+      tags: [Área do aluno (planejado)]
+      summary: Acessos (matrículas) do cliente logado, com progresso
+      security: [{ cookieAuth: [] }]
+      responses:
+        "200": { description: Lista de CourseAccess, content: { application/json: { schema: { type: array, items: { $ref: '#/components/schemas/CourseAccess' } } } } }
+  /api/me/courses/redeem:
+    post:
+      tags: [Área do aluno (planejado)]
+      summary: Vincula um código de acesso (presente/venda no balcão) à conta
+      security: [{ cookieAuth: [] }]
+      requestBody: { required: true, content: { application/json: { schema: { type: object, required: [code], properties: { code: { type: string, example: VAN3RA24 } } } } } }
+      responses:
+        "200": { description: Acesso criado, content: { application/json: { schema: { $ref: '#/components/schemas/CourseAccess' } } } }
+        "404": { description: Código inválido ou já usado }
+  /api/me/courses/{slug}:
+    get:
+      tags: [Área do aluno (planejado)]
+      summary: Sala de aula — acesso + módulos/aulas com flag completed
+      security: [{ cookieAuth: [] }]
+      parameters: [{ name: slug, in: path, required: true, schema: { type: string } }]
+      responses:
+        "200": { description: "{ access: CourseAccess, modules: [{ id, title, lessons: [{ id, title, durationMinutes, completed, description, materials }] }] }" }
+        "404": { description: Sem acesso a este curso }
+  /api/me/courses/{courseId}/sessions:
+    post:
+      tags: [Área do aluno (planejado)]
+      summary: Reserva uma vaga de aparelho para assistir (limite de sessões simultâneas por conta)
+      description: >
+        Sessão ativa = heartbeat nos últimos 2 min. Se já houver `maxDevices` sessões ativas
+        de OUTROS aparelhos, responde 409 com code DEVICE_LIMIT e details.devices.
+        O aparelho é identificado pelo cookie httpOnly `cg_device` (UUID, 1 ano), que o
+        backend cria aqui se não existir — o frontend não guarda nem envia ID de aparelho.
+        O mesmo aparelho reaproveita a própria vaga.
+      security: [{ cookieAuth: [] }]
+      parameters: [{ name: courseId, in: path, required: true, schema: { type: string } }]
+      requestBody: { required: true, content: { application/json: { schema: { type: object, required: [deviceName], properties: { deviceName: { type: string, example: Chrome no Android } } } } } }
+      responses:
+        "200": { description: "{ sessionId, heartbeatSeconds }" }
+        "409": { description: "{ code: DEVICE_LIMIT, message, details: { devices: CustomerDevice[] } }" }
+  /api/me/course-sessions/{sessionId}/heartbeat:
+    post:
+      tags: [Área do aluno (planejado)]
+      summary: Mantém a sessão viva (a cada 60s). 409 SESSION_REVOKED se foi encerrada em outro aparelho
+      security: [{ cookieAuth: [] }]
+      parameters: [{ name: sessionId, in: path, required: true, schema: { type: string } }]
+      responses: { "200": { description: OK }, "409": { description: Sessão revogada } }
+  /api/me/course-sessions/{sessionId}:
+    delete:
+      tags: [Área do aluno (planejado)]
+      summary: Libera a vaga ao sair da aula
+      security: [{ cookieAuth: [] }]
+      parameters: [{ name: sessionId, in: path, required: true, schema: { type: string } }]
+      responses: { "200": { description: OK } }
+  /api/me/course-sessions/{sessionId}/end:
+    post:
+      tags: [Área do aluno (planejado)]
+      summary: Igual ao DELETE, para navigator.sendBeacon ao fechar a aba
+      security: [{ cookieAuth: [] }]
+      parameters: [{ name: sessionId, in: path, required: true, schema: { type: string } }]
+      responses: { "200": { description: OK } }
+  /api/me/lessons/{lessonId}/playback:
+    get:
+      tags: [Área do aluno (planejado)]
+      summary: URL assinada e de curta duração do vídeo — exige sessionId ativo
+      security: [{ cookieAuth: [] }]
+      parameters:
+        - { name: lessonId, in: path, required: true, schema: { type: string } }
+        - { name: sessionId, in: query, required: true, schema: { type: string } }
+      responses:
+        "200": { description: "{ url, kind: mp4 | hls | embed, expiresAt }" }
+        "409": { description: Sessão inválida/revogada }
+  /api/me/lessons/{lessonId}/progress:
+    post:
+      tags: [Área do aluno (planejado)]
+      summary: Salva progresso (a cada ~15s e ao concluir)
+      security: [{ cookieAuth: [] }]
+      parameters: [{ name: lessonId, in: path, required: true, schema: { type: string } }]
+      requestBody: { required: true, content: { application/json: { schema: { type: object, properties: { seconds: { type: integer }, completed: { type: boolean } } } } } }
+      responses: { "200": { description: OK } }
+  /api/me/devices:
+    get:
+      tags: [Área do aluno (planejado)]
+      summary: Aparelhos que já acessaram as aulas
+      security: [{ cookieAuth: [] }]
+      responses:
+        "200": { description: "CustomerDevice[] = [{ id, name, lastSeenAt, current, watching }] — current é calculado pelo backend comparando com o cookie cg_device" }
+  /api/me/devices/{deviceId}:
+    delete:
+      tags: [Área do aluno (planejado)]
+      summary: Desconecta um aparelho (revoga as sessões dele)
+      security: [{ cookieAuth: [] }]
+      parameters: [{ name: deviceId, in: path, required: true, schema: { type: string } }]
+      responses: { "200": { description: OK } }
+
+  /api/cart:
+    get:
+      tags: [Carrinho]
+      summary: Carrinho atual (da conta, se logado; senão do visitante pelo cookie cg_cart)
+      description: >
+        Se não houver cookie cg_cart nem sessão, responde carrinho vazio e cria o cookie
+        (httpOnly, Secure, SameSite=Lax, 30 dias). Ao entrar na conta, o backend mescla o
+        carrinho do visitante no da conta (somando quantidades, respeitando limites) e apaga o do visitante.
+      responses:
+        "200": { description: Carrinho, content: { application/json: { schema: { $ref: "#/components/schemas/Cart" } } } }
+    delete:
+      tags: [Carrinho]
+      summary: Esvazia o carrinho
+      responses:
+        "200": { description: Carrinho vazio, content: { application/json: { schema: { $ref: "#/components/schemas/Cart" } } } }
+  /api/cart/items:
+    post:
+      tags: [Carrinho]
+      summary: Adiciona ou substitui uma linha (upsert pela chave; quantity substitui, não soma)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/CheckoutLine" }
+      responses:
+        "200": { description: Carrinho atualizado, content: { application/json: { schema: { $ref: "#/components/schemas/Cart" } } } }
+        "409": { description: Item esgotado/indisponível, content: { application/json: { schema: { $ref: "#/components/schemas/ApiErrorBody" } } } }
+        "422": { description: "Quantidade inválida (1–20; cursos e turmas = 1)" }
+  /api/cart/items/{key}:
+    parameters: [{ name: key, in: path, required: true, schema: { type: string, example: "PRODUCT:p1:p1-M" }, description: "EVENT:<id> | PRODUCT:<id>:<variantId|u> | COURSE:<id>" }]
+    patch:
+      tags: [Carrinho]
+      summary: Altera a quantidade
+      requestBody: { required: true, content: { application/json: { schema: { type: object, required: [quantity], properties: { quantity: { type: integer, minimum: 1, maximum: 20 } } } } } }
+      responses:
+        "200": { description: Carrinho atualizado, content: { application/json: { schema: { $ref: "#/components/schemas/Cart" } } } }
+    delete:
+      tags: [Carrinho]
+      summary: Remove a linha
+      responses:
+        "200": { description: Carrinho atualizado, content: { application/json: { schema: { $ref: "#/components/schemas/Cart" } } } }
+
+  /api/consents:
+    post:
+      tags: [Privacidade (LGPD)]
+      summary: Registra a escolha de cookies (prova de consentimento)
+      description: >
+        Guardar com data/hora, versão, IP (X-Forwarded-For), user-agent e userId se houver sessão.
+        Chamada "fire-and-forget" — falha não bloqueia o site.
+      requestBody: { required: true, content: { application/json: { schema: { type: object, required: [version, preferences, media], properties: { version: { type: integer, example: 1 }, preferences: { type: boolean }, media: { type: boolean } } } } } }
+      responses: { "201": { description: Registrado } }
+
+  /api/revalidate:
+    post:
+      tags: [Site (Next.js)]
+      summary: Invalida o cache de leitura do catálogo — chamado PELO BACKEND após escrita
+      description: >
+        Implementado no frontend (src/app/api/revalidate/route.ts). O backend chama após criar/editar
+        evento, lote, produto, estoque, curso, álbum ou empresa (de preferência via outbox/fila).
+      parameters: [{ name: x-revalidate-secret, in: header, required: true, schema: { type: string } }]
+      requestBody: { content: { application/json: { schema: { type: object, properties: { tags: { type: array, items: { type: string, enum: [catalog, "catalog:events", "catalog:products", "catalog:courses", "catalog:albums", "catalog:empresas"] } } } } } } }
+      responses:
+        "200": { description: "{ revalidated: string[], at }" }
+        "401": { description: Segredo inválido }
+
 components:
+  parameters:
+    IdempotencyKey:
+      name: Idempotency-Key
+      in: header
+      required: true
+      schema: { type: string, format: uuid }
+      description: >
+        UUID gerado pelo frontend por tentativa de compra. O backend guarda (chave + userId) -> resposta
+        por 24h; repetição com o mesmo corpo devolve a MESMA resposta sem criar outro pedido; corpo
+        diferente com a mesma chave -> 422; requisição ainda em andamento com a mesma chave -> 409.
+
   securitySchemes:
     cookieAuth:
       type: apiKey
       in: cookie
-      name: better-auth.session_token
+      name: cg-admin.session_token
       description: >
-        Sessão first-party via cookie, propagada porque o frontend chama o
-        path relativo `/api/...` na mesma origem (proxiado pelo next.config.mjs).
+        Sessão first-party via cookie httpOnly (em produção `__Secure-cg-admin.session_token`),
+        propagada porque o navegador chama `/api/...` na mesma origem e o BFF do Next repassa
+        Cookie/Set-Cookie ao backend.
 
   responses:
+    TooManyRequests:
+      description: Limite de requisições atingido — enviar header Retry-After (segundos)
+      headers:
+        Retry-After: { schema: { type: integer } }
+      content:
+        application/json:
+          schema: { $ref: "#/components/schemas/ApiErrorBody" }
     Unauthorized:
       description: Sessão expirada ou ausente
       content:
@@ -514,6 +743,52 @@ components:
           schema: { $ref: "#/components/schemas/ApiErrorBody" }
 
   schemas:
+    Product:
+      type: object
+      properties:
+        id: { type: string }
+        slug: { type: string }
+        title: { type: string }
+        description: { type: string }
+        category: { type: string }
+        images: { type: array, items: { type: string } }
+        price: { type: number, description: Reais (o checkout recalcula) }
+        compareAtPrice: { type: number }
+        available: { type: integer, nullable: true }
+        soldOut: { type: boolean }
+        variants: { type: array, items: { type: object, properties: { id: { type: string }, label: { type: string, example: M }, available: { type: integer, nullable: true }, price: { type: number } } } }
+    OnlineCourse:
+      type: object
+      properties:
+        id: { type: string }
+        slug: { type: string }
+        title: { type: string }
+        subtitle: { type: string }
+        description: { type: string }
+        image: { type: string }
+        trailerUrl: { type: string }
+        level: { type: string }
+        price: { type: number }
+        compareAtPrice: { type: number }
+        lessonsCount: { type: integer }
+        durationMinutes: { type: integer }
+        accessDays: { type: integer, nullable: true, description: null = vitalício }
+        maxDevices: { type: integer, default: 2 }
+        teachers: { type: array, items: { type: string } }
+        highlights: { type: array, items: { type: string } }
+        modules: { type: array, items: { type: object, properties: { id: { type: string }, title: { type: string }, lessons: { type: array, items: { type: object, properties: { id: { type: string }, title: { type: string }, durationMinutes: { type: integer }, preview: { type: boolean } } } } } } }
+    CourseAccess:
+      type: object
+      description: Matrícula/token de acesso vinculado ao cliente, gerado quando o pagamento é confirmado
+      properties:
+        id: { type: string }
+        code: { type: string, example: VAN3RA24 }
+        status: { type: string, enum: [ATIVO, EXPIRADO, REVOGADO] }
+        course: { $ref: '#/components/schemas/OnlineCourse' }
+        progressPercent: { type: integer }
+        lastLessonId: { type: string }
+        startedAt: { type: string, format: date-time }
+        expiresAt: { type: string, format: date-time, nullable: true }
     ApiErrorBody:
       type: object
       description: >
@@ -618,24 +893,71 @@ components:
         city: { type: string }
         complete: { type: boolean, description: "True quando todos os campos obrigatórios estão preenchidos" }
 
+    CheckoutLine:
+      oneOf:
+        - type: object
+          required: [eventId, quantity]
+          properties:
+            eventId: { type: integer }
+            quantity: { type: integer, minimum: 1, maximum: 20 }
+        - type: object
+          required: [productId, quantity]
+          properties:
+            productId: { type: string }
+            variantId: { type: string }
+            quantity: { type: integer, minimum: 1, maximum: 20 }
+        - type: object
+          required: [courseId, quantity]
+          properties:
+            courseId: { type: string }
+            quantity: { type: integer, enum: [1] }
+
     CartItemsBody:
       type: object
       required: [items]
       properties:
         items:
           type: array
-          items:
-            type: object
-            required: [eventId, quantity]
-            properties:
-              eventId: { type: integer }
-              quantity: { type: integer, minimum: 1 }
+          description: >
+            Só identificadores e quantidades — nunca preço. O backend pode ignorar esta lista e
+            usar o carrinho do servidor (GET /api/cart), mas deve aceitá-la para compatibilidade.
+          items: { $ref: "#/components/schemas/CheckoutLine" }
+
+    CartLine:
+      type: object
+      required: [key, kind, refId, quantity, title]
+      properties:
+        key: { type: string, example: "EVENT:12" }
+        kind: { type: string, enum: [EVENT, PRODUCT, COURSE] }
+        refId: { type: string }
+        variantId: { type: string }
+        variantLabel: { type: string, example: M }
+        quantity: { type: integer }
+        title: { type: string }
+        type: { type: string, description: "BAILE | CURSO | PRODUTO | CURSO ONLINE ..." }
+        image: { type: string, format: uri }
+        unitPrice: { type: number, description: "Prévia do preço atual (o valor final é recalculado no checkout)" }
+        date: { type: string, format: date-time }
+        city: { type: string }
+        place: { type: string }
+        href: { type: string, example: /loja/eventos/baile-farroupilha }
+        available: { type: integer, nullable: true }
+
+    Cart:
+      type: object
+      properties:
+        items: { type: array, items: { $ref: "#/components/schemas/CartLine" } }
+        updatedAt: { type: string, format: date-time }
 
     ValidatedItem:
       type: object
       properties:
+        key: { type: string, description: "Opcional (planejado): EVENT:<id> | PRODUCT:<id>:<variantId> | COURSE:<id>" }
         eventId: { type: integer }
-        itemType: { type: string, enum: [EVENT, DANCE, COURSE] }
+        productId: { type: string }
+        variantId: { type: string }
+        courseId: { type: string }
+        itemType: { type: string, enum: [EVENT, DANCE, COURSE, PRODUCT, ONLINE_COURSE] }
         name: { type: string }
         type: { type: string }
         banner: { type: string }

@@ -1,4 +1,8 @@
-const ORDER_KEY = 'cg_checkout_order_id';
-export function rememberCheckoutOrder(orderId: number) { try { localStorage.setItem(ORDER_KEY, String(orderId)); } catch {} }
-export function recoverCheckoutOrder() { try { const id = Number(localStorage.getItem(ORDER_KEY)); return Number.isInteger(id) && id > 0 ? id : null; } catch { return null; } }
-export function forgetCheckoutOrder() { try { localStorage.removeItem(ORDER_KEY); } catch {} }
+import { deleteCookie, readCookie, writeCookie } from '@/utils/cookies';
+
+// Cookie estritamente necessário: guarda só o número do último pedido para retomar o status
+// na volta do gateway (ou se a pessoa fechar a aba e voltar depois). Expira em 2 dias.
+const ORDER_COOKIE = 'cg_checkout_order';
+export function rememberCheckoutOrder(orderId: number) { writeCookie(ORDER_COOKIE, String(orderId), 2 * 24 * 60 * 60); }
+export function recoverCheckoutOrder() { const id = Number(readCookie(ORDER_COOKIE)); return Number.isInteger(id) && id > 0 ? id : null; }
+export function forgetCheckoutOrder() { deleteCookie(ORDER_COOKIE); }

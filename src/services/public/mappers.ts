@@ -100,22 +100,22 @@ export function mapClassFromApi(item: PublicClassApi): PublicClass {
   };
 }
 
-function asRecord(value: unknown): Record<string, unknown> {
+export function asRecord(value: unknown): Record<string, unknown> {
   return value && typeof value === 'object' ? (value as Record<string, unknown>) : {};
 }
 
-function stringValue(value: unknown, fallback = ''): string {
+export function stringValue(value: unknown, fallback = ''): string {
   if (typeof value === 'string') return value;
   if (typeof value === 'number') return String(value);
   return fallback;
 }
 
-function optionalString(value: unknown): string | undefined {
+export function optionalString(value: unknown): string | undefined {
   const parsed = stringValue(value);
   return parsed || undefined;
 }
 
-function optionalNumber(value: unknown): number | undefined {
+export function optionalNumber(value: unknown): number | undefined {
   if (typeof value === 'number') return value;
   if (typeof value === 'string' && value.trim()) {
     const parsed = Number(value.replace(',', '.'));
@@ -130,12 +130,12 @@ function optionalNumber(value: unknown): number | undefined {
   return undefined;
 }
 
-function optionalNullableNumber(value: unknown): number | null | undefined {
+export function optionalNullableNumber(value: unknown): number | null | undefined {
   if (value === null) return null;
   return optionalNumber(value);
 }
 
-function optionalBoolean(value: unknown): boolean | undefined {
+export function optionalBoolean(value: unknown): boolean | undefined {
   if (typeof value === 'boolean') return value;
   if (typeof value === 'string') return ['true', '1', 'yes', 'sim'].includes(value.toLowerCase());
   return undefined;

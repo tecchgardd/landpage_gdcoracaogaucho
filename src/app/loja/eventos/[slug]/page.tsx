@@ -1,0 +1,5 @@
+import type { Metadata } from 'next';
+import { EventDetailsPage } from './EventDetailsPage';
+import { BACKEND_URL, CATALOG_REVALIDATE_SECONDS, backendHeaders, catalogTags } from '@/services/server/backend';
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> { try { const response = await fetch(`${BACKEND_URL}/api/public/events/${encodeURIComponent(params.slug)}`, { headers: backendHeaders(), next: { revalidate: CATALOG_REVALIDATE_SECONDS, tags: catalogTags('events') } }); if (!response.ok) return { title: 'Evento | Coração Gaúcho' }; const event = await response.json() as { name?: string; banner?: string; description?: string }; return { title: `${event.name ?? 'Evento'} | Coração Gaúcho`, description: event.description, openGraph: { title: event.name, description: event.description, images: event.banner ? [{ url: event.banner }] : undefined } }; } catch { return { title: 'Evento | Coração Gaúcho' }; } }
+export default function Page({ params }: { params: { slug: string } }) { return <EventDetailsPage slug={params.slug}/>; }

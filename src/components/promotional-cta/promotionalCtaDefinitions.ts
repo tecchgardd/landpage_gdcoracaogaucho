@@ -6,13 +6,13 @@ export const promotionalCtaDefinitions: PromotionalCta[] = [
   {
     id: 'bilheteria-social',
     badge: 'NOVIDADE',
-    title: 'Garanta seu ingresso e',
-    highlight: 'acompanhe de perto',
-    description: 'Compre seus ingressos com segurança pela bilheteria online e siga nossas redes para não perder nenhuma novidade do grupo.',
+    title: 'Ingressos, cursos e pilcha',
+    highlight: 'na loja oficial',
+    description: 'Compre ingressos dos bailes, inscrições e produtos do grupo com Pix, boleto ou cartão, e siga nossas redes para não perder nenhuma novidade.',
     image: '/assets/bg-hero.png',
     theme: 'ticketing',
     priority: 100,
-    primaryAction: { label: 'Acessar a bilheteria', href: '/bilheteria' },
+    primaryAction: { label: 'Entrar na loja', href: '/loja' },
     secondaryAction: { label: 'Seguir no Instagram', href: 'https://www.instagram.com/gdcoracaogaucho/', external: true, ariaLabel: 'Seguir o GD Coração Gaúcho no Instagram' },
     socialRow: true
   },
@@ -36,8 +36,19 @@ export const promotionalCtaDefinitions: PromotionalCta[] = [
     image: '/assets/bg-hero.png',
     theme: 'events',
     priority: 80,
-    primaryAction: { label: 'Ver bilheteria', href: '/bilheteria' },
+    primaryAction: { label: 'Ver a agenda', href: '/loja?categoria=ingressos' },
     secondaryAction: { label: 'Conhecer o curso', href: '/curso' }
+  },
+  {
+    id: 'online-courses',
+    badge: 'NOVO',
+    title: 'Aprenda a dançar',
+    highlight: 'em casa, no seu ritmo',
+    description: 'Aulas online gravadas pelos professores do Coração Gaúcho. Assista no celular, computador ou TV.',
+    image: '/assets/Foto_sobre_1.jpg',
+    theme: 'events',
+    priority: 95,
+    primaryAction: { label: 'Ver cursos online', href: '/loja?categoria=cursos-online' }
   },
   {
     id: 'graduation-albums',
